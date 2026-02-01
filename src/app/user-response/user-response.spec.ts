@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserResponse } from './user-response';
 
 describe('UserResponse', () => {
+
   let component: UserResponse;
   let fixture: ComponentFixture<UserResponse>;
 

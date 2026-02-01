@@ -16,23 +16,24 @@ export class VideoPlayer implements OnInit, OnDestroy {
   @ViewChild('target', { static: true }) target!: ElementRef;
 
   private get player(): Player {
-    return videojs(this.target.nativeElement);
+    const player = videojs(this.target.nativeElement);
+    if (!player) {
+      throw new Error('VideoPlayer: player not initialized yet');
+    }
+    return player
   }
 
   // See options: https://videojs.com/guides/options
   @Input()
-  set source(s: string | undefined) {
-    if (this.player) {
+  set source(s: string | undefined | null) {
       if (s) {
         this.player!.src({ src: s, type: 'video/youtube' });
+        this.player!.load();
         this.player!.play();
       } else {
         this.player!.pause();
         this.player!.src({ src: '', type: '' });
       }
-    } else {
-      console.warn('VideoPlayer: player not initialized yet');
-    }
   }
   get source(): string | undefined {
     if (this.player) {

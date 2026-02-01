@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-export enum ResponseType {
-  full = 'full',
-  oneTeam = 'oneTeam',
-}
+
 
 /**
  * Component to display user response options.
@@ -21,7 +18,7 @@ export class UserResponse {
    * Type of response options to display.
    * @default ResponseType.full
    */
-  @Input() responseType: ResponseType = ResponseType.full;
+  @Input() options?: string[] = [];
 
   @Input() visible: boolean = true;
 
@@ -36,16 +33,6 @@ export class UserResponse {
    */
   @Output() selection: EventEmitter<string> = new EventEmitter();
 
-  get buttons(): string[] {
-    switch (this.responseType) {
-      case ResponseType.full:
-        return ['RC1', 'YC1', 'PK1', '-', 'PK2', 'YC2', 'RC2'];
-      case ResponseType.oneTeam:
-        return ['RC1', 'YC1', 'PK1', '-'];
-      default:
-        return [];
-    }
-  }
 
   sendResponse(t: string): void {
     this.selection.emit(t);

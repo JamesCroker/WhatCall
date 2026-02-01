@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Video, VideoService } from '../../services/videoService';
+import { Scenario, ScenarioService } from '../../services/scenarioService';
 import { VideoPlayer } from '../video-player/video-player';
-import { UserResponse, ResponseType } from '../user-response/user-response';
+import { UserResponse } from '../user-response/user-response';
 import { RespondCompare } from '../respond-compare/respond-compare';
+import { ProfileService } from '../../services/profileService';
+import { ResponseService } from '../../services/responseService';
 
 @Component({
   selector: 'app-root',
@@ -15,35 +17,42 @@ export class App implements OnInit {
 
   @ViewChild('response', { static: true }) response!: UserResponse;
   @ViewChild('compare', { static: true }) compare!: RespondCompare;
-  public video: Video | null = null;
-
-  // Expose ResponseType enum to template
-  public readonly ResponseType = ResponseType;
+  public scenario: Scenario | null = null;
 
   public userResponse: string = '';
 
   constructor(
-    private videoService: VideoService,
+    private responseService: ResponseService,
+    private scenarioService: ScenarioService,
+    private profileService: ProfileService,
     private changeDetector: ChangeDetectorRef
   ) {
   }
 
   ngOnInit(): void {
     // Initialization logic if needed
-    this.videoService.getVideo().then(video => {
-      this.video = video;
+    console.log('Loggin in');
+    this.profileService.login().then(() => {
+      console.log('User UID:', this.profileService.getUid());
+    });
+
+    this.scenarioService.getScenario().then(scenario => {
+      this.scenario = scenario;
       this.changeDetector.detectChanges();
     });
   }
 
   selectionMade(userResponse: string) {
-    console.log('App selection made: ', userResponse);
     this.userResponse = userResponse;
     this.response.visible = false;
     this.compare.visible = true;
     // this.compare.userResponse = userResponse;
     this.changeDetector.detectChanges();
-    this.videoService.addResponse(this.video!.id, userResponse)
+    if (this.scenario) {
+      this.responseService.addResponse(this.scenario.id, userResponse)
+    } else {
+      throw new Error('No scenario loaded');
+    }
   }
 
 }
