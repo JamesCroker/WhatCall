@@ -6,10 +6,8 @@ import { FirebaseService } from './firebaseService';
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileService  {
+export class ProfileService {
 
-  private uid: string | null = null;
-  
   constructor(
     private firebaseService: FirebaseService
   ) {
@@ -19,13 +17,11 @@ export class ProfileService  {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         console.debug('User signed in:', user);
-        this.uid = user.uid;
         // ...
       } else {
         // User is signed out
         // ...
         console.debug('User signed out');
-        this.uid = null;
       }
     });
   }
@@ -37,7 +33,8 @@ export class ProfileService  {
   }
 
   getUid(): string | null {
-    return this.uid;
+    const auth = getAuth(this.firebaseService.firebaseApp);
+    return auth.currentUser ? auth.currentUser.uid : null;
   }
 
   updateProfile(profile: Profile): void {

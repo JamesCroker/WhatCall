@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {
   getFirestore, collection, getDocs, DocumentData, QueryDocumentSnapshot, SnapshotOptions, FirestoreDataConverter,
   CollectionReference,
-  addDoc
+  doc,
+  getDoc
 } from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
 import { getAnalytics } from "firebase/analytics";
 import { FirebaseService } from './firebaseService';
-import { ProfileService } from './profileService';
+//import { ProfileService } from './profileService';
 import { ResponseService } from './responseService';
 
 
@@ -86,17 +87,40 @@ export class ScenarioService {
     return querySnapshot.docs[randomIndex].data();
   }
 
+
+  /**
+   * description
+   * 
+   * more text
+   * 
+   * @param scenarioId 
+   * @returns 
+   */
+  public async getScenarioById(scenarioId: string): Promise<Scenario | undefined> {
+    const docRef = doc(this.scenariosRef, scenarioId);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+
+  }
+
+  /**
+   * 
+   * @param scenarioId 
+   * @returns 
+   */
   public async getScenarioStats(scenarioId: string): Promise<ScenarioStats> {
     const responses = await this.responseService.getResponsesForScenario(scenarioId);
     const optionCounts: { [key: string]: number } = {}
     responses.forEach(response => {
       optionCounts[response.response] = ( optionCounts[response.response] || 0 ) + 1;
     })
+
     return {
       scenarioId,
       totalResponses: responses.length,
       optionCounts
     }
   }
+
 
 }

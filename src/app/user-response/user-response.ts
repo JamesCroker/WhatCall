@@ -12,7 +12,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './user-response.html',
   styleUrl: './user-response.scss',
 })
-export class UserResponse {
+export class UserResponseComponent {
 
   /**
    * Type of response options to display.

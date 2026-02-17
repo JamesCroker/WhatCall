@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './respond-compare.html',
   styleUrl: './respond-compare.scss',
 })
-export class RespondCompare {
+export class RespondCompareComponent {
 
   @Input() userResponse: string = '';
 

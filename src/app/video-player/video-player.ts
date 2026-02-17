@@ -12,7 +12,7 @@ import 'videojs-youtube'
   encapsulation: ViewEncapsulation.None,
 })
 
-export class VideoPlayer implements OnInit, OnDestroy {
+export class VideoPlayerComponent implements OnInit, OnDestroy {
   @ViewChild('target', { static: true }) target!: ElementRef;
 
   private get player(): Player {
@@ -26,13 +26,15 @@ export class VideoPlayer implements OnInit, OnDestroy {
   // See options: https://videojs.com/guides/options
   @Input()
   set source(s: string | undefined | null) {
+      console.log("VideoPlayer: setting source to ", s);
       if (s) {
-        this.player!.src({ src: s, type: 'video/youtube' });
-        this.player!.load();
-        this.player!.play();
+        this.player.src({ src: s, type: 'video/youtube' });
+        this.player.load();
+        this.player.play();
+        this.player.autoplay('muted');
       } else {
-        this.player!.pause();
-        this.player!.src({ src: '', type: '' });
+        this.player.pause();
+        this.player.src({ src: '', type: '' });
       }
   }
   get source(): string | undefined {
@@ -42,22 +44,17 @@ export class VideoPlayer implements OnInit, OnDestroy {
     return undefined;
   }
 
-  constructor(
-    private elementRef: ElementRef,
-    private changeDetector: ChangeDetectorRef
-  ) {
-    // Constructor logic if needed
-  }
-
   // Instantiate a Video.js player OnInit
   ngOnInit() {
+    const self = this;
     videojs(this.target.nativeElement, { "techOrder": ["youtube"], "youtube": { "ytControls": 2 }, fluid: true })
+      .ready(() => {
+        console.log('VideoPlayer: player is ready');
+      });
   }
 
   // Dispose the player OnDestroy
   ngOnDestroy() {
-    if (this.player) {
       this.player.dispose();
-    }
   }
 }

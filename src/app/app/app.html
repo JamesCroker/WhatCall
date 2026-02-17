@@ -1,10 +1,1 @@
-<main class="main">
-
-  <app-video-player #player [source]="scenario?.url"></app-video-player>
-
-  <app-user-response #response [options]="scenario?.options" (selection)="selectionMade($event)"></app-user-response>
-  <app-respond-compare #compare [userResponse]="userResponse" [visible]="false"></app-respond-compare>
-  
-</main>
-
 <router-outlet />

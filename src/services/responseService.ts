@@ -6,7 +6,8 @@ import {
   query,
   where,
   doc,
-  getDocs
+  getDocs,
+  limit
 } from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
@@ -79,6 +80,25 @@ export class ResponseService {
     const q = query(this.responsesRef, where("scenarioId", "==", scenarioId));
     const d = await getDocs(q);
     return d.docs.map(doc => doc.data());
+  }
+
+  public async getMyResponseForScenario(scenarioId: string): Promise<ScenarioResponse | undefined> {
+    const uid = this.profileService.getUid();
+    if (!uid) {
+      return undefined;
+    }
+    const q = query(this.responsesRef,
+      where("scenarioId", "==", scenarioId),
+      where("uid", "==", uid),
+      limit(1)
+    );
+    const d = await getDocs(q);
+    console.log('getMyResponseForScenario', d);
+    if (d.docs.length === 1) {
+      return d.docs[0].data();
+    } else {
+      return undefined;
+    }
   }
 
 }
