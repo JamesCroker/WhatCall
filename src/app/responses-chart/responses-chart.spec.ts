@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RespondCompare } from './respond-compare';
+import { ResponsesChart } from './responses-chart';
 
-describe('RespondCompare', () => {
-  let component: RespondCompare;
-  let fixture: ComponentFixture<RespondCompare>;
+describe('ResponsesChart', () => {
+  let component: ResponsesChart;
+  let fixture: ComponentFixture<ResponsesChart>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RespondCompare]
+      imports: [ResponsesChart]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RespondCompare);
+    fixture = TestBed.createComponent(ResponsesChart);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

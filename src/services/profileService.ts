@@ -26,15 +26,9 @@ export class ProfileService {
     });
   }
 
-  getProfile(): Profile {
-    return {
-      name: 'John Doe'
-    }
-  }
-
   getUid(): string | null {
     const auth = getAuth(this.firebaseService.firebaseApp);
-    return auth.currentUser ? auth.currentUser.uid : null;
+    return auth.currentUser ? auth.currentUser.uid : 'default-uid';  // TODO: Handle unauthenticated state properly
   }
 
   updateProfile(profile: Profile): void {

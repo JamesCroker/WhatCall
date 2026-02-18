@@ -9,8 +9,7 @@ import {
 // Import the functions you need from the SDKs you need
 import { getAnalytics } from "firebase/analytics";
 import { FirebaseService } from './firebaseService';
-//import { ProfileService } from './profileService';
-import { ResponseService } from './responseService';
+import { Router } from '@angular/router';
 
 
 /**
@@ -22,13 +21,6 @@ export interface Scenario {
   url: string;
   uid: string;
   options: string[];
-}
-
-
-export interface ScenarioStats {
-  scenarioId: string;
-  totalResponses: number;
-  optionCounts: { [option: string]: number };
 }
 
 /**
@@ -69,8 +61,9 @@ export class ScenarioService {
   }
 
   constructor(
-    private firebaseService: FirebaseService,
-    private responseService: ResponseService,
+    private firebaseService: FirebaseService, 
+    private router: Router
+
   ) {
     // Initialize Firebase
     const analytics = getAnalytics(this.firebaseService.firebaseApp);
@@ -87,7 +80,6 @@ export class ScenarioService {
     return querySnapshot.docs[randomIndex].data();
   }
 
-
   /**
    * description
    * 
@@ -100,27 +92,20 @@ export class ScenarioService {
     const docRef = doc(this.scenariosRef, scenarioId);
     const docSnap = await getDoc(docRef);
     return docSnap.data();
-
   }
 
-  /**
-   * 
-   * @param scenarioId 
-   * @returns 
-   */
-  public async getScenarioStats(scenarioId: string): Promise<ScenarioStats> {
-    const responses = await this.responseService.getResponsesForScenario(scenarioId);
-    const optionCounts: { [key: string]: number } = {}
-    responses.forEach(response => {
-      optionCounts[response.response] = ( optionCounts[response.response] || 0 ) + 1;
-    })
-
-    return {
-      scenarioId,
-      totalResponses: responses.length,
-      optionCounts
-    }
+  gotoRandomScenario() {
+    // Logic to navigate to a random scenario
+    console.log('Navigating to a random scenario');
+    this.getRandomScenario().then(scenario => {
+      console.log('Random Scenario ID:', scenario.id);
+      // Here you would typically use a router to navigate
+      // this.router.navigate(['/scenario', scenario.id]);
+      this.router.navigate(['/scenario', scenario.id]);
+    });
   }
+
+ 
 
 
 }

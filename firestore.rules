@@ -2,29 +2,8 @@ rules_version='2'
 
 service cloud.firestore {
   match /databases/{database}/documents {
-
-
-    match /scenarios/{scenario} {
-      allow read: if true;
+    match /{document=**} {
+      allow read, write: if true;
     }
-    match /scenarios/{scenario} {
-      allow pdate, delete: if resource.data.uid == request.auth.uid;
-    } 
-    match /responses/{response} {
-      allow create: if request.resource.data.uid == request.auth.uid;
-    } 
-
-
-    match /responses/{response} {
-      allow read: if true;
-    }
-    match /responses/{response} {
-      allow update, delete: if resource.data.uid == request.auth.uid;
-    } 
-    match /responses/{response} {
-      allow create: if request.resource.data.uid == request.auth.uid;
-    } 
-
-    
   }
 }

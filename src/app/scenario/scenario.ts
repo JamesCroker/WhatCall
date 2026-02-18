@@ -1,21 +1,22 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Scenario, ScenarioService } from '../../services/scenarioService';
-import { ResponseService } from '../../services/responseService';
+import { ResponseService, ScenarioStats } from '../../services/responseService';
 import { ProfileService } from '../../services/profileService';
 import { VideoPlayerComponent } from '../video-player/video-player';
 import { UserResponseComponent } from '../user-response/user-response';
-import { RespondCompareComponent } from '../respond-compare/respond-compare';
+import { ResponsesChartComponent } from '../responses-chart/responses-chart';
 
 @Component({
   selector: 'app-scenario',
-  imports: [VideoPlayerComponent, UserResponseComponent, RespondCompareComponent],
+  imports: [VideoPlayerComponent, UserResponseComponent, ResponsesChartComponent],
   templateUrl: './scenario.html',
   styleUrl: './scenario.scss',
 })
 export class ScenarioComponent implements OnInit {
 
   public scenario: Scenario | undefined = undefined;
+  public scenarioStats: ScenarioStats | undefined = undefined;
   public userResponse: string | undefined = undefined;
 
   constructor(
@@ -38,23 +39,24 @@ export class ScenarioComponent implements OnInit {
       ]);
       console.log('Fetching scenario', scenario)
       this.scenario = scenario;
-      this.userResponse = userResponse?.response;
+      this.userResponse = userResponse?.latestResponse;
       console.log('User response', this.userResponse);
       this.changeDetector.detectChanges();
     });
   }
 
 
-  selectionMade(userResponse: string) {
+  async selectionMade(userResponse: string) {
     if (!this.scenario) {
       throw new Error('No scenario loaded');
     }
     this.userResponse = userResponse;
     this.responseService.addResponse(this.scenario.id, userResponse)
-    // this.compare.userResponse = userResponse;
     this.changeDetector.detectChanges();
     if (this.scenario) {
-      this.scenarioService.getScenarioStats(this.scenario.id).then((stats) => {
+      this.responseService.getScenarioStats(this.scenario.id).then((stats) => {
+        this.scenarioStats = stats;
+        this.changeDetector.detectChanges();
         console.log('Stats retrieved', stats);
       })
     } else {
@@ -62,5 +64,8 @@ export class ScenarioComponent implements OnInit {
     }
   }
 
+  gotoRandomScenario() {
+    this.scenarioService.gotoRandomScenario();
+  }
 
 }

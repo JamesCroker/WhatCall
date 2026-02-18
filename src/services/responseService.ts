@@ -7,7 +7,9 @@ import {
   where,
   doc,
   getDocs,
-  limit
+  limit,
+  setDoc,
+  getDoc
 } from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
@@ -19,10 +21,15 @@ export interface ScenarioResponse {
   id: string;
   uid: string;
   scenarioId: string;
-  response: string;
+  latestResponse: string;
+  firstResponse: string;
 }
 
-
+export interface ScenarioStats {
+  scenarioId: string;
+  totalResponses: number;
+  optionCounts: { [option: string]: number };
+}
 /**
 * Firestore data converter for Video objects.
 */
@@ -40,7 +47,8 @@ const responseConverter: FirestoreDataConverter<ScenarioResponse> = {
       id: snapshot.id,
       uid: data['uid'],
       scenarioId: data['scenarioId'],
-      response: data['response'],
+      latestResponse: data['latestResponse'],
+      firstResponse: data['firstResponse'],
     } as ScenarioResponse;
   }
 };
@@ -53,10 +61,7 @@ const responseConverter: FirestoreDataConverter<ScenarioResponse> = {
 })
 export class ResponseService {
 
-  private get responsesRef(): CollectionReference<ScenarioResponse> {
-    const db = getFirestore(this.firebaseService.firebaseApp);
-    return collection(db, "responses").withConverter(responseConverter);
-  }
+
 
   constructor(
     private firebaseService: FirebaseService,
@@ -68,17 +73,39 @@ export class ResponseService {
 
   public async addResponse(scenarioId: string, response: string): Promise<void> {
     console.log(this.profileService.getUid())
-    await addDoc(this.responsesRef, {
-      scenarioId,
-      response,
-      uid: this.profileService.getUid() || '',
-      id: ''
-    });
+
+    // Check if user is logged in
+    const uid = this.profileService.getUid() || 'made up user'
+    if (!uid) {
+      throw new Error('User not logged in');
+    }
+
+    // Check if user has already responded to this scenario
+    const responsesRef = this.responsesRef(scenarioId)
+    const docRef = doc(responsesRef, uid);
+    const docSnap = await getDoc(docRef);
+    console.log('getDocs result:', docSnap);
+    if (docSnap.exists()) {
+      // User has already responded, update the existing response 
+      await setDoc(docRef, {
+        latestResponse: response
+      }, { merge: true });
+    } else {
+      // User has not responded, create a new response document
+      await setDoc(docRef, {
+        scenarioId,
+        latestResponse: response,
+        firstResponse: response,
+        uid,
+        id: ''
+      }
+      );
+    }
   }
 
   public async getResponsesForScenario(scenarioId: string): Promise<ScenarioResponse[]> {
-    const q = query(this.responsesRef, where("scenarioId", "==", scenarioId));
-    const d = await getDocs(q);
+    const responsesRef = this.responsesRef(scenarioId);
+    const d = await getDocs(responsesRef);
     return d.docs.map(doc => doc.data());
   }
 
@@ -87,18 +114,36 @@ export class ResponseService {
     if (!uid) {
       return undefined;
     }
-    const q = query(this.responsesRef,
-      where("scenarioId", "==", scenarioId),
-      where("uid", "==", uid),
-      limit(1)
-    );
-    const d = await getDocs(q);
-    console.log('getMyResponseForScenario', d);
-    if (d.docs.length === 1) {
-      return d.docs[0].data();
+    const docRef = doc(this.responsesRef(scenarioId), uid);
+    const docSnap = await getDoc(docRef);
+    console.log('getMyResponseForScenario', docSnap);
+    if (docSnap.exists()) {
+      return docSnap.data();
     } else {
       return undefined;
     }
+  }
+  /**
+    * 
+    * @param scenarioId 
+    * @returns 
+    */
+  public async getScenarioStats(scenarioId: string): Promise<ScenarioStats> {
+    const responses = await this.getResponsesForScenario(scenarioId);
+    const optionCounts: { [key: string]: number } = {}
+    responses.forEach(response => {
+      optionCounts[response.latestResponse] = (optionCounts[response.latestResponse] || 0) + 1;
+    })
+
+    return {
+      scenarioId,
+      totalResponses: responses.length,
+      optionCounts
+    }
+  }
+  private responsesRef(scenarioId: string): CollectionReference<ScenarioResponse> {
+    const db = getFirestore(this.firebaseService.firebaseApp);
+    return collection(db, "scenarios", scenarioId, "responses").withConverter(responseConverter);
   }
 
 }

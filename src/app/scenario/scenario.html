@@ -6,8 +6,9 @@
   <app-video-player #player [source]="scenario?.url"></app-video-player>
 
   @if (userResponse !== undefined) {
-  <app-respond-compare #compare [userResponse]="userResponse"></app-respond-compare>
+   <p>You selected {{ userResponse }}</p>
+   <app-responses-chart [scenarioStats]="scenarioStats"></app-responses-chart>
   }
-  <app-user-response #response [options]="scenario?.options" (selection)="selectionMade($event)"></app-user-response>
-
+<app-user-response #response [options]="scenario?.options" (selection)="selectionMade($event)"></app-user-response>
+<button (click)="gotoRandomScenario()">Random Scenario</button>
 </main>
