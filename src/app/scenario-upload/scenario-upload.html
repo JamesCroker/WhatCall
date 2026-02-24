@@ -1,10 +1,26 @@
 <main class="main">
   <h1>Upload Scenario</h1>
 
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <input type="text" formControlName="scenarioType" placeholder="e.g. Scrum">
-    <input type="text" formControlName="title" placeholder="e.g. Play on or penalty?">
-    <input type="text" formControlName="url" placeholder="e.g. https://www.youtube.com">
-    <button type="submit" [disabled]="!form.valid">Save</button>
+  <form (ngSubmit)="ngOnInit()" [formGroup]="form">
+    <input type="text" formControlName="title" placeholder="Title" required>
+    <input type="text" formControlName="description" placeholder="Description" required>
+    <input type="text" formControlName="scenarioType" placeholder="Scenario Type" required>
+    <input type="text" formControlName="url" placeholder="URL">
+    
+    <div>
+      <h3>Possible Answers</h3>
+      <div formArrayName="options" required>
+        <div *ngFor="let option of optionsArray.controls; let i = index">
+          <input 
+            type="text" 
+            [formControl]="$any(option)" 
+            placeholder="Enter a possible response">
+          <button type="button" (click)="removeOption(i)">Remove</button>
+        </div>
+      </div>
+      <button type="button" (click)="addOption()">Add Answer Option</button>
+    </div>
+
+    <button type="submit" [disabled]="!isFormValid()">Save</button>
   </form>
 </main>
