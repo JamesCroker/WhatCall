@@ -99,17 +99,16 @@ export class ScenarioService {
     console.log('Navigating to a random scenario');
     this.getRandomScenario().then(scenario => {
       console.log('Random Scenario ID:', scenario.id);
-      // Here you would typically use a router to navigate
-      // this.router.navigate(['/scenario', scenario.id]);
       this.router.navigate(['/scenario', scenario.id]);
     });
   }
 
-  public async addScenario(scenario: Omit<Scenario, 'id'>): Promise<void> {
+  public async addScenario(scenario: Omit<Scenario, 'id'>): Promise<string> {
     const db = getFirestore(this.firebaseService.firebaseApp);
     const scenariosCollection = collection(db, 'scenarios').withConverter(scenarioConverter);
     const newScenarioRef = doc(scenariosCollection);
     await setDoc(newScenarioRef, scenario);
     console.log('Scenario added with ID:', newScenarioRef.id);
+    return newScenarioRef.id;
   }
 }

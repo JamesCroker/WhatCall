@@ -9,7 +9,7 @@ import { FirebaseApp, initializeApp } from "firebase/app";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyD4-v5htNmy6ocVhw7d46uzcTpFYOVqzMs",
+  apiKey: "AIzaSyD1O8ZHNunSbIULlIYtenA6VWeq-y1o5As",
   authDomain: "whatcall-52d6a.firebaseapp.com",
   projectId: "whatcall-52d6a",
   storageBucket: "whatcall-52d6a.firebasestorage.app",

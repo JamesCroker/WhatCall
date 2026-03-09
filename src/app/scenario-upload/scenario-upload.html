@@ -1,10 +1,10 @@
 <main class="main">
   <h1>Upload Scenario</h1>
 
-  <form (ngSubmit)="ngOnInit()" [formGroup]="form">
-    <input type="text" formControlName="title" placeholder="Title" required>
-    <input type="text" formControlName="description" placeholder="Description" required>
-    <input type="text" formControlName="scenarioType" placeholder="Scenario Type" required>
+  <form (ngSubmit)="save()" [formGroup]="form">
+    <input type="text" formControlName="title" placeholder="Title">
+    <input type="text" formControlName="description" placeholder="Description">
+    <input type="text" formControlName="scenarioType" placeholder="Scenario Type">
     <input type="text" formControlName="url" placeholder="URL">
     
     <div>
@@ -21,6 +21,6 @@
       <button type="button" (click)="addOption()">Add Answer Option</button>
     </div>
 
-    <button type="submit" [disabled]="!isFormValid()">Save</button>
+    <button type="submit" [disabled]="form.invalid">Save</button>
   </form>
 </main>

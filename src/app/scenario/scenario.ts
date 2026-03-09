@@ -45,7 +45,6 @@ export class ScenarioComponent implements OnInit {
     });
   }
 
-
   async selectionMade(userResponse: string) {
     if (!this.scenario) {
       throw new Error('No scenario loaded');

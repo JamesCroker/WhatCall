@@ -14,11 +14,11 @@ import { CommonModule } from '@angular/common';
 export class ScenarioUploadComponent implements OnInit {
 
   public form: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    scenarioType: new FormControl(''),
-    description: new FormControl(''),
+    title: new FormControl('', Validators.required),
+    scenarioType: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
     url: new FormControl(''),
-    options: new FormArray([])
+    options: new FormArray([], Validators.required)
   });
   payLoad: string = '';
 
@@ -26,7 +26,7 @@ export class ScenarioUploadComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private profileService: ProfileService,
     private scenarioService: ScenarioService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async params => {
@@ -46,29 +46,17 @@ export class ScenarioUploadComponent implements OnInit {
     optionsArray.removeAt(index);
   }
 
-  isFormValid(): boolean {
-    const optionsArray = this.form.get('options') as FormArray;
-    return this.form.valid && optionsArray.length > 0;
-  }
-
   get optionsArray(): FormArray {
     return this.form.get('options') as FormArray;
   }
-
+ 
   async save(): Promise<void> {
-    if (!this.isFormValid()) {
-      console.error('Form is invalid');
-      alert('Please fill in all required fields and add at least one answer option');
-      return;
-    }
-
     try {
       const formData = this.form.value;
       const scenarioId = await this.scenarioService.addScenario(formData);
       console.log('Scenario saved successfully with ID:', scenarioId);
       this.payLoad = JSON.stringify(formData);
       alert('Scenario saved successfully!');
-      // Optional: Reset form or navigate away
       this.form.reset();
     } catch (error) {
       console.error('Error saving scenario:', error);
