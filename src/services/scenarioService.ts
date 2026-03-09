@@ -94,11 +94,6 @@ export class ScenarioService {
     return docSnap.data();
   }
 
-  public async getRandomScenarioUrl(): Promise<string> {
-    const scenario = await this.getRandomScenario();
-    return scenario.url;
-  }
-
   gotoRandomScenario() {
     // Logic to navigate to a random scenario
     console.log('Navigating to a random scenario');
