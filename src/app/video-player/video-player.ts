@@ -26,7 +26,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   // See options: https://videojs.com/guides/options
   @Input()
   set source(s: string | undefined | null) {
-      console.log("VideoPlayer: setting source to ", s);
       if (s) {
         this.player.src({ src: s, type: 'video/youtube' });
         this.player.load();

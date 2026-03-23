@@ -116,7 +116,6 @@ export class ResponseService {
     }
     const docRef = doc(this.responsesRef(scenarioId), uid);
     const docSnap = await getDoc(docRef);
-    console.log('getMyResponseForScenario', docSnap);
     if (docSnap.exists()) {
       return docSnap.data();
     } else {

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { ScenarioService } from '../../services/scenarioService';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink, MatMenuModule, MatIconModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -15,10 +17,6 @@ export class HomeComponent {
     private router: Router
   ) {
     console.log('App component initialized');
-  }
-
-  gotoRandomScenario() {
-    this.scenarioService.gotoRandomScenario();
   }
 
   gotoUploadScenario() {

@@ -1,15 +1,16 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Scenario, ScenarioService } from '../../services/scenarioService';
 import { ResponseService, ScenarioStats } from '../../services/responseService';
 import { ProfileService } from '../../services/profileService';
 import { VideoPlayerComponent } from '../video-player/video-player';
 import { UserResponseComponent } from '../user-response/user-response';
 import { ResponsesChartComponent } from '../responses-chart/responses-chart';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-scenario',
-  imports: [VideoPlayerComponent, UserResponseComponent, ResponsesChartComponent],
+  imports: [VideoPlayerComponent, UserResponseComponent, ResponsesChartComponent, RouterLink],
   templateUrl: './scenario.html',
   styleUrl: './scenario.scss',
 })
@@ -24,25 +25,35 @@ export class ScenarioComponent implements OnInit {
     private scenarioService: ScenarioService,
     private responseService: ResponseService,
     private profileService: ProfileService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private location: Location
   ) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async params => {
-      const scenarioId = params['id'];
+      let scenarioId = params['id'];
       console.log('ScenarioComponent: scenarioId from route params', scenarioId);
       await this.profileService.login();
+      await this.loadScenario(scenarioId);
+    })
+  }
+
+  async loadScenario(scenarioId?: string) {
+    if (!scenarioId) {
+      this.scenario = await this.scenarioService.getRandomScenarioId();
+      this.location.replaceState(`/scenario/${this.scenario.id}`);
+      this.userResponse = (await this.responseService.getMyResponseForScenario(this.scenario.id))?.latestResponse;
+
+    } else {
       const [scenario, userResponse] = await Promise.all([
         this.scenarioService.getScenarioById(scenarioId),
         this.responseService.getMyResponseForScenario(scenarioId)
       ]);
-      console.log('Fetching scenario', scenario)
       this.scenario = scenario;
       this.userResponse = userResponse?.latestResponse;
-      console.log('User response', this.userResponse);
-      this.changeDetector.detectChanges();
-    });
+    }
+    this.changeDetector.detectChanges();
   }
 
   async selectionMade(userResponse: string) {
@@ -63,8 +74,8 @@ export class ScenarioComponent implements OnInit {
     }
   }
 
-  gotoRandomScenario() {
-    this.scenarioService.gotoRandomScenario();
+  async gotoRandomScenario() {
+    await this.loadScenario();
   }
 
 }

@@ -74,7 +74,7 @@ export class ScenarioService {
    * 
    * @returns A promise that resolves to a Scenario object. 
    */
-  public async getRandomScenario(): Promise<Scenario> {
+  public async getRandomScenarioId(): Promise<Scenario> {
     const querySnapshot = await getDocs(this.scenariosRef);
     const randomIndex = Math.floor(Math.random() * querySnapshot.size);
     return querySnapshot.docs[randomIndex].data();
@@ -92,15 +92,6 @@ export class ScenarioService {
     const docRef = doc(this.scenariosRef, scenarioId);
     const docSnap = await getDoc(docRef);
     return docSnap.data();
-  }
-
-  gotoRandomScenario() {
-    // Logic to navigate to a random scenario
-    console.log('Navigating to a random scenario');
-    this.getRandomScenario().then(scenario => {
-      console.log('Random Scenario ID:', scenario.id);
-      this.router.navigate(['/scenario', scenario.id]);
-    });
   }
 
   public async addScenario(scenario: Omit<Scenario, 'id'>): Promise<string> {

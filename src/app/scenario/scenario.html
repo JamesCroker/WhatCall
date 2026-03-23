@@ -10,5 +10,5 @@
    <app-responses-chart [scenarioStats]="scenarioStats"></app-responses-chart>
   }
 <app-user-response #response [options]="scenario?.options" (selection)="selectionMade($event)"></app-user-response>
-<button (click)="gotoRandomScenario()">Random Scenario</button>
+<button (click)="loadScenario()">Random Scenario</button>
 </main>

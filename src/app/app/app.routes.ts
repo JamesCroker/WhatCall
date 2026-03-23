@@ -7,11 +7,15 @@ import { ScenarioUploadComponent } from '../scenario-upload/scenario-upload';
 export const routes: Routes = [
   {
     'path': 'scenario/:id',
-    'component': ScenarioComponent 
+    'component': ScenarioComponent
+  },
+  {
+    'path': 'scenario',
+    'component': ScenarioComponent
   },
   {
     'path': 'scenario-upload/:id',
-    'component': ScenarioUploadComponent 
+    'component': ScenarioUploadComponent
   },
   { path: '**', component: HomeComponent },
 ];
