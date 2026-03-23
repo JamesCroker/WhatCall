@@ -2,7 +2,7 @@
   <mat-icon>more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="/scenario">
+  <button mat-menu-item (click)="gotoRandonScenario()">
     <mat-icon>dialpad</mat-icon>
     <span>Random Scenario</span>
   </button>

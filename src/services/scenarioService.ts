@@ -46,7 +46,6 @@ const scenarioConverter: FirestoreDataConverter<Scenario> = {
   }
 };
 
-
 /**
  * Service to interact with video data from Firestore.
  */
@@ -61,9 +60,7 @@ export class ScenarioService {
   }
 
   constructor(
-    private firebaseService: FirebaseService, 
-    private router: Router
-
+    private firebaseService: FirebaseService
   ) {
     // Initialize Firebase
     const analytics = getAnalytics(this.firebaseService.firebaseApp);
@@ -74,7 +71,7 @@ export class ScenarioService {
    * 
    * @returns A promise that resolves to a Scenario object. 
    */
-  public async getRandomScenarioId(): Promise<Scenario> {
+  public async getRandomScenario(): Promise<Scenario> {
     const querySnapshot = await getDocs(this.scenariosRef);
     const randomIndex = Math.floor(Math.random() * querySnapshot.size);
     return querySnapshot.docs[randomIndex].data();
@@ -102,4 +99,5 @@ export class ScenarioService {
     console.log('Scenario added with ID:', newScenarioRef.id);
     return newScenarioRef.id;
   }
+  
 }
