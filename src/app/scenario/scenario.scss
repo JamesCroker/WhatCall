@@ -1,0 +1,51 @@
+/* Container setup */
+.main-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to move to the next line */
+  gap: 10px; /* Optional: adds space between columns */
+}
+
+/* Default Mobile State (Stacked) */
+.left-column,
+.right-column {
+  flex: 1 1 100%; /* Grow, Shrink, and start at 100% width */
+}
+
+.right-column {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Desktop State (Side-by-Side) */
+@media (min-width: 441px) {
+  .main-container {
+    flex-wrap: nowrap;
+  }
+
+  .left-column {
+    flex: 0 0 60%; /* Do not grow/shrink, stay at 75% */
+  }
+
+  .right-column {
+    flex: 0 0 35%; /* Do not grow/shrink, stay at 20% */
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Note: If using 'gap', adjust percentages slightly (e.g., calc(75% - 10px))
+     to ensure they fit on one line perfectly. */
+}
+
+:host {
+  ::ng-deep {
+    .mat-horizontal-stepper-header-container {
+      display: none;
+    }
+  }
+}
+
+h2, h3 {
+  text-align: center;
+  width: 100%;
+}

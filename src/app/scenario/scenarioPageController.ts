@@ -16,14 +16,19 @@ export class ScenarioPageController {
   private activeScenarioId$: BehaviorSubject<string | undefined>
     = new BehaviorSubject<string | undefined>(undefined);
 
-  public activeScenario$: Observable<ScenarioWithResponses | undefined> = this.activeScenarioId$
-    .pipe(
-      tap(
-        scenarioId => console.log('Scenario ID changed in controller', scenarioId)
-      ),
-      map(scenarioId => this.scenarioService.getScenarioWithResponsesById$(scenarioId)),
-      switchAll()
-    );
+  /**
+   * Observable that emits the active ScenarioWithResponses object based on the activeScenarioId$, including the responses and stats.
+   * The component can subscribe to this Observable to get updates whenever the active scenario changes.
+   */
+  public activeScenario$: Observable<ScenarioWithResponses | undefined>
+    = this.activeScenarioId$
+      .pipe(
+        tap(
+          scenarioId => console.log('Scenario ID changed in controller', scenarioId)
+        ),
+        map(scenarioId => this.scenarioService.getScenarioWithResponsesById$(scenarioId)),
+        switchAll()
+      );
 
   constructor(
     private profileService: ProfileService,

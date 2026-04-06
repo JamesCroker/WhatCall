@@ -1,22 +1,36 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ScenarioService, ScenarioWithResponses } from '../../services';
-import { ScenarioPageController } from './scenarioPageController';
+import { ScenarioPageController } from '../scenario/scenarioPageController';
 import { VideoPlayerComponent } from '../video-player/video-player';
-import { UserResponseComponent } from '../user-response/user-response';
 import { ResponsesChartComponent } from '../responses-chart/responses-chart';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { Observable } from 'rxjs';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-scenario',
-  imports: [VideoPlayerComponent, UserResponseComponent, ResponsesChartComponent],
+  imports: [VideoPlayerComponent, ResponsesChartComponent, MatButtonModule,
+    CommonModule, MatStepperModule, ReactiveFormsModule],
   templateUrl: './scenario.html',
   styleUrl: './scenario.scss',
 })
 export class ScenarioComponent implements OnInit {
 
-  public scenario: ScenarioWithResponses | undefined = undefined;
-  
+  @ViewChild('stepper') stepper!: MatStepper;
+
+  public scenario$: Observable<ScenarioWithResponses | undefined>;
+  private scenario: ScenarioWithResponses | undefined = undefined;
+
+  public stepperDuration = '';
+
+  firstFormGroup = new FormGroup({
+  });
+  secondFormGroup = new FormGroup({
+  });
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private pageController: ScenarioPageController,
@@ -24,15 +38,14 @@ export class ScenarioComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private location: Location
   ) {
-    // Empty constructor; all initialization logic is in ngOnInit
+    this.scenario$ = this.pageController.activeScenario$;
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async params => {
       await this.pageController.loadScenario(params['id']);
     })
-    this.pageController.activeScenario$.subscribe(activeScenario => {
-      console.log('Active scenario updated in component', activeScenario);
+    this.scenario$.subscribe(activeScenario => {
       this.scenario = activeScenario;
       this.location.replaceState(`/scenario/${activeScenario?.id}`);
       this.changeDetector.detectChanges();
@@ -48,7 +61,15 @@ export class ScenarioComponent implements OnInit {
       throw new Error('No scenario loaded');
     }
     this.scenarioService.addResponse(this.scenario.id, userResponse)
-    this.changeDetector.detectChanges();
+  }
+
+  gotoNext() {
+    this.pageController.loadScenario();
+    this.stepperDuration = '0ms';
+    this.stepper.reset();
+    this.stepper.animationDone.asObservable().subscribe(() => {
+      this.stepperDuration = '';
+    })
   }
 
 }

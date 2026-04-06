@@ -1,0 +1,98 @@
+<mat-stepper headerPosition="top" #stepper>
+
+  <!-- FIRST STEP -->
+
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Upload</ng-template>
+
+      <mat-radio-group formControlName="upload">
+        <mat-radio-button value="1">Upload File</mat-radio-button>
+        <mat-radio-button value="2">External URL</mat-radio-button>
+      </mat-radio-group>
+
+      <p [hidden]="firstFormGroup.value.upload == '1'">
+        <mat-form-field>
+          <mat-label>Video URL</mat-label>
+          <input matInput type="url" placeholder="Video URL" formControlName="url">
+        </mat-form-field>
+      </p>
+
+      <p [hidden]="firstFormGroup.value.upload != '1'">
+        <input #fileInput type="file" accept=".mp4" placeholder="Video">
+      </p>
+
+      <div>
+        <button matButton matStepperNext [disabled]="!firstFormGroup.valid">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- SECOND STEP -->
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Details</ng-template>
+      <p>
+        <mat-form-field>
+          <mat-label>Scenario Title</mat-label>
+          <input matInput type="text" placeholder="Title" formControlName="title">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Scenario Description</mat-label>
+          <input matInput type="text" placeholder="Scenario" formControlName="description">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Scenario Type</mat-label>
+          <input matInput type="text" placeholder="Scenario Type" formControlName="scenarioType">
+        </mat-form-field>
+      </p>
+      <div>
+        <button matButton matStepperPrevious>Back</button>
+        <button matButton matStepperNext [disabled]="!secondFormGroup.valid">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- THIRD STEP -->
+
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Options</ng-template>
+      <mat-form-field class="example-form-field">
+        <mat-label>Video keywords</mat-label>
+        <mat-chip-grid #reactiveChipGrid aria-label="Enter reactive form keywords" formControlName="options">
+          @for (keyword of reactiveKeywords(); track keyword) {
+          <mat-chip-row (removed)="removeReactiveKeyword(keyword)">
+            {{keyword}}
+            <button matChipRemove [attr.aria-label]="'remove reactive form' + keyword">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          }
+        </mat-chip-grid>
+        <input placeholder="New keyword..." [matChipInputFor]="reactiveChipGrid"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addReactiveKeyword($event)" />
+      </mat-form-field>
+      <div>
+        <button matButton matStepperPrevious>Back</button>
+        <button matButton matStepperNext [disabled]="!thirdFormGroup.valid">Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- FOURTH STEP -->
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button matButton matStepperPrevious>Back</button>
+      <button matButton (click)="save()">Save</button>
+    </div>
+  </mat-step>
+
+</mat-stepper>

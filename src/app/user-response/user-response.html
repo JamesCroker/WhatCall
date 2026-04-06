@@ -1,7 +1,0 @@
-@if(visible) {
-@for (item of options; track item) {
-<button (click)="sendResponse(item)">{{ item }}</button>
-} @empty {
-<li>There are no items.</li>
-}
-}

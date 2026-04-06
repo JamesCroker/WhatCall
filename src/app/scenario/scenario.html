@@ -1,14 +1,48 @@
-<main class="main">
+<h2>Scenario</h2>
+<h3>{{ (scenario$ | async)?.title }}</h3>
 
-  <h2>Scenario</h2>
-  <h3>{{ scenario?.title }}</h3>
+<mat-stepper headerPosition="top" #stepper [animationDuration]="stepperDuration">
 
-  <app-video-player #player [source]="scenario?.url"></app-video-player>
+  <!-- FIRST STEP -->
 
-  @if (scenario?.myResponse !== undefined) {
-   <p>You selected {{ scenario?.myResponse?.latestResponse }}</p>
-   <app-responses-chart [scenarioStats]="scenario?.stats"></app-responses-chart>
-  }
-<app-user-response #response [options]="scenario?.options" (selection)="selectionMade($event)"></app-user-response>
-<button mat-raised-button color="primary" (click)="loadScenario()">Random Scenario</button>
-</main>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Scenario</ng-template>
+
+      <div class="main-container">
+        <div class="left-column">
+          <app-video-player #player [source]="(scenario$ | async)?.url"></app-video-player>
+        </div>
+        <div class="right-column">
+          @for (item of (scenario$ | async)?.options; track item) {
+          <button matStepperNext matButton="filled" (click)="selectionMade(item)">{{ item }}</button>
+          } @empty {
+          <span>There are no items.</span>
+          }
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- SECOND STEP -->
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Review</ng-template>
+
+      <div class="main-container">
+        <div class="left-column">
+          @if ((scenario$ | async)?.myResponse !== undefined) {
+          <p>You selected {{ (scenario$ | async)?.myResponse?.latestResponse }}</p>
+          }
+          <app-responses-chart [scenarioStats]="(scenario$ | async)?.stats"></app-responses-chart>
+        </div>
+        <div class="right-column">
+          <button matButton matStepperPrevious>Rewatch</button>
+          <button class="next-button" matButton="filled" (click)="gotoNext()">Next Scenario</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+</mat-stepper>

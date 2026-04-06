@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getFirestore, collection, getDocs, CollectionReference, doc, getDoc, setDoc, onSnapshot, DocumentSnapshot, QuerySnapshot } from "firebase/firestore";
+import { getFirestore, collection, getDocs, CollectionReference, doc, getDoc, setDoc, onSnapshot, DocumentSnapshot, QuerySnapshot, collectionGroup, query } from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
 import { FirebaseService } from './firebaseService';
@@ -25,8 +25,8 @@ export class ScenarioService {
 
   /**
    * Retrieves a random video from the Firestore 'videos' collection.
-   * 
-   * @returns A promise that resolves to a Scenario object. 
+   *
+   * @returns A promise that resolves to a Scenario object.
    */
   public async getRandomScenarioId(): Promise<string> {
     const querySnapshot = (await getDocs(this.scenariosRef));
@@ -36,9 +36,9 @@ export class ScenarioService {
 
   /**
    * Creates an Observable that emits a ScenarioWithResponses object for the Scenario document with the given ID, including the responses and stats.
-   * 
-   * @param scenarioId 
-   * @returns 
+   *
+   * @param scenarioId
+   * @returns
    */
   public getScenarioWithResponsesById$(scenarioId?: string): Observable<ScenarioWithResponses | undefined> {
     if (!scenarioId) {
@@ -67,12 +67,12 @@ export class ScenarioService {
 
   /**
    * Creates an Observable that emits the Scenario document with the given ID.
-   * 
-   * Listen to real-time updates of the scenario document and map the Firestore document snapshot to 
+   *
+   * Listen to real-time updates of the scenario document and map the Firestore document snapshot to
    * a Scenario object using the scenarioConverter.
    * Note: We use fromEventPattern to create an Observable from the onSnapshot listener.
-   * @param scenarioId 
-   * @returns 
+   * @param scenarioId
+   * @returns
    */
   private getScenarioById$(scenarioId: string): Observable<Scenario | undefined> {
     const docRef = doc(this.scenariosRef, scenarioId);
@@ -85,17 +85,19 @@ export class ScenarioService {
   }
 
   public async addScenario(scenario: Omit<Scenario, 'id'>): Promise<string> {
-    const db = getFirestore(this.firebaseService.firebaseApp);
-    const scenariosCollection = collection(db, 'scenarios').withConverter(scenarioConverter);
-    const newScenarioRef = doc(scenariosCollection);
+    const newScenarioRef = doc(this.scenariosRef);
     await setDoc(newScenarioRef, scenario);
-    console.log('Scenario added with ID:', newScenarioRef.id);
+    console.debug('Scenario added with ID:', newScenarioRef.id);
     return newScenarioRef.id;
   }
 
-  public async addResponse(scenarioId: string, response: string): Promise<void> {
-    console.log(this.profileService.getUid())
+  public async editScenario(scenarioId: string, scenario: Partial<Scenario>): Promise<void> {
+    const scenarioRef = doc(this.scenariosRef, scenarioId);
+    await setDoc(scenarioRef, scenario, { merge: true });
+    console.debug('Scenario edited ID:', scenarioRef.id);
+  }
 
+  public async addResponse(scenarioId: string, response: string): Promise<void> {
     // Check if user is logged in
     const uid = this.profileService.getUid() || 'made up user'
     if (!uid) {
@@ -106,9 +108,8 @@ export class ScenarioService {
     const responsesRef = this.responsesRef(scenarioId)
     const docRef = doc(responsesRef, uid);
     const docSnap = await getDoc(docRef);
-    console.log('getDocs result:', docSnap);
     if (docSnap.exists()) {
-      // User has already responded, update the existing response 
+      // User has already responded, update the existing response
       await setDoc(docRef, {
         latestResponse: response
       }, { merge: true });
@@ -127,13 +128,13 @@ export class ScenarioService {
 
   /**
    * Creates an Observable that emits the responses for the Scenario with the given ID.
-   * 
+   *
    * Listen to real-time updates of the responses subcollection for the scenario document and
    * map the Firestore query snapshot to an array of ScenarioResponse objects using the responseConverter.
    * Note: We use fromEventPattern to create an Observable from the onSnapshot listener.
-   * 
-   * @param scenarioId 
-   * @returns 
+   *
+   * @param scenarioId
+   * @returns
    */
   private getResponsesForScenario$(scenarioId: string): Observable<ScenarioResponse[]> {
     const colRef = this.responsesRef(scenarioId);
@@ -141,25 +142,25 @@ export class ScenarioService {
       (handler) => onSnapshot(colRef, handler),
       (handler, unsubscribe) => unsubscribe()
     ).pipe(
-       map(docSnap => docSnap.docs.map(doc => doc.data()))
+      map(docSnap => docSnap.docs.map(doc => doc.data()))
     );
   }
 
   /**
    * Creates an Observable that emits the response for the current user for the Scenario with the given ID.
-   * 
+   *
    * Listen to real-time updates of the response document for the current user in the responses subcollection
    * for the scenario document and map the Firestore document snapshot to a ScenarioResponse object using the
    * responseConverter.
-   * 
+   *
    * Note: We use fromEventPattern to create an Observable from the onSnapshot listener.
-   * 
+   *
    * TODO: This currently assumes that the user is logged in and has a UID. We should handle the case where the
    * user is not logged in. We should also take UID as an Oberserble from the ProfileService and switch to the
    * appropriate response document when the UID changes (e.g. user logs in or out).
-   * 
-   * @param scenarioId 
-   * @returns 
+   *
+   * @param scenarioId
+   * @returns
    */
   public getMyResponseForScenario$(scenarioId: string): Observable<ScenarioResponse | undefined> {
     const uid = this.profileService.getUid() || '';

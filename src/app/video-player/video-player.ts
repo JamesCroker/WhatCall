@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import videojs from 'video.js';
 import Player from "video.js/dist/types/player";
 import 'videojs-youtube'
@@ -26,15 +26,18 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   // See options: https://videojs.com/guides/options
   @Input()
   set source(s: string | undefined | null) {
-      if (s) {
+    if (s) {
+      if (s.includes('youtube')) {
         this.player.src({ src: s, type: 'video/youtube' });
-        this.player.load();
-        this.player.play();
-        this.player.autoplay('muted');
+        this.player.src({ src: s, type: 'video/youtube' });
       } else {
-        this.player.pause();
-        this.player.src({ src: '', type: '' });
-      }
+        this.player.src({ src: s, type: 'video/mp4' });
+      } this.player.play();
+      this.player.autoplay('muted');
+    } else {
+      this.player.pause();
+      this.player.src({ src: '', type: '' });
+    }
   }
   get source(): string | undefined {
     if (this.player) {
@@ -54,6 +57,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   // Dispose the player OnDestroy
   ngOnDestroy() {
-      this.player.dispose();
+    this.player.dispose();
   }
 }
