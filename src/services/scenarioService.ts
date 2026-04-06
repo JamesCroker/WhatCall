@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { getFirestore, collection, getDocs, CollectionReference, doc, getDoc, setDoc, onSnapshot, DocumentSnapshot, QuerySnapshot, collectionGroup, query } from "firebase/firestore";
+import {
+  Firestore, collection, getDocs, CollectionReference,
+  doc, getDoc, setDoc, onSnapshot, DocumentSnapshot, QuerySnapshot
+} from '@angular/fire/firestore';
 
 // Import the functions you need from the SDKs you need
-import { FirebaseService } from './firebaseService';
 import { ProfileService } from './profileService';
 
 import { responseConverter, Scenario, scenarioConverter, ScenarioResponse, ScenarioStats, ScenarioWithResponses } from './types';
@@ -17,7 +19,7 @@ import { combineLatest, fromEventPattern, map, Observable, of } from 'rxjs';
 export class ScenarioService {
 
   constructor(
-    private firebaseService: FirebaseService,
+    private firestore: Firestore,
     private profileService: ProfileService
   ) {
     // Empty constructor
@@ -31,7 +33,7 @@ export class ScenarioService {
   public async getRandomScenarioId(): Promise<string> {
     const querySnapshot = (await getDocs(this.scenariosRef));
     const randomIndex = Math.floor(Math.random() * querySnapshot.size);
-    return querySnapshot.docs[randomIndex].data().id;
+    return querySnapshot.docs[randomIndex].data()['id'];
   }
 
   /**
@@ -173,14 +175,12 @@ export class ScenarioService {
     );
   }
 
-  private responsesRef(scenarioId: string): CollectionReference<ScenarioResponse> {
-    const db = getFirestore(this.firebaseService.firebaseApp);
-    return collection(db, "scenarios", scenarioId, "responses").withConverter(responseConverter);
+  private responsesRef(scenarioId: string): CollectionReference {
+    return collection(this.firestore, "scenarios", scenarioId, "responses").withConverter(responseConverter);
   }
 
-  private get scenariosRef(): CollectionReference<Scenario> {
-    const db = getFirestore(this.firebaseService.firebaseApp);
-    return collection(db, "scenarios").withConverter(scenarioConverter);
+  private get scenariosRef(): CollectionReference {
+    return collection(this.firestore, "scenarios").withConverter(scenarioConverter);
   }
 
 }

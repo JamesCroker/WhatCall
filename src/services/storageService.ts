@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FirebaseService } from './firebaseService';
-import { getDownloadURL, getStorage, ref, StorageReference, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, StorageReference, uploadBytes, Storage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +7,7 @@ import { getDownloadURL, getStorage, ref, StorageReference, uploadBytes } from "
 export class StorageService {
 
   constructor(
-    private firebaseService: FirebaseService
+    private storage: Storage
   ) {
   }
 
@@ -19,8 +18,7 @@ export class StorageService {
   }
 
   private storageRef(uid: string, scenarioId: string): StorageReference {
-    const storage = getStorage(this.firebaseService.firebaseApp);
-    return ref(storage, `uploads/${uid}/${scenarioId}`);
+    return ref(this.storage, `uploads/${uid}/${scenarioId}`);
   }
 
 }
