@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
-  Firestore, collection, getDocs, CollectionReference,
-  doc, getDoc, setDoc, onSnapshot, DocumentSnapshot, QuerySnapshot
+  collection, getDocs, CollectionReference,
+  doc, getDoc, setDoc, onSnapshot, DocumentSnapshot, QuerySnapshot,
+  getFirestore, Firestore
 } from '@angular/fire/firestore';
 
 // Import the functions you need from the SDKs you need
@@ -9,6 +10,7 @@ import { ProfileService } from './profileService';
 
 import { responseConverter, Scenario, scenarioConverter, ScenarioResponse, ScenarioStats, ScenarioWithResponses } from './types';
 import { combineLatest, fromEventPattern, map, Observable, of } from 'rxjs';
+import { FirebaseApp } from '@angular/fire/app';
 
 /**
  * Service to interact with video data from Firestore.
@@ -18,11 +20,12 @@ import { combineLatest, fromEventPattern, map, Observable, of } from 'rxjs';
 })
 export class ScenarioService {
 
+  private firestore: Firestore
+
   constructor(
-    private firestore: Firestore,
     private profileService: ProfileService
   ) {
-    // Empty constructor
+    this.firestore = this.getFirestore();
   }
 
   /**
@@ -183,6 +186,9 @@ export class ScenarioService {
     return collection(this.firestore, "scenarios").withConverter(scenarioConverter);
   }
 
+  public getFirestore() {
+    return getFirestore(inject(FirebaseApp));
+  }
 }
 
 function calculateScenarioStats(scenario: Scenario, respomses: ScenarioResponse[]): ScenarioStats {

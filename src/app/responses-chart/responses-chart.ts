@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ChartConfiguration, ChartData } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ScenarioStats } from '../../services';
 
 const EMPTY_CHART_DATA: ChartData<'bar'> = {
@@ -11,6 +11,7 @@ const EMPTY_CHART_DATA: ChartData<'bar'> = {
 @Component({
   selector: 'app-responses-chart',
   imports: [BaseChartDirective],
+  providers: [provideCharts(withDefaultRegisterables())],
   templateUrl: './responses-chart.html',
   styleUrl: './responses-chart.scss'
 })

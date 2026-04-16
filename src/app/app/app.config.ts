@@ -1,10 +1,7 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getStorage, provideStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import {
   autoAnonymousLogin,
@@ -18,7 +15,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideCharts(withDefaultRegisterables()),
     provideFirebaseApp(() => initializeApp({
       projectId: "whatcall-52d6a",
       appId: "1:139166244778:web:4f0914dc3a5eca506955d3",
@@ -30,17 +26,17 @@ export const appConfig: ApplicationConfig = {
       /// projectNumber: "139166244778",
       // version: "2"
     })),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),
     provideAuth(() => getAuth()),
     provideFirebaseUI((apps) => initializeUI({
       app: apps[0],
       behaviors: [
         autoAnonymousLogin(),
         autoUpgradeAnonymousUsers({
+          /*
           async onUpgrade(ui, oldUserId, credential) {
             // Some account upgrade logic.
           }
+          */
         }),
         providerPopupStrategy()
       ],

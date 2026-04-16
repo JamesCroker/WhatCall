@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <button #menuButton matIconButton [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>WhatCall</span>
+  <span class="toolbar-spacer"></span>
+  <button matIconButton class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>person</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/">
+    <mat-icon>home</mat-icon>
+    <span>Home</span>
+  </button>
+  <button mat-menu-item (click)="gotoRandonScenario()">
+    <mat-icon>refresh</mat-icon>
+    <span>Random Scenario</span>
+  </button>
+  <button mat-menu-item (click)="launchUpload()">
+    <mat-icon>file_upload</mat-icon>
+    <span>Upload Scenario</span>
+  </button>
+</mat-menu>
+<router-outlet />

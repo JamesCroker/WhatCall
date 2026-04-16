@@ -33,6 +33,7 @@ export interface ScenarioStats {
 export const responseConverter: FirestoreDataConverter<ScenarioResponse> = {
 
   toFirestore(response: ScenarioResponse): DocumentData {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const firebaseResponse: any = response;
     delete firebaseResponse.id; // ID is stored in document ID, not in data
     return firebaseResponse
@@ -56,6 +57,7 @@ export const responseConverter: FirestoreDataConverter<ScenarioResponse> = {
 export const scenarioConverter: FirestoreDataConverter<Scenario> = {
 
   toFirestore(video: Scenario): DocumentData {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const firebaseVideo: any = video;
     delete firebaseVideo.id; // ID is stored in document ID, not in data
     return firebaseVideo

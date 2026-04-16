@@ -6,12 +6,13 @@ import { VideoPlayerComponent } from '../video-player/video-player';
 import { ResponsesChartComponent } from '../responses-chart/responses-chart';
 import { CommonModule, Location } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { Observable } from 'rxjs';
+import { Observable, map, mergeMap, switchAll } from 'rxjs';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-scenario',
+  standalone: true,
   imports: [VideoPlayerComponent, ResponsesChartComponent, MatButtonModule,
     CommonModule, MatStepperModule, ReactiveFormsModule],
   templateUrl: './scenario.html',
@@ -21,6 +22,12 @@ export class ScenarioComponent implements OnInit {
 
   @ViewChild('stepper') stepper!: MatStepper;
 
+  /**
+ * Observable that emits the active ScenarioWithResponses object based on the
+  activeScenarioId$, including the responses and stats.
+ * The component can subscribe to this Observable to get updates whenever the 
+  active scenario changes.
+ */
   public scenario$: Observable<ScenarioWithResponses | undefined>;
   private scenario: ScenarioWithResponses | undefined = undefined;
 
@@ -38,7 +45,18 @@ export class ScenarioComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private location: Location
   ) {
-    this.scenario$ = this.pageController.activeScenario$;
+    this.scenario$ = this.pageController.activeScenarioId$
+    .pipe(
+        mergeMap(scenarioId => {
+          if (!scenarioId) {
+            return this.scenarioService.getRandomScenarioId()
+          } else {
+            return Promise.resolve(scenarioId);
+          }
+        }),
+        map(scenarioId => this.scenarioService.getScenarioWithResponsesById$(scenarioId)),
+        switchAll()
+    );
   }
 
   ngOnInit(): void {
