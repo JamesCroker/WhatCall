@@ -9,7 +9,7 @@ import {
 import { ProfileService } from './profileService';
 
 import { responseConverter, Scenario, scenarioConverter, ScenarioResponse, ScenarioStats, ScenarioWithResponses } from './types';
-import { combineLatest, fromEventPattern, map, Observable, of } from 'rxjs';
+import { combineLatest, fromEventPattern, map, Observable, of, tap } from 'rxjs';
 import { FirebaseApp } from '@angular/fire/app';
 
 /**
@@ -39,12 +39,13 @@ export class ScenarioService {
     return querySnapshot.docs[randomIndex].data()['id'];
   }
 
-  /**
+  /*
    * Creates an Observable that emits a ScenarioWithResponses object for the Scenario document with the given ID, including the responses and stats.
    *
    * @param scenarioId
    * @returns
    */
+
   public getScenarioWithResponsesById$(scenarioId?: string): Observable<ScenarioWithResponses | undefined> {
     if (!scenarioId) {
       return of(undefined);

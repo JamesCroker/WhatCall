@@ -45,17 +45,16 @@ export class ScenarioComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private location: Location
   ) {
-    this.scenario$ = this.pageController.activeScenarioId$
-    .pipe(
-        mergeMap(scenarioId => {
-          if (!scenarioId) {
-            return this.scenarioService.getRandomScenarioId()
-          } else {
-            return Promise.resolve(scenarioId);
-          }
-        }),
-        map(scenarioId => this.scenarioService.getScenarioWithResponsesById$(scenarioId)),
-        switchAll()
+  
+    this.scenario$ = this.pageController.activeScenarioId$.pipe(mergeMap(scenarioId => {
+        if (!scenarioId) {
+          return this.scenarioService.getRandomScenarioId()
+        } else {
+          return Promise.resolve(scenarioId);
+        }
+      }),
+      map(scenarioId => this.scenarioService.getScenarioWithResponsesById$(scenarioId)),
+      switchAll()
     );
   }
 

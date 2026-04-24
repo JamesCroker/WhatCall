@@ -12,7 +12,7 @@ describe('AuthScreenComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-       providers: [
+      providers: [
         provideFirebaseApp(() => initializeApp({
           projectId: "whatcall-52d6a",
           appId: "1:139166244778:web:4f0914dc3a5eca506955d3",
@@ -38,7 +38,7 @@ describe('AuthScreenComponent', () => {
       ],
       imports: [AuthScreenComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AuthScreenComponent);
     component = fixture.componentInstance;

@@ -4,13 +4,15 @@ import { HomeComponent } from '../home/home';
 export const routes: Routes = [
   {
     'path': 'scenario/:id',
-    loadComponent: () => import('../scenario/scenario').then(m =>
-      m.ScenarioComponent)
+    loadComponent: () => import('../scenario/scenario').then(m => m.ScenarioComponent)
   },
   {
     'path': 'scenario',
-    loadComponent: () => import('../scenario/scenario').then(m =>
-      m.ScenarioComponent)
+    loadComponent: () => import('../scenario/scenario').then(m => m.ScenarioComponent)
+  },
+  {
+    'path': 'home',
+    loadComponent: () => import('../home/home').then(m => m.HomeComponent)
   },
   {
     'path': 'auth',

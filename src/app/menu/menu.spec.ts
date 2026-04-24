@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { MenuComponent } from './menu';
 import { ActivatedRoute } from '@angular/router';
+import { ScenarioPageController } from '../scenario/scenarioPageController';
+import { UploadModalService } from '../upload/uploadModal';
 
 describe('MenuComponent', () => {
   beforeEach(async () => {
@@ -17,6 +19,16 @@ describe('MenuComponent', () => {
                 },
               },
             },
+          },
+        },
+        {
+          provide: ScenarioPageController,
+          useValue: {
+          },
+        },
+        {
+          provide: UploadModalService,
+          useValue: {
           },
         },
       ]
