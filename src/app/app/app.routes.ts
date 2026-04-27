@@ -14,9 +14,5 @@ export const routes: Routes = [
     'path': 'home',
     loadComponent: () => import('../home/home').then(m => m.HomeComponent)
   },
-  {
-    'path': 'auth',
-    loadComponent: () => import('../auth-screen/auth-screen').then(m => m.AuthScreenComponent)
-  },
   { path: '**', component: HomeComponent },
 ];

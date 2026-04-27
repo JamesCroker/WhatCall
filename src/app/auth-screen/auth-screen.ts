@@ -1,7 +1,8 @@
 import { OAuthScreenComponent, GoogleSignInButtonComponent } from "@firebase-oss/ui-angular";
-import { Component, OnInit } from '@angular/core';
-import { Auth, User, onAuthStateChanged } from "@angular/fire/auth";
+import { Component, inject, OnInit } from '@angular/core';
+import { Auth, onAuthStateChanged } from "@angular/fire/auth";
 import { MatButtonModule } from "@angular/material/button";
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-auth-screen',
@@ -15,6 +16,8 @@ export class AuthScreenComponent implements OnInit {
     private auth: Auth
   ) { }
 
+  private readonly dialogRef = inject(MatDialogRef<AuthScreenComponent>);
+
   ngOnInit(): void {
     console.debug('AuthScreenComponent initialized');
     onAuthStateChanged(this.auth, (user) => {
@@ -26,22 +29,8 @@ export class AuthScreenComponent implements OnInit {
     });
   }
 
-  onSignIn(user: User): void {
-    console.debug('Sign-in button clicked', user);
-    // The actual sign-in logic is handled by the Firebase UI component, so we don't need to do anything here.
+  onSignIn(): void {
+    this.dialogRef.close(); 
   }
 
-  signOut(): void {
-    this.auth.signOut()
-      .then(() => {
-        console.debug('User signed out successfully');
-      })
-      .catch((error) => {
-        console.error('Error signing out:', error);
-      });
-  }
-
-  display(): void {
-    console.debug('Current user:', this.auth.currentUser);  // TODO: Replace with actual user info from auth state 
-  }
 }
