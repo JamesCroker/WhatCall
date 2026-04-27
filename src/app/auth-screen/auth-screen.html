@@ -1,3 +1,8 @@
-<fui-sign-up-auth-screen>
-  <fui-google-sign-in-button></fui-google-sign-in-button>
-</fui-sign-up-auth-screen>
+
+  <fui-oauth-screen (onSignIn)="onSignIn($event)">
+   <fui-google-sign-in-button></fui-google-sign-in-button>
+  </fui-oauth-screen>
+
+  <!-- TODO: TEST CODE TO REMOVE -->
+  <button matButton="filled" color="primary" (click)="signOut()">Sign out</button>
+  <button matButton="filled" color="primary" (click)="display()">Display</button>
