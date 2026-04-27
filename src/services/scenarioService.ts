@@ -46,6 +46,23 @@ export class ScenarioService {
    * @returns
    */
 
+  /*
+    PSEUDO CODE:
+    if (there is no ID provided) {
+      emit an event with undefined;
+      exit
+    }
+
+    merge together observable streams for scenario, responses, and my response for the given scenarion ID
+    when the above strema emits a value {
+      if (the scenario does not exist) {
+        emit an event with undefined
+      } else {
+        calculate the stats for the scenario based on the responses
+        emit an event with the scenario, responses, my response, and stats as a ScenarioWithResponses object
+      }
+    }
+  */
   public getScenarioWithResponsesById$(scenarioId?: string): Observable<ScenarioWithResponses | undefined> {
     if (!scenarioId) {
       return of(undefined);
@@ -103,6 +120,20 @@ export class ScenarioService {
     console.debug('Scenario edited ID:', scenarioRef.id);
   }
 
+
+  /*
+    PSEUDO CODE:
+    if (user is not logged in) {
+       throw an error and exit
+    }
+
+    if (the user has already responded to this scenario) {
+      update the existing response document with the new response and update the timestamp
+    } else {
+      create a new response document in the responses subcollection for the scenario 
+    document with the user's UID as the document ID, including the response and timestamp
+    }
+  */
   public async addResponse(scenarioId: string, response: string): Promise<void> {
     // Check if user is logged in
     const uid = this.profileService.getUid() || 'made up user'

@@ -5,6 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ScenarioPageController } from '../scenario/scenarioPageController';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UploadModalService } from '../upload/uploadModal';
+import { Auth } from '@angular/fire/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 @Component({
   selector: 'app-menu',
   imports: [RouterOutlet, MatMenuModule, MatIconModule, MatToolbarModule, RouterLink],
@@ -13,12 +15,23 @@ import { UploadModalService } from '../upload/uploadModal';
 })
 export class MenuComponent {
 
+  public isLoggedIn = false;
+
   constructor(
     private router: Router,
     private scenarioPageController: ScenarioPageController,
-    private uploadModalService: UploadModalService
+    private uploadModalService: UploadModalService,
+    private auth: Auth
   ) {
-    // Empty constructor for dependency injection
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.debug('User signed in:', user);
+        this.isLoggedIn = true;
+      } else {
+        console.debug('User signed out');
+        this.isLoggedIn = false;
+      }
+    })
   }
 
   gotoRandonScenario() {
@@ -29,4 +42,9 @@ export class MenuComponent {
   launchUpload() {
     this.uploadModalService.launch();
   }
+
+  signOut() {
+    this.auth.signOut();
+  }
+
 }

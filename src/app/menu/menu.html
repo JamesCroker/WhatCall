@@ -23,5 +23,8 @@
     <mat-icon>file_upload</mat-icon>
     <span>Upload Scenario</span>
   </button>
-</mat-menu>
+  <button mat-menu-item (click)="signOut()" [style]="(!isLoggedIn) ? 'display: none;' : ''">
+    <mat-icon>logout</mat-icon>
+    <span>signOut</span>
+  </button></mat-menu>
 <router-outlet />
