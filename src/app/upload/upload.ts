@@ -94,6 +94,36 @@ export class UploadComponent {
     return this.thirdFormGroup.get('options') as FormArray;
   }
 
+  /*
+  PSEUDO CODE:
+  if (the user is not logged in) {
+    throw an error and exit.
+  }
+
+  if (the user has entered a URL) {
+    URL = the URL entered by the user
+  } else {
+    upload the first file selected to Firebase Storage using a unique identifier (e.g., timestamp or UUID)
+    make the file publicly accessible and get the URL
+  }
+  
+  create a database document based on the input from the user and the URL obtained above, including:
+  - title
+  - description
+  - scenario type
+  - options (array of strings)
+  - URL (from above)
+  - UID of the user
+
+  save the document to Firestore under a "scenarios" collection with an auto-generated ID
+
+  if (save is successful) {
+    close the upload dialog
+  }  else {
+    display an error message to the user
+  }
+    
+  */
   async save(): Promise<void> {
 
     const file = (this.fileInputElem.nativeElement.files !== null)

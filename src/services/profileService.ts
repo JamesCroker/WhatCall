@@ -33,16 +33,4 @@ export class ProfileService {
     console.log('Profile updated:', profile);
   }
 
-  /*
-  async login(): Promise<void> {
-    try {
-      const x = await signInAnonymously(this.auth);
-      console.log('User signed in anonymously', x);
-    }
-    catch (error) {
-      console.error('Error during anonymous sign-in:', error);
-    }
-  }
-  */
-
 }

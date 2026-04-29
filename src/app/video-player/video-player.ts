@@ -24,7 +24,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     return player
   }
 
-  // See options: https://videojs.com/guides/options
   @Input()
   set source(s: string | undefined | null) {
     if (s) {
