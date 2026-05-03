@@ -2,15 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import {
   collection, getDocs, CollectionReference,
   doc, getDoc, setDoc, onSnapshot, DocumentSnapshot, QuerySnapshot,
-  getFirestore, Firestore
+  Firestore
 } from '@angular/fire/firestore';
 
 // Import the functions you need from the SDKs you need
 import { ProfileService } from './profileService';
 
 import { responseConverter, Scenario, scenarioConverter, ScenarioResponse, ScenarioStats, ScenarioWithResponses } from './types';
-import { combineLatest, fromEventPattern, map, Observable, of, tap } from 'rxjs';
-import { FirebaseApp } from '@angular/fire/app';
+import { combineLatest, fromEventPattern, map, Observable, of } from 'rxjs';
 
 /**
  * Service to interact with video data from Firestore.
@@ -34,7 +33,9 @@ export class ScenarioService {
    * @returns A promise that resolves to a Scenario object.
    */
   public async getRandomScenarioId(): Promise<string> {
+    console.log('ScenarioService: getRandomScenarioId called');
     const querySnapshot = (await getDocs(this.scenariosRef));
+    console.log('ScenarioService: querySnapshot size', querySnapshot.docs.length);
     const randomIndex = Math.floor(Math.random() * querySnapshot.size);
     return querySnapshot.docs[randomIndex].data()['id'];
   }
@@ -73,6 +74,7 @@ export class ScenarioService {
       this.getMyResponseForScenario$(scenarioId)
     ]).pipe(
       map(([scenario, responses, myResponse]) => {
+        console.log('ScenarioService: scenario, responses, myResponse', scenario, responses, myResponse);
         if (!scenario) {
           return undefined;
         } else {
@@ -219,7 +221,7 @@ export class ScenarioService {
   }
 
   public getFirestore() {
-    return getFirestore(inject(FirebaseApp));
+    return inject(Firestore);
   }
 }
 

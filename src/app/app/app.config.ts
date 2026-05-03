@@ -3,9 +3,9 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getStorage, provideStorage } from '@angular/fire/storage';
-import { provideAuth, getAuth } from '@angular/fire/auth';
+import { connectFirestoreEmulator, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fire/storage';
+import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
 import {
   autoAnonymousLogin,
   autoUpgradeAnonymousUsers,
@@ -13,26 +13,42 @@ import {
   providerPopupStrategy
 } from '@firebase-oss/ui-core';
 import { provideFirebaseUI, provideFirebaseUIPolicies } from '@firebase-oss/ui-angular';
+import { firebaseConfig, firebaseEmulators } from '../../env/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideCharts(withDefaultRegisterables()),
-    provideFirebaseApp(() => initializeApp({
-      projectId: "whatcall-52d6a",
-      appId: "1:139166244778:web:4f0914dc3a5eca506955d3",
-      storageBucket: "whatcall-52d6a.firebasestorage.app",
-      apiKey: "AIzaSyD1O8ZHNunSbIULlIYtenA6VWeq-y1o5As",
-      authDomain: "whatcall-52d6a.firebaseapp.com",
-      messagingSenderId: "139166244778",
-      measurementId: "G-TDXW9BDJ3G"
-      /// projectNumber: "139166244778",
-      // version: "2"
-    })),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),
-    provideAuth(() => getAuth()),
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+
+    provideFirestore(() => {
+      const firestore = getFirestore()
+      if (firebaseEmulators) {
+        console.log('Connecting firestore emulator.')
+        connectFirestoreEmulator(firestore, firebaseEmulators.firestore.host, firebaseEmulators.firestore.port)
+      }
+      return firestore
+    }),
+
+    provideStorage(() => {
+      const storage = getStorage()
+      if (firebaseEmulators) {
+        console.log('Connecting storage emulator.')
+        connectStorageEmulator(storage, firebaseEmulators.storage.host, firebaseEmulators.storage.port)
+      }
+      return storage
+    }),
+
+    provideAuth(() => {
+      const auth = getAuth()
+      if (firebaseEmulators) {
+        console.log('Connectng auth emulator.')
+        connectAuthEmulator(auth, firebaseEmulators.auth);
+      }
+      return auth;
+    }),
+
     provideFirebaseUI((apps) => initializeUI({
       app: apps[0],
       behaviors: [

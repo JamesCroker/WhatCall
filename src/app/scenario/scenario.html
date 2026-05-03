@@ -15,7 +15,8 @@
         </div>
         <div class="right-column">
           @for (item of (scenario$ | async)?.options; track item) {
-          <button matStepperNext matButton="filled" (click)="selectionMade(item)">{{ item }}</button>
+          <button matStepperNext [attr.data-testid]="'scenario-option-' + $index" matButton="filled"
+            (click)="selectionMade(item)">{{ item }}</button>
           } @empty {
           <span>There are no items.</span>
           }
@@ -33,7 +34,8 @@
       <div class="main-container">
         <div class="left-column">
           @if ((scenario$ | async)?.myResponse !== undefined) {
-          <p>You selected {{ (scenario$ | async)?.myResponse?.latestResponse }}</p>
+          <p>You selected <span data-testid="your-selection">{{ (scenario$ | async)?.myResponse?.latestResponse
+              }}</span></p>
           }
           <app-responses-chart [scenarioStats]="(scenario$ | async)?.stats"></app-responses-chart>
         </div>

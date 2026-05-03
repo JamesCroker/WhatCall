@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import videojs from 'video.js';
 import Player from "video.js/dist/types/player";
 import 'videojs-youtube'
@@ -38,12 +38,19 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
       this.player.pause();
       this.player.src({ src: '', type: '' });
     }
+    this.changeDetectorRef.detectChanges();
   }
   get source(): string | undefined {
     if (this.player) {
       return this.player.currentSrc();
     }
     return undefined;
+  }
+
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
+    // Empty constructor
   }
 
   // Instantiate a Video.js player OnInit

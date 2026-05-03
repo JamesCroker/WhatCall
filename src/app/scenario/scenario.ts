@@ -45,8 +45,8 @@ export class ScenarioComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     private location: Location
   ) {
-  
     this.scenario$ = this.pageController.activeScenarioId$.pipe(mergeMap(scenarioId => {
+      console.log('ScenarioComponent: activeScenarioId', scenarioId);
         if (!scenarioId) {
           return this.scenarioService.getRandomScenarioId()
         } else {
