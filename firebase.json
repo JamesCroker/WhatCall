@@ -7,6 +7,7 @@
   },
   "hosting": {
     "public": "dist/whatcall/browser",
+    "predeploy": "npm run build:prod",
     "ignore": [
       "firebase.json",
       "**/.*",

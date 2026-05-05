@@ -3,16 +3,29 @@ rules_version='2'
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    match /scenarios/{scenario} {
+    match /videos/{video} {
+      // Anbody can read any video (used only for backward compatability with older app versions.)
       allow read: if true;
+    }
+
+    match /scenarios/{scenario} {
+      // Anbody can read any scenario even if unauthenticated.
+      allow read: if true;
+      // A user can modify a scenario if their auth/uid matches the one in the existing document
       allow update, delete: if resource.data.uid == request.auth.uid;
+      // A user can create a new scenario if their auth/uid matches the one in the request
       allow create: if request.resource.data.uid == request.auth.uid;
     }
 
     match /scenarios/{scenario}/responses/{response} {
+      // A user can create or modify a response if their auth/uid matches the response id (from path)
+      allow update, delete, create: if response == request.auth.uid;
+    }
+
+    match /{path=**}/responses/{response} {
+      // Anbody can read any response even if unauthenticated
+      // this is set using "**/responses/{response}" to support collectionGroup queries
       allow read: if true;
-      allow update, delete: if response == request.auth.uid;
-      allow create: if response == request.auth.uid;
     }
 
   }
