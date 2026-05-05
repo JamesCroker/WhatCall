@@ -30,10 +30,8 @@ export class MenuComponent {
   ) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.debug('User signed in:', user);
         this.isLoggedIn = true;
       } else {
-        console.debug('User signed out');
         this.isLoggedIn = false;
       }
     })
@@ -45,7 +43,9 @@ export class MenuComponent {
   }
 
   async launchUpload() {
-    await this.authModalService.launch();
+    if (!this.auth.currentUser) {
+      await this.authModalService.launch();
+    }
     if (!this.auth.currentUser) {
       this.snackbar.open('You need to be signed in to upload a scenario', 'Close', { duration: 3000 });
       return;

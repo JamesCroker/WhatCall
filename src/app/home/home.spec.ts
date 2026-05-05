@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home';
-import { ActivatedRoute } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,18 +8,7 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              paramMap: {
-                get(): string {
-                  return '123';
-                },
-              },
-            },
-          },
-        },
+        provideRouter([])
       ],
       imports: [HomeComponent]
     })

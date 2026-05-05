@@ -11,18 +11,7 @@ export class ProfileService {
   constructor(
     private auth: Auth
   ) {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        console.debug('User signed in:', user);
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        console.debug('User signed out');
-      }
-    });
+    // Do nothing
   }
 
   getUid(): string | null {

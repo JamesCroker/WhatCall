@@ -10,28 +10,10 @@ describe('UploadComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        {
-          provide: MatDialogRef,
-          useValue: {
-            close: () => { }
-          }
-        },
-        {
-          provide: StorageService,
-          useValue: {
-          }
-        },
-        {
-          provide: ScenarioService,
-          useValue: {
-          }
-        }
-        ,
-        {
-          provide: ProfileService,
-          useValue: {
-          }
-        }
+        { provide: MatDialogRef, useValue: { close: () => { } } },
+        { provide: StorageService, useValue: {} },
+        { provide: ScenarioService, useValue: {} },
+        { provide: ProfileService, useValue: {} }
       ],
       imports: [UploadComponent]
     })
@@ -42,7 +24,7 @@ describe('UploadComponent', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it('should create component', () => {
     expect(component).toBeTruthy();
   });
 });

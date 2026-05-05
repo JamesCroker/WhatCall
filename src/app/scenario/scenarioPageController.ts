@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ScenarioPageController {
 
-  public activeScenarioId$: BehaviorSubject<string | undefined>
+  public readonly activeScenarioId$: BehaviorSubject<string | undefined>
     = new BehaviorSubject<string | undefined>(undefined);
 
   async loadScenario(scenarioId?: string) {

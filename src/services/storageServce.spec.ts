@@ -8,7 +8,7 @@ describe('StorageService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    
+
     spyOn(StorageService.prototype, 'getFirebaseStorage')
       .and
       .callFake(() => {
@@ -18,7 +18,7 @@ describe('StorageService', () => {
     service = TestBed.inject(StorageService);
   });
 
-  it('should be created', () => {
+  it('should create service', () => {
     expect(service).toBeTruthy();
   });
 });

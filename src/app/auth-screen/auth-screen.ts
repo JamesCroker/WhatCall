@@ -22,7 +22,7 @@ export class AuthScreenComponent implements OnInit {
     console.debug('AuthScreenComponent initialized');
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
-        console.debug('User signed in:', user);
+        console.debug('User signed in:', user.displayName);
       } else {
         console.debug('User signed out');
       }
@@ -30,7 +30,7 @@ export class AuthScreenComponent implements OnInit {
   }
 
   onSignIn(): void {
-    this.dialogRef.close(); 
+    this.dialogRef.close();
   }
 
 }
