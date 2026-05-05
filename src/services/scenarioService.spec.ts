@@ -28,7 +28,7 @@ describe('ScenarioService', () => {
     service = TestBed.inject(ScenarioService);
   });
 
-  it('should be created', () => {
+  it('should create service', () => {
     expect(service).toBeTruthy();
   });
 });

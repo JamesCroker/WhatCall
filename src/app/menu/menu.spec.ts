@@ -46,16 +46,12 @@ describe('MenuComponent', () => {
     await fixture.whenStable();
   });
 
-  afterEach(async () => {
-    authLaunchSpy
-
-  })
-
   it('should create component', () => {
     expect(component).toBeTruthy();
   });
 
   it('auth-screen should be launched if user is not authenticated', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     currentUserSpy.and.returnValues(null, { x: true } as any as User);
     authLaunchSpy.and.resolveTo();
     await component.launchUpload();
@@ -72,6 +68,7 @@ describe('MenuComponent', () => {
   });
 
   it('auth-screen should be bypassed in user is already authenticated', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     currentUserSpy.and.returnValue({ x: true } as any as User);
     authLaunchSpy.and.resolveTo();
     await component.launchUpload();

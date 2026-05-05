@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Profile } from '../types/profile';
-import { Auth, onAuthStateChanged } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
 
 
 @Injectable({

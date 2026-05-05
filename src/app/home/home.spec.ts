@@ -19,7 +19,7 @@ describe('HomeComponent', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it('should create component', () => {
     expect(component).toBeTruthy();
   });
 });
