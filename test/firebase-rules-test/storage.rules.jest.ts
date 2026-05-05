@@ -6,7 +6,6 @@ import {
 } from "@firebase/rules-unit-testing";
 import { readFile } from "fs/promises";
 import { ref, uploadBytes } from "firebase/storage";
-import { aliceId } from "./testdata";
 
 let testEnv: RulesTestEnvironment;
 

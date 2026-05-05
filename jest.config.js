@@ -4,21 +4,15 @@ module.exports = {
     '\\.[jt]sx?$': [
       'ts-jest',
       {
-        '^.+\\.tsx?$': [
-          'ts-jest',
-          {},
-        ],
-        tsConfig: 'tsconfig.jest.json',
+        tsConfig: 'tsconfig.jest.json'
       },
-    ],
-    '^.+\\.tsx?$': [
-      'ts-jest',
-      {},
     ],
   },
   roots: [
-    '<rootDir>/test',
+    '<rootDir>/src',
+    '<rootDir>/test'
   ],
+  testRegex: "((\\.|/)jest)\\.[mc]?[jt]sx?$",
   verbose: true,
   silent: true,
   reporters: [

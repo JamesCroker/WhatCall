@@ -3,7 +3,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../out-tsc/jest",
+    "outDir": "./out-tsc/jest",
     "esModuleInterop": true,
     "types": [
       "jest",
