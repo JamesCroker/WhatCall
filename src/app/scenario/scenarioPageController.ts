@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-
-// Import the functions you need from the SDKs you need
-import { ScenarioService  } from '../../services';
 import { BehaviorSubject } from 'rxjs';
 
 /**
@@ -15,7 +12,7 @@ export class ScenarioPageController {
 
   public activeScenarioId$: BehaviorSubject<string | undefined>
     = new BehaviorSubject<string | undefined>(undefined);
-    
+
   async loadScenario(scenarioId?: string) {
     this.activeScenarioId$.next(scenarioId);
   }

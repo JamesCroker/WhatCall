@@ -53,11 +53,7 @@ export const appConfig: ApplicationConfig = {
       app: apps[0],
       behaviors: [
         autoAnonymousLogin(),
-        autoUpgradeAnonymousUsers({
-          async onUpgrade(ui, oldUserId, credential) {
-            // Some account upgrade logic.
-          }
-        }),
+        autoUpgradeAnonymousUsers(),
         providerPopupStrategy()
       ],
     })),
