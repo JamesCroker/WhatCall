@@ -10,7 +10,7 @@
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:karma": "ng test --browsers ChromeHeadless --no-progress --no-watch",
+    "test:ci": "ng test --browsers ChromeHeadless --no-progress --no-watch",
     "test:jest": "firebase emulators:exec --project demo-firestore-rules \"jest --detectOpenHandles\"",
     "doc": "npx typedoc --out docs --entryPointStrategy Expand src  --exclude **/*.spec.ts --excludePrivate --excludeExternals --includeVersion",
     "uml": "tsuml2 --glob \"./src/**/!(*.d|*.spec).ts\" --outFile  ./docs/uml.svg",
