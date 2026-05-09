@@ -1,0 +1,1214 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>whatcall documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">whatcall documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  UploadComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/upload/upload.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-upload</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatStepperModule</code>
+                                <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatInputModule</code>
+                            <code>MatButtonModule</code>
+                            <code>MatChipsModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatRadioModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./upload.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./upload.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialogRef" >dialogRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#fileInputElem" >fileInputElem</a>
+                            </li>
+                            <li>
+                                <a href="#firstFormGroup" >firstFormGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#reactiveKeywords" >reactiveKeywords</a>
+                            </li>
+                            <li>
+                                <a href="#secondFormGroup" >secondFormGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#separatorKeysCodes" >separatorKeysCodes</a>
+                            </li>
+                            <li>
+                                <a href="#thirdFormGroup" >thirdFormGroup</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addReactiveKeyword" >addReactiveKeyword</a>
+                            </li>
+                            <li>
+                                <a href="#removeReactiveKeyword" >removeReactiveKeyword</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#save" >save</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#optionsArray" >optionsArray</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(profileService: <a href="../injectables/ProfileService.html" target="_self">ProfileService</a>, scenarioService: <a href="../injectables/ScenarioService.html" target="_self">ScenarioService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/upload/upload.ts:56</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>profileService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProfileService.html" target="_self" >ProfileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>scenarioService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ScenarioService.html" target="_self" >ScenarioService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>storageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/StorageService.html" target="_self" >StorageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addReactiveKeyword"></a>
+                    <span class="name">
+                        <span ><b>addReactiveKeyword</b></span>
+                        <a href="#addReactiveKeyword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addReactiveKeyword(event: MatChipInputEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/app/upload/upload.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>MatChipInputEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeReactiveKeyword"></a>
+                    <span class="name">
+                        <span ><b>removeReactiveKeyword</b></span>
+                        <a href="#removeReactiveKeyword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeReactiveKeyword(keyword: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/upload/upload.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>keyword</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="save"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>save</b></span>
+                        <a href="#save"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>save()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/upload/upload.ts:127</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogRef"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialogRef</b></span>
+                        <a href="#dialogRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MatDialogRef&lt;UploadComponent&gt;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/upload/upload.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fileInputElem"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>fileInputElem</b></span>
+                        <a href="#fileInputElem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLInputElement&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;fileInput&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/upload/upload.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="firstFormGroup"></a>
+                    <span class="name">
+                        <span ><b>firstFormGroup</b></span>
+                        <a href="#firstFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    upload: new FormControl&lt;string&gt;(&#x27;1&#x27;),
+    url: new FormControl&lt;string&gt;(&#x27;&#x27;),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/upload/upload.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reactiveKeywords"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>reactiveKeywords</b></span>
+                        <a href="#reactiveKeywords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/upload/upload.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="secondFormGroup"></a>
+                    <span class="name">
+                        <span ><b>secondFormGroup</b></span>
+                        <a href="#secondFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    title: new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required),
+    scenarioType: new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required),
+    description: new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/upload/upload.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="separatorKeysCodes"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>separatorKeysCodes</b></span>
+                        <a href="#separatorKeysCodes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[ENTER, COMMA, SEMICOLON]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/upload/upload.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="thirdFormGroup"></a>
+                    <span class="name">
+                        <span ><b>thirdFormGroup</b></span>
+                        <a href="#thirdFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    options: new FormControl&lt;string[]&gt;([] as string[], [
+      Validators.required,
+      ArrayValidators.minArrayLengthValidator(2),
+      ArrayValidators.arrayNoDuplicatesValidator
+    ])
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/upload/upload.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="optionsArray"></a>
+                        <span class="name"><b>optionsArray</b><a href="#optionsArray"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>optionsArray()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/upload/upload.ts:93</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ElementRef, inject, signal, ViewChild } from &#x27;@angular/core&#x27;;
+import { Validators, FormsModule, ReactiveFormsModule, FormControl, FormGroup, FormArray } from &#x27;@angular/forms&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatStepperModule } from &#x27;@angular/material/stepper&#x27;;
+import { MatChipInputEvent, MatChipsModule } from &#x27;@angular/material/chips&#x27;;
+import { ProfileService, Scenario, ScenarioService, StorageService } from &#x27;../../services&#x27;;
+import { ENTER, COMMA, SEMICOLON } from &#x27;@angular/cdk/keycodes&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatDialogRef } from &#x27;@angular/material/dialog&#x27;;
+import { MatRadioModule } from &#x27;@angular/material/radio&#x27;;
+import * as ArrayValidators from &#x27;./arrayValidators&#x27;;
+
+@Component({
+  standalone: true,
+  selector: &#x27;app-upload&#x27;,
+  templateUrl: &#x27;./upload.html&#x27;,
+  styleUrl: &#x27;./upload.scss&#x27;,
+  imports: [
+    MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatIconModule,
+    MatRadioModule
+  ],
+})
+export class UploadComponent {
+
+  @ViewChild(&#x27;fileInput&#x27;) fileInputElem!: ElementRef&lt;HTMLInputElement&gt;;
+
+  private readonly dialogRef &#x3D; inject(MatDialogRef&lt;UploadComponent&gt;);
+
+  readonly separatorKeysCodes: number[] &#x3D; [ENTER, COMMA, SEMICOLON]; // Enter, comma
+  readonly reactiveKeywords &#x3D; signal&lt;string[]&gt;([]);
+
+  firstFormGroup &#x3D; new FormGroup({
+    upload: new FormControl&lt;string&gt;(&#x27;1&#x27;),
+    url: new FormControl&lt;string&gt;(&#x27;&#x27;),
+  });
+  secondFormGroup &#x3D; new FormGroup({
+    title: new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required),
+    scenarioType: new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required),
+    description: new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required),
+  });
+  thirdFormGroup &#x3D; new FormGroup({
+    options: new FormControl&lt;string[]&gt;([] as string[], [
+      Validators.required,
+      ArrayValidators.minArrayLengthValidator(2),
+      ArrayValidators.arrayNoDuplicatesValidator
+    ])
+  });
+
+  constructor(
+    private profileService: ProfileService,
+    private scenarioService: ScenarioService,
+    private storageService: StorageService
+  ) { }
+
+  removeReactiveKeyword(keyword: string) {
+    this.reactiveKeywords.update(keywords &#x3D;&gt; {
+      const index &#x3D; keywords.indexOf(keyword);
+      if (index &lt; 0) {
+        return keywords;
+      }
+
+      keywords.splice(index, 1);
+      return [...keywords];
+    });
+
+    this.thirdFormGroup.controls[&#x27;options&#x27;].setValue(this.reactiveKeywords());
+  }
+
+  addReactiveKeyword(event: MatChipInputEvent): void {
+    const value &#x3D; (event.value || &#x27;&#x27;).trim();
+
+    // Add our keyword
+    if (value) {
+      console.log(&#x27;Adding keyword&#x27;, value);
+      this.reactiveKeywords.update(keywords &#x3D;&gt; [...keywords, value]);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.thirdFormGroup.controls[&#x27;options&#x27;].setValue(this.reactiveKeywords());
+  }
+
+  get optionsArray(): FormArray {
+    return this.thirdFormGroup.get(&#x27;options&#x27;) as FormArray;
+  }
+
+  /*
+  PSEUDO CODE:
+  if (the user is not logged in) {
+    throw an error and exit.
+  }
+
+  if (the user has entered a URL) {
+    URL &#x3D; the URL entered by the user
+  } else {
+    upload the first file selected to Firebase Storage using a unique identifier (e.g., timestamp or UUID)
+    make the file publicly accessible and get the URL
+  }
+  
+  create a database document based on the input from the user and the URL obtained above, including:
+  - title
+  - description
+  - scenario type
+  - options (array of strings)
+  - URL (from above)
+  - UID of the user
+
+  save the document to Firestore under a &quot;scenarios&quot; collection with an auto-generated ID
+
+  if (save is successful) {
+    close the upload dialog
+  }  else {
+    display an error message to the user
+  }
+    
+  */
+  async save(): Promise&lt;void&gt; {
+
+    const file &#x3D; (this.fileInputElem.nativeElement.files !&#x3D;&#x3D; null)
+      ? this.fileInputElem.nativeElement.files[0]
+      : undefined;
+
+    const uid &#x3D; this.profileService.getUid();
+    if (!uid) {
+      throw new Error(&#x27;User not logged in&#x27;);
+    }
+
+    let fileUrl &#x3D; this.firstFormGroup.value.url;
+    if (file !&#x3D;&#x3D; undefined) {
+      const fileId &#x3D; (new Date()).toISOString()
+      fileUrl &#x3D; await this.storageService.upload(uid, fileId, file);
+    }
+
+    try {
+      const formData: Omit&lt;Scenario, &#x27;id&#x27;&gt; &#x3D; {
+        url: fileUrl || &#x27;&#x27;,
+        options: this.thirdFormGroup.value.options || [],
+        scenarioType: this.secondFormGroup.value.scenarioType || &#x27;&#x27;,
+        title: this.secondFormGroup.value.title || &#x27;&#x27;,
+        uid: this.profileService.getUid() || &#x27;&#x27;
+      };
+
+      const scenarioId &#x3D; await this.scenarioService.addScenario(formData);
+      console.log(&#x27;Scenario saved successfully with ID:&#x27;, scenarioId);
+
+      this.dialogRef.close();
+
+    } catch (error) {
+      console.error(&#x27;Error saving scenario:&#x27;, error);
+      alert(&#x27;Error saving scenario. Please try again.&#x27;);
+    }
+  }
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-stepper headerPosition&#x3D;&quot;top&quot; #stepper linear&#x3D;&quot;true&quot;&gt;
+
+  &lt;!-- FIRST STEP --&gt;
+
+  &lt;mat-step [stepControl]&#x3D;&quot;firstFormGroup&quot;&gt;
+    &lt;form [formGroup]&#x3D;&quot;firstFormGroup&quot;&gt;
+      &lt;ng-template matStepLabel&gt;Upload&lt;/ng-template&gt;
+
+      &lt;mat-radio-group formControlName&#x3D;&quot;upload&quot;&gt;
+        &lt;mat-radio-button value&#x3D;&quot;1&quot;&gt;Upload File&lt;/mat-radio-button&gt;
+        &lt;mat-radio-button value&#x3D;&quot;2&quot;&gt;External URL&lt;/mat-radio-button&gt;
+      &lt;/mat-radio-group&gt;
+
+      &lt;p [hidden]&#x3D;&quot;firstFormGroup.value.upload &#x3D;&#x3D; &#x27;1&#x27;&quot;&gt;
+        &lt;mat-form-field&gt;
+          &lt;mat-label&gt;Video URL&lt;/mat-label&gt;
+          &lt;input matInput type&#x3D;&quot;url&quot; placeholder&#x3D;&quot;Video URL&quot; formControlName&#x3D;&quot;url&quot;&gt;
+        &lt;/mat-form-field&gt;
+      &lt;/p&gt;
+
+      &lt;p [hidden]&#x3D;&quot;firstFormGroup.value.upload !&#x3D; &#x27;1&#x27;&quot;&gt;
+        &lt;input #fileInput type&#x3D;&quot;file&quot; accept&#x3D;&quot;.mp4&quot; placeholder&#x3D;&quot;Video&quot;&gt;
+      &lt;/p&gt;
+
+      &lt;div&gt;
+        &lt;button matButton matStepperNext [disabled]&#x3D;&quot;!firstFormGroup.valid&quot;&gt;Next&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/mat-step&gt;
+
+  &lt;!-- SECOND STEP --&gt;
+
+  &lt;mat-step [stepControl]&#x3D;&quot;secondFormGroup&quot;&gt;
+    &lt;form [formGroup]&#x3D;&quot;secondFormGroup&quot;&gt;
+      &lt;ng-template matStepLabel&gt;Details&lt;/ng-template&gt;
+      &lt;p&gt;
+        &lt;mat-form-field&gt;
+          &lt;mat-label&gt;Scenario Title&lt;/mat-label&gt;
+          &lt;input matInput type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Title&quot; formControlName&#x3D;&quot;title&quot;&gt;
+        &lt;/mat-form-field&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;mat-form-field&gt;
+          &lt;mat-label&gt;Scenario Description&lt;/mat-label&gt;
+          &lt;input matInput type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Scenario&quot; formControlName&#x3D;&quot;description&quot;&gt;
+        &lt;/mat-form-field&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;mat-form-field&gt;
+          &lt;mat-label&gt;Scenario Type&lt;/mat-label&gt;
+          &lt;input matInput type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Scenario Type&quot; formControlName&#x3D;&quot;scenarioType&quot;&gt;
+        &lt;/mat-form-field&gt;
+      &lt;/p&gt;
+      &lt;div&gt;
+        &lt;button matButton matStepperPrevious&gt;Back&lt;/button&gt;
+        &lt;button matButton matStepperNext [disabled]&#x3D;&quot;!secondFormGroup.valid&quot;&gt;Next&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/mat-step&gt;
+
+  &lt;!-- THIRD STEP --&gt;
+
+  &lt;mat-step [stepControl]&#x3D;&quot;thirdFormGroup&quot;&gt;
+    &lt;form [formGroup]&#x3D;&quot;thirdFormGroup&quot;&gt;
+      &lt;ng-template matStepLabel&gt;Options&lt;/ng-template&gt;
+      &lt;mat-form-field class&#x3D;&quot;example-form-field&quot;&gt;
+        &lt;mat-label&gt;Video keywords&lt;/mat-label&gt;
+        &lt;mat-chip-grid #reactiveChipGrid aria-label&#x3D;&quot;Enter reactive form keywords&quot; formControlName&#x3D;&quot;options&quot;&gt;
+          @for (keyword of reactiveKeywords(); track keyword) {
+          &lt;mat-chip-row (removed)&#x3D;&quot;removeReactiveKeyword(keyword)&quot;&gt;
+            {{keyword}}
+            &lt;button matChipRemove [attr.aria-label]&#x3D;&quot;&#x27;remove reactive form&#x27; + keyword&quot;&gt;
+              &lt;mat-icon&gt;cancel&lt;/mat-icon&gt;
+            &lt;/button&gt;
+          &lt;/mat-chip-row&gt;
+          }
+        &lt;/mat-chip-grid&gt;
+        &lt;input placeholder&#x3D;&quot;New keyword...&quot; [matChipInputFor]&#x3D;&quot;reactiveChipGrid&quot;
+          [matChipInputSeparatorKeyCodes]&#x3D;&quot;separatorKeysCodes&quot; (matChipInputTokenEnd)&#x3D;&quot;addReactiveKeyword($event)&quot; /&gt;
+      &lt;/mat-form-field&gt;
+      &lt;div&gt;
+        &lt;button matButton matStepperPrevious&gt;Back&lt;/button&gt;
+        &lt;button matButton matStepperNext [disabled]&#x3D;&quot;!thirdFormGroup.valid&quot;&gt;Next&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/mat-step&gt;
+
+  &lt;!-- FOURTH STEP --&gt;
+  &lt;mat-step&gt;
+    &lt;ng-template matStepLabel&gt;Done&lt;/ng-template&gt;
+    You are now done.
+    &lt;div&gt;
+      &lt;button matButton matStepperPrevious&gt;Back&lt;/button&gt;
+      &lt;button matButton (click)&#x3D;&quot;save()&quot;&gt;Save&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/mat-step&gt;
+
+&lt;/mat-stepper&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-stepper headerPosition="top" #stepper linear="true">  <!-- FIRST STEP -->  <mat-step [stepControl]="firstFormGroup">    <form [formGroup]="firstFormGroup">      <ng-template matStepLabel>Upload</ng-template>      <mat-radio-group formControlName="upload">        <mat-radio-button value="1">Upload File</mat-radio-button>        <mat-radio-button value="2">External URL</mat-radio-button>      </mat-radio-group>      <p [hidden]="firstFormGroup.value.upload == \'1\'">        <mat-form-field>          <mat-label>Video URL</mat-label>          <input matInput type="url" placeholder="Video URL" formControlName="url">        </mat-form-field>      </p>      <p [hidden]="firstFormGroup.value.upload != \'1\'">        <input #fileInput type="file" accept=".mp4" placeholder="Video">      </p>      <div>        <button matButton matStepperNext [disabled]="!firstFormGroup.valid">Next</button>      </div>    </form>  </mat-step>  <!-- SECOND STEP -->  <mat-step [stepControl]="secondFormGroup">    <form [formGroup]="secondFormGroup">      <ng-template matStepLabel>Details</ng-template>      <p>        <mat-form-field>          <mat-label>Scenario Title</mat-label>          <input matInput type="text" placeholder="Title" formControlName="title">        </mat-form-field>      </p>      <p>        <mat-form-field>          <mat-label>Scenario Description</mat-label>          <input matInput type="text" placeholder="Scenario" formControlName="description">        </mat-form-field>      </p>      <p>        <mat-form-field>          <mat-label>Scenario Type</mat-label>          <input matInput type="text" placeholder="Scenario Type" formControlName="scenarioType">        </mat-form-field>      </p>      <div>        <button matButton matStepperPrevious>Back</button>        <button matButton matStepperNext [disabled]="!secondFormGroup.valid">Next</button>      </div>    </form>  </mat-step>  <!-- THIRD STEP -->  <mat-step [stepControl]="thirdFormGroup">    <form [formGroup]="thirdFormGroup">      <ng-template matStepLabel>Options</ng-template>      <mat-form-field class="example-form-field">        <mat-label>Video keywords</mat-label>        <mat-chip-grid #reactiveChipGrid aria-label="Enter reactive form keywords" formControlName="options">          @for (keyword of reactiveKeywords(); track keyword) {          <mat-chip-row (removed)="removeReactiveKeyword(keyword)">            {{keyword}}            <button matChipRemove [attr.aria-label]="\'remove reactive form\' + keyword">              <mat-icon>cancel</mat-icon>            </button>          </mat-chip-row>          }        </mat-chip-grid>        <input placeholder="New keyword..." [matChipInputFor]="reactiveChipGrid"          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addReactiveKeyword($event)" />      </mat-form-field>      <div>        <button matButton matStepperPrevious>Back</button>        <button matButton matStepperNext [disabled]="!thirdFormGroup.valid">Next</button>      </div>    </form>  </mat-step>  <!-- FOURTH STEP -->  <mat-step>    <ng-template matStepLabel>Done</ng-template>    You are now done.    <div>      <button matButton matStepperPrevious>Back</button>      <button matButton (click)="save()">Save</button>    </div>  </mat-step></mat-stepper></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'AuthScreenComponent', 'selector': 'app-auth-screen'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'ResponsesChartComponent', 'selector': 'app-responses-chart'},{'name': 'ScenarioComponent', 'selector': 'app-scenario'},{'name': 'UploadComponent', 'selector': 'app-upload'},{'name': 'VideoPlayerComponent', 'selector': 'app-video-player'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'UploadComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'UploadComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
