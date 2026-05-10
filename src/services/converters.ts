@@ -1,34 +1,5 @@
 import { DocumentData, QueryDocumentSnapshot, SnapshotOptions, FirestoreDataConverter } from "firebase/firestore";
-/**
- * Video data model.
- */
-export interface Scenario {
-  id: string;
-  title: string;
-  url: string;
-  uid: string;
-  scenarioType: string;
-  options: string[];
-}
-
-export interface ScenarioWithResponses extends Scenario {
-    responses: ScenarioResponse[];
-    stats: ScenarioStats;
-    myResponse?: ScenarioResponse;
-}
-
-export interface ScenarioResponse {
-  id: string;
-  uid: string;
-  scenarioId: string;
-  latestResponse: string;
-  firstResponse: string;
-}
-
-export interface ScenarioStats {
-  totalResponses: number;
-  optionCounts: { [option: string]: number };
-}
+import { ScenarioResponse, Scenario } from "../types/types";
 
 export const responseConverter: FirestoreDataConverter<ScenarioResponse> = {
 

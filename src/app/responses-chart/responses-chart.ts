@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ChartConfiguration, ChartData } from 'chart.js';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
-import { ScenarioStats } from '../../services';
+import { ScenarioStats } from '../../types';
 
 const EMPTY_CHART_DATA: ChartData<'bar'> = {
     labels: [],

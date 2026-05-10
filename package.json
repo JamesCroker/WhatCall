@@ -66,6 +66,7 @@
     "@angular/cli": "~20.2.0",
     "@angular/compiler-cli": "~20.2.0",
     "@compodoc/compodoc": "^1.2.1",
+    "@elfsquad/tsdoc-parser": "^1.0.0",
     "@eslint/js": "^10.0.1",
     "@firebase/rules-unit-testing": "~4.0.0",
     "@jest/globals": "^30.3.0",

@@ -5,7 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { ProfileService, Scenario, ScenarioService, StorageService } from '../../services';
+import { ProfileService, ScenarioService, StorageService } from '../../services';
+import { Scenario } from '../../types';
 import { ENTER, COMMA, SEMICOLON } from '@angular/cdk/keycodes';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -106,7 +107,7 @@ export class UploadComponent {
     upload the first file selected to Firebase Storage using a unique identifier (e.g., timestamp or UUID)
     make the file publicly accessible and get the URL
   }
-  
+
   create a database document based on the input from the user and the URL obtained above, including:
   - title
   - description
@@ -122,7 +123,7 @@ export class UploadComponent {
   }  else {
     display an error message to the user
   }
-    
+
   */
   async save(): Promise<void> {
 

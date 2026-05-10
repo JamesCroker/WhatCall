@@ -8,7 +8,8 @@ import {
 // Import the functions you need from the SDKs you need
 import { ProfileService } from './profileService';
 
-import { responseConverter, Scenario, scenarioConverter, ScenarioResponse, ScenarioStats, ScenarioWithResponses } from './types';
+import {  Scenario, ScenarioResponse, ScenarioStats, ScenarioWithResponses } from '../types';
+import { responseConverter, scenarioConverter } from './converters';
 import { combineLatest, fromEventPattern, map, Observable, of } from 'rxjs';
 
 /**
@@ -122,7 +123,6 @@ export class ScenarioService {
     console.debug('Scenario edited ID:', scenarioRef.id);
   }
 
-
   /*
     PSEUDO CODE:
     if (user is not logged in) {
@@ -132,7 +132,7 @@ export class ScenarioService {
     if (the user has already responded to this scenario) {
       update the existing response document with the new response and update the timestamp
     } else {
-      create a new response document in the responses subcollection for the scenario 
+      create a new response document in the responses subcollection for the scenario
     document with the user's UID as the document ID, including the response and timestamp
     }
   */
@@ -201,7 +201,7 @@ export class ScenarioService {
    * @param scenarioId
    * @returns
    */
-  public getMyResponseForScenario$(scenarioId: string): Observable<ScenarioResponse | undefined> {
+  private getMyResponseForScenario$(scenarioId: string): Observable<ScenarioResponse | undefined> {
     const uid = this.profileService.getUid() || '';
     const docRef = doc(this.responsesRef(scenarioId), uid);
     return fromEventPattern<DocumentSnapshot<ScenarioResponse | undefined>>(

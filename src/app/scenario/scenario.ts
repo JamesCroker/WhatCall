@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ScenarioService, ScenarioWithResponses } from '../../services';
+import { ScenarioService } from '../../services';
+import { ScenarioWithResponses } from '../../types';
 import { ScenarioPageController } from '../scenario/scenarioPageController';
 import { VideoPlayerComponent } from '../video-player/video-player';
 import { ResponsesChartComponent } from '../responses-chart/responses-chart';
@@ -23,36 +24,47 @@ export class ScenarioComponent implements OnInit {
   @ViewChild('stepper') stepper!: MatStepper;
 
   /**
- * Observable that emits the active ScenarioWithResponses object based on the
-  activeScenarioId$, including the responses and stats.
- * The component can subscribe to this Observable to get updates whenever the 
-  active scenario changes.
- */
+   * Observable that emits the active ScenarioWithResponses object based on the activeScenarioId$
+   * including the responses and stats.
+  **/
   public scenario$: Observable<ScenarioWithResponses | undefined>;
+
+  /** active scenario tracks most recent response recived from scenario$ observable. */
   private scenario: ScenarioWithResponses | undefined = undefined;
 
+  /** The duration of animation for the mat-stepper */
   public stepperDuration = '';
 
-  firstFormGroup = new FormGroup({
-  });
-  secondFormGroup = new FormGroup({
-  });
+  /** Empty FromGroup object, used for first mat-stepper page. */
+  firstFormGroup = new FormGroup({ });
+
+  /** Empty FromGroup object, used for second mat-stepper page. */
+  secondFormGroup = new FormGroup({ });
 
   constructor(
+    /** injected ActivatedRoute service */
     private activatedRoute: ActivatedRoute,
+
+    /** injected ScenarioPageController service */
     private pageController: ScenarioPageController,
+
+    /** injected ScenarioService service */
     private scenarioService: ScenarioService,
+
+    /** injected ChangeDetectorRef service */
     private changeDetector: ChangeDetectorRef,
+
+    /** injected Location service */
     private location: Location
   ) {
     this.scenario$ = this.pageController.activeScenarioId$.pipe(mergeMap(scenarioId => {
       console.log('ScenarioComponent: activeScenarioId', scenarioId);
-        if (!scenarioId) {
-          return this.scenarioService.getRandomScenarioId()
-        } else {
-          return Promise.resolve(scenarioId);
-        }
-      }),
+      if (!scenarioId) {
+        return this.scenarioService.getRandomScenarioId()
+      } else {
+        return Promise.resolve(scenarioId);
+      }
+    }),
       map(scenarioId => this.scenarioService.getScenarioWithResponsesById$(scenarioId)),
       switchAll()
     );
@@ -80,10 +92,18 @@ export class ScenarioComponent implements OnInit {
     this.scenarioService.addResponse(this.scenario.id, userResponse)
   }
 
+  /**
+   * goto next randomly selected scenario.
+   */
   gotoNext() {
+    // select another random scenaro by calling page controller without scenarioId specified.
     this.pageController.loadScenario();
+
+    // move the stepper back to page-1 without annimation
     this.stepperDuration = '0ms';
     this.stepper.reset();
+
+    // Subscribe to the animationDone event and once (0ms) animation is complete turn animation back on
     this.stepper.animationDone.asObservable().subscribe(() => {
       this.stepperDuration = '';
     })

@@ -131,25 +131,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/Scenario.html" data-type="entity-link" >Scenario</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Scenario-1.html" data-type="entity-link" >Scenario</a>
-                            </li>
-                            <li class="link">
                                 <a href="interfaces/ScenarioResponse.html" data-type="entity-link" >ScenarioResponse</a>
-                            </li>
-                            <li class="link">
-                                <a href="interfaces/ScenarioResponse-1.html" data-type="entity-link" >ScenarioResponse</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/ScenarioStats.html" data-type="entity-link" >ScenarioStats</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/ScenarioStats-1.html" data-type="entity-link" >ScenarioStats</a>
-                            </li>
-                            <li class="link">
                                 <a href="interfaces/ScenarioWithResponses.html" data-type="entity-link" >ScenarioWithResponses</a>
-                            </li>
-                            <li class="link">
-                                <a href="interfaces/ScenarioWithResponses-1.html" data-type="entity-link" >ScenarioWithResponses</a>
                             </li>
                         </ul>
                     </li>

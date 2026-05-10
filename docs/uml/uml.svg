@@ -6,13 +6,8 @@
 [&lt;interface&gt;FirebaseEmulatorConfig|+auth: string;+firestore: { host: string; port: number; };+storage: { host: string; port: number; }|]
 [&lt;interface&gt;FirebaseConfig|+projectId: string;+appId: string;+storageBucket: string;+apiKey: string;+authDomain: string;+messagingSenderId: string;+measurementId: string|]
 [ProfileService|-auth: Auth|+getUid(): string;+updateProfile(): void]
-[ScenarioService|-firestore: Firestore;-profileService: ProfileService|+getRandomScenarioId(): Promise&lt;string&gt;;+getScenarioWithResponsesById$(): Observable&lt;ScenarioWithResponses&gt;;-getScenarioById$(): Observable&lt;Scenario&gt;;+addScenario(): Promise&lt;string&gt;;+editScenario(): Promise&lt;void&gt;;+addResponse(): Promise&lt;void&gt;;-getResponsesForScenario$(): Observable&lt;ScenarioResponse\[\]&gt;;+getMyResponseForScenario$(): Observable&lt;ScenarioResponse&gt;;-responsesRef(): CollectionReference&lt;DocumentData, DocumentData&gt;;+getFirestore(): Firestore]
+[ScenarioService|-firestore: Firestore;-profileService: ProfileService|+getRandomScenarioId(): Promise&lt;string&gt;;+getScenarioWithResponsesById$(): Observable&lt;ScenarioWithResponses&gt;;-getScenarioById$(): Observable&lt;Scenario&gt;;+addScenario(): Promise&lt;string&gt;;+editScenario(): Promise&lt;void&gt;;+addResponse(): Promise&lt;void&gt;;-getResponsesForScenario$(): Observable&lt;ScenarioResponse\[\]&gt;;-getMyResponseForScenario$(): Observable&lt;ScenarioResponse&gt;;-responsesRef(): CollectionReference&lt;DocumentData, DocumentData&gt;;+getFirestore(): Firestore]
 [StorageService|-storage: Storage|+upload(): Promise&lt;string&gt;;-storageRef(): StorageReference;+getFirebaseStorage(): Storage]
-[&lt;interface&gt;Scenario|+id: string;+title: string;+url: string;+uid: string;+scenarioType: string;+options: string\[\]|]
-[&lt;interface&gt;ScenarioWithResponses|+responses: ScenarioResponse\[\];+stats: ScenarioStats;+myResponse?: ScenarioResponse|]
-[&lt;interface&gt;ScenarioResponse|+id: string;+uid: string;+scenarioId: string;+latestResponse: string;+firstResponse: string|]
-[&lt;interface&gt;ScenarioStats|+totalResponses: number;+optionCounts: { \[option: string\]: number; }|]
-[Scenario]&lt;:--[ScenarioWithResponses]
 [&lt;interface&gt;Profile|+name: string|]
 [&lt;interface&gt;Scenario|+id: string;+title: string;+url: string;+uid: string;+scenarioType: string;+options: string\[\]|]
 [&lt;interface&gt;ScenarioWithResponses|+responses: ScenarioResponse\[\];+stats: ScenarioStats;+myResponse?: ScenarioResponse|]
@@ -42,17 +37,13 @@
 <g transform="translate(8, 8)" fill="#33322E">
 <g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
 <g stroke-dasharray="6 6">
-<path d="M1806.8 275.8 L1795.5 392 L1809.4481268011527 513 L1809.4 513.0 " fill="none"></path>
+<path d="M1979.5 275.8 L1979.5 392 L1979.5 513 L1979.5 513.0 " fill="none"></path>
 </g>
-<path d="M1812.1 276.3 L1806.8 275.8 L1801.5 275.3 L1808.1 262.5 Z"></path>
+<path d="M1984.8 275.8 L1979.5 275.8 L1974.2 275.8 L1979.5 262.5 Z"></path>
 <g stroke-dasharray="6 6">
-<path d="M1920.0 258.5 L2112.5 392 L1905.3703170028818 513 L1905.4 513.0 " fill="none"></path>
+<path d="M2805.8 205.4 L2384.5 392 L2384.5 501.5 L2384.5 501.5 " fill="none"></path>
 </g>
-<path d="M1923.0 254.1 L1920.0 258.5 L1916.9 262.8 L1909.0 250.9 Z"></path>
-<g stroke-dasharray="6 6">
-<path d="M2805.5 202.6 L2302.5 392 L2302.5 501.5 L2302.5 501.5 " fill="none"></path>
-</g>
-<path d="M2807.4 207.6 L2805.5 202.6 L2803.6 197.6 L2818.0 197.9 Z"></path>
+<path d="M2808.0 210.2 L2805.8 205.4 L2803.6 200.5 L2818.0 200.0 Z"></path>
 <g stroke-dasharray="6 6">
 <path d="M2849.5 215.3 L2849.5 392 L2849.5 412 L2849.5 412.0 " fill="none"></path>
 </g>
@@ -179,7 +170,7 @@
 <text x="0.0" y="78.9" stroke="none" data-name="ScenarioService" data-compartment="2">+editScenario(): Promise&lt;void&gt;</text>
 <text x="0.0" y="95.1" stroke="none" data-name="ScenarioService" data-compartment="2">+addResponse(): Promise&lt;void&gt;</text>
 <text x="0.0" y="111.3" stroke="none" data-name="ScenarioService" data-compartment="2">-getResponsesForScenario$(): Observable&lt;ScenarioResponse[]&gt;</text>
-<text x="0.0" y="127.5" stroke="none" data-name="ScenarioService" data-compartment="2">+getMyResponseForScenario$(): Observable&lt;ScenarioResponse&gt;</text>
+<text x="0.0" y="127.5" stroke="none" data-name="ScenarioService" data-compartment="2">-getMyResponseForScenario$(): Observable&lt;ScenarioResponse&gt;</text>
 <text x="0.0" y="143.7" stroke="none" data-name="ScenarioService" data-compartment="2">-responsesRef(): CollectionReference&lt;DocumentData, DocumentData&gt;</text>
 <text x="0.0" y="159.9" stroke="none" data-name="ScenarioService" data-compartment="2">+getFirestore(): Firestore</text>
 
@@ -213,19 +204,43 @@
 </g>
 </g>
 </g>
+<g data-name="Profile">
+<g fill="lightblue" stroke="#33322E" data-name="Profile">
+<rect x="1722.0" y="150.0" height="72.0" width="124.0" data-name="Profile"></rect>
+<path d="M1722.0 182.0 L1846.0 182.0" fill="none" data-name="Profile"></path>
+<path d="M1722.0 214.0 L1846.0 214.0" fill="none" data-name="Profile"></path>
+</g>
+<g transform="translate(1722, 150)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Profile" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Profile" data-compartment="0">
+<a id="../../src/types/profile.ts.Profile" xlink:href="../../src/types/profile.ts"><text x="54.0" y="14.1" stroke="none" text-anchor="middle" data-name="Profile" data-compartment="0">Profile</text></a>
+
+</g>
+</g>
+<g transform="translate(1722, 182)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Profile" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Profile" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="Profile" data-compartment="1">+name: string</text>
+
+</g>
+</g>
+<g transform="translate(1722, 214)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Profile" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Profile" data-compartment="2">
+
+</g>
+</g>
+</g>
 <g data-name="Scenario">
 <g fill="lightblue" stroke="#33322E" data-name="Scenario">
-<rect x="1722.0" y="109.5" height="153.0" width="187.0" data-name="Scenario"></rect>
-<path d="M1722.0 141.5 L1909.0 141.5" fill="none" data-name="Scenario"></path>
-<path d="M1722.0 254.5 L1909.0 254.5" fill="none" data-name="Scenario"></path>
+<rect x="1886.0" y="109.5" height="153.0" width="187.0" data-name="Scenario"></rect>
+<path d="M1886.0 141.5 L2073.0 141.5" fill="none" data-name="Scenario"></path>
+<path d="M1886.0 254.5 L2073.0 254.5" fill="none" data-name="Scenario"></path>
 </g>
-<g transform="translate(1722, 109.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="0">
+<g transform="translate(1886, 109.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Scenario" data-compartment="0">
 <a id="../../src/types/types.ts.Scenario" xlink:href="../../src/types/types.ts"><text x="85.5" y="14.1" stroke="none" text-anchor="middle" data-name="Scenario" data-compartment="0">Scenario</text></a>
 
 </g>
 </g>
-<g transform="translate(1722, 141.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="1">
+<g transform="translate(1886, 141.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Scenario" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="Scenario" data-compartment="1">+id: string</text>
 <text x="0.0" y="30.3" stroke="none" data-name="Scenario" data-compartment="1">+title: string</text>
@@ -236,7 +251,7 @@
 
 </g>
 </g>
-<g transform="translate(1722, 254.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="2">
+<g transform="translate(1886, 254.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="Scenario" data-compartment="2">
 
 </g>
@@ -244,17 +259,17 @@
 </g>
 <g data-name="ScenarioWithResponses">
 <g fill="lightblue" stroke="#33322E" data-name="ScenarioWithResponses">
-<rect x="1666.0" y="513.0" height="105.0" width="299.0" data-name="ScenarioWithResponses"></rect>
-<path d="M1666.0 545.0 L1965.0 545.0" fill="none" data-name="ScenarioWithResponses"></path>
-<path d="M1666.0 610.0 L1965.0 610.0" fill="none" data-name="ScenarioWithResponses"></path>
+<rect x="1830.0" y="513.0" height="105.0" width="299.0" data-name="ScenarioWithResponses"></rect>
+<path d="M1830.0 545.0 L2129.0 545.0" fill="none" data-name="ScenarioWithResponses"></path>
+<path d="M1830.0 610.0 L2129.0 610.0" fill="none" data-name="ScenarioWithResponses"></path>
 </g>
-<g transform="translate(1666, 513)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="0">
+<g transform="translate(1830, 513)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ScenarioWithResponses" data-compartment="0">
 <a id="../../src/types/types.ts.ScenarioWithResponses" xlink:href="../../src/types/types.ts"><text x="141.5" y="14.1" stroke="none" text-anchor="middle" data-name="ScenarioWithResponses" data-compartment="0">ScenarioWithResponses</text></a>
 
 </g>
 </g>
-<g transform="translate(1666, 545)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="1">
+<g transform="translate(1830, 545)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioWithResponses" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioWithResponses" data-compartment="1">+responses: ScenarioResponse[]</text>
 <text x="0.0" y="30.3" stroke="none" data-name="ScenarioWithResponses" data-compartment="1">+stats: ScenarioStats</text>
@@ -262,7 +277,7 @@
 
 </g>
 </g>
-<g transform="translate(1666, 610)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="2">
+<g transform="translate(1830, 610)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="ScenarioWithResponses" data-compartment="2">
 
 </g>
@@ -270,17 +285,17 @@
 </g>
 <g data-name="ScenarioResponse">
 <g fill="lightblue" stroke="#33322E" data-name="ScenarioResponse">
-<rect x="1949.0" y="117.5" height="137.0" width="203.0" data-name="ScenarioResponse"></rect>
-<path d="M1949.0 149.5 L2152.0 149.5" fill="none" data-name="ScenarioResponse"></path>
-<path d="M1949.0 246.5 L2152.0 246.5" fill="none" data-name="ScenarioResponse"></path>
+<rect x="2113.0" y="117.5" height="137.0" width="203.0" data-name="ScenarioResponse"></rect>
+<path d="M2113.0 149.5 L2316.0 149.5" fill="none" data-name="ScenarioResponse"></path>
+<path d="M2113.0 246.5 L2316.0 246.5" fill="none" data-name="ScenarioResponse"></path>
 </g>
-<g transform="translate(1949, 117.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="0">
+<g transform="translate(2113, 117.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ScenarioResponse" data-compartment="0">
 <a id="../../src/types/types.ts.ScenarioResponse" xlink:href="../../src/types/types.ts"><text x="93.5" y="14.1" stroke="none" text-anchor="middle" data-name="ScenarioResponse" data-compartment="0">ScenarioResponse</text></a>
 
 </g>
 </g>
-<g transform="translate(1949, 149.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="1">
+<g transform="translate(2113, 149.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioResponse" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioResponse" data-compartment="1">+id: string</text>
 <text x="0.0" y="30.3" stroke="none" data-name="ScenarioResponse" data-compartment="1">+uid: string</text>
@@ -290,7 +305,7 @@
 
 </g>
 </g>
-<g transform="translate(1949, 246.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="2">
+<g transform="translate(2113, 246.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="ScenarioResponse" data-compartment="2">
 
 </g>
@@ -298,17 +313,17 @@
 </g>
 <g data-name="ScenarioStats">
 <g fill="lightblue" stroke="#33322E" data-name="ScenarioStats">
-<rect x="2192.0" y="133.5" height="105.0" width="335.0" data-name="ScenarioStats"></rect>
-<path d="M2192.0 165.5 L2527.0 165.5" fill="none" data-name="ScenarioStats"></path>
-<path d="M2192.0 230.5 L2527.0 230.5" fill="none" data-name="ScenarioStats"></path>
+<rect x="2356.0" y="133.5" height="105.0" width="335.0" data-name="ScenarioStats"></rect>
+<path d="M2356.0 165.5 L2691.0 165.5" fill="none" data-name="ScenarioStats"></path>
+<path d="M2356.0 230.5 L2691.0 230.5" fill="none" data-name="ScenarioStats"></path>
 </g>
-<g transform="translate(2192, 133.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="0">
+<g transform="translate(2356, 133.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ScenarioStats" data-compartment="0">
 <a id="../../src/types/types.ts.ScenarioStats" xlink:href="../../src/types/types.ts"><text x="159.5" y="14.1" stroke="none" text-anchor="middle" data-name="ScenarioStats" data-compartment="0">ScenarioStats</text></a>
 
 </g>
 </g>
-<g transform="translate(2192, 165.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="1">
+<g transform="translate(2356, 165.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioStats" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioStats" data-compartment="1">+totalResponses: number</text>
 <text x="0.0" y="30.3" stroke="none" data-name="ScenarioStats" data-compartment="1">+optionCounts: { [option: string]: number</text>
@@ -316,32 +331,8 @@
 
 </g>
 </g>
-<g transform="translate(2192, 230.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="2">
+<g transform="translate(2356, 230.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="ScenarioStats" data-compartment="2">
-
-</g>
-</g>
-</g>
-<g data-name="Profile">
-<g fill="lightblue" stroke="#33322E" data-name="Profile">
-<rect x="2567.0" y="150.0" height="72.0" width="124.0" data-name="Profile"></rect>
-<path d="M2567.0 182.0 L2691.0 182.0" fill="none" data-name="Profile"></path>
-<path d="M2567.0 214.0 L2691.0 214.0" fill="none" data-name="Profile"></path>
-</g>
-<g transform="translate(2567, 150)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Profile" data-compartment="0">
-<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Profile" data-compartment="0">
-<a id="../../src/types/profile.ts.Profile" xlink:href="../../src/types/profile.ts"><text x="54.0" y="14.1" stroke="none" text-anchor="middle" data-name="Profile" data-compartment="0">Profile</text></a>
-
-</g>
-</g>
-<g transform="translate(2567, 182)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Profile" data-compartment="1">
-<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Profile" data-compartment="1">
-<text x="0.0" y="14.1" stroke="none" data-name="Profile" data-compartment="1">+name: string</text>
-
-</g>
-</g>
-<g transform="translate(2567, 214)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Profile" data-compartment="2">
-<g transform="translate(8, 8)" fill="#33322E" data-name="Profile" data-compartment="2">
 
 </g>
 </g>
@@ -371,24 +362,24 @@
 </g>
 <g data-name="AuthScreenComponent">
 <g fill="#eee8d5" stroke="#33322E" data-name="AuthScreenComponent">
-<rect x="2152.0" y="501.5" height="128.0" width="301.0" data-name="AuthScreenComponent"></rect>
-<path d="M2152.0 533.5 L2453.0 533.5" fill="none" data-name="AuthScreenComponent"></path>
-<path d="M2152.0 581.5 L2453.0 581.5" fill="none" data-name="AuthScreenComponent"></path>
+<rect x="2234.0" y="501.5" height="128.0" width="301.0" data-name="AuthScreenComponent"></rect>
+<path d="M2234.0 533.5 L2535.0 533.5" fill="none" data-name="AuthScreenComponent"></path>
+<path d="M2234.0 581.5 L2535.0 581.5" fill="none" data-name="AuthScreenComponent"></path>
 </g>
-<g transform="translate(2152, 501.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthScreenComponent" data-compartment="0">
+<g transform="translate(2234, 501.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthScreenComponent" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthScreenComponent" data-compartment="0">
 <a id="../../src/app/auth-screen/auth-screen.ts.AuthScreenComponent" xlink:href="../../src/app/auth-screen/auth-screen.ts"><text x="142.5" y="14.1" stroke="none" text-anchor="middle" data-name="AuthScreenComponent" data-compartment="0">AuthScreenComponent</text></a>
 
 </g>
 </g>
-<g transform="translate(2152, 533.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthScreenComponent" data-compartment="1">
+<g transform="translate(2234, 533.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthScreenComponent" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthScreenComponent" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="AuthScreenComponent" data-compartment="1">-dialogRef: MatDialogRef&lt;any, any&gt;</text>
 <text x="0.0" y="30.3" stroke="none" data-name="AuthScreenComponent" data-compartment="1">-auth: Auth</text>
 
 </g>
 </g>
-<g transform="translate(2152, 581.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthScreenComponent" data-compartment="2">
+<g transform="translate(2234, 581.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthScreenComponent" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthScreenComponent" data-compartment="2">
 <text x="0.0" y="14.1" stroke="none" data-name="AuthScreenComponent" data-compartment="2">+ngOnInit(): void</text>
 <text x="0.0" y="30.3" stroke="none" data-name="AuthScreenComponent" data-compartment="2">+onSignIn(): void</text>

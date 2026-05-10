@@ -291,7 +291,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/scenario/scenario.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/scenario/scenario.ts:40</a></div>
                             </td>
                         </tr>
 
@@ -406,8 +406,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">src/app/scenario/scenario.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/scenario/scenario.ts:84</a></div>
                         </td>
                     </tr>
 
@@ -443,8 +443,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">src/app/scenario/scenario.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/scenario/scenario.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -510,8 +510,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/scenario/scenario.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/scenario/scenario.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -549,8 +549,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/app/scenario/scenario.ts:76</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/scenario/scenario.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -627,7 +627,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/scenario/scenario.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/scenario/scenario.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -659,7 +659,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/scenario/scenario.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/scenario/scenario.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -686,7 +686,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/scenario/scenario.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/scenario/scenario.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -727,7 +727,7 @@ active scenario changes.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/scenario/scenario.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/scenario/scenario.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -763,7 +763,7 @@ active scenario changes.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/scenario/scenario.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/scenario/scenario.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -795,7 +795,7 @@ active scenario changes.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/scenario/scenario.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/scenario/scenario.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -810,7 +810,8 @@ active scenario changes.</p>
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectorRef, Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
 import { ActivatedRoute } from &#x27;@angular/router&#x27;;
-import { ScenarioService, ScenarioWithResponses } from &#x27;../../services&#x27;;
+import { ScenarioService } from &#x27;../../services&#x27;;
+import { ScenarioWithResponses } from &#x27;../../types&#x27;;
 import { ScenarioPageController } from &#x27;../scenario/scenarioPageController&#x27;;
 import { VideoPlayerComponent } from &#x27;../video-player/video-player&#x27;;
 import { ResponsesChartComponent } from &#x27;../responses-chart/responses-chart&#x27;;
@@ -835,7 +836,7 @@ export class ScenarioComponent implements OnInit {
   /**
  * Observable that emits the active ScenarioWithResponses object based on the
   activeScenarioId$, including the responses and stats.
- * The component can subscribe to this Observable to get updates whenever the 
+ * The component can subscribe to this Observable to get updates whenever the
   active scenario changes.
  */
   public scenario$: Observable&lt;ScenarioWithResponses | undefined&gt;;
@@ -857,12 +858,12 @@ export class ScenarioComponent implements OnInit {
   ) {
     this.scenario$ &#x3D; this.pageController.activeScenarioId$.pipe(mergeMap(scenarioId &#x3D;&gt; {
       console.log(&#x27;ScenarioComponent: activeScenarioId&#x27;, scenarioId);
-        if (!scenarioId) {
-          return this.scenarioService.getRandomScenarioId()
-        } else {
-          return Promise.resolve(scenarioId);
-        }
-      }),
+      if (!scenarioId) {
+        return this.scenarioService.getRandomScenarioId()
+      } else {
+        return Promise.resolve(scenarioId);
+      }
+    }),
       map(scenarioId &#x3D;&gt; this.scenarioService.getScenarioWithResponsesById$(scenarioId)),
       switchAll()
     );
@@ -899,7 +900,8 @@ export class ScenarioComponent implements OnInit {
     })
   }
 
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
