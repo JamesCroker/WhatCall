@@ -2,16 +2,16 @@ export type FirebaseEmulators = FirebaseEmulatorConfig | null;
 
 /**
  * Optional configuration to set the application to use Firebase emulator
- * @member {string} auth URL of the auth emulator e.g. 'https://localhost:8001'
- * @member firestore Endpoint for the firestore emulator
- * @member storage Endpoint for the storage mulator
  */
 export interface FirebaseEmulatorConfig {
+  /** URL of the auth emulator e.g. 'https://localhost:8001' */
   auth: string,
+  /** Endpoint for the firestore emulator */
   firestore: {
     host: string,
     port: number
   },
+  /** storage Endpoint for the storage emulator */
   storage: {
     host: string,
     port: number
