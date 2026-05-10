@@ -3,6 +3,11 @@ import videojs from 'video.js';
 import Player from "video.js/dist/types/player";
 import 'videojs-youtube'
 
+/**
+ * Component plays a video.
+ *
+ * The source can be either mp4 or from YouTube.
+ */
 @Component({
   standalone: true,
   selector: 'app-video-player',
@@ -14,8 +19,18 @@ import 'videojs-youtube'
 })
 
 export class VideoPlayerComponent implements OnInit, OnDestroy {
+
+  /**
+   * HTML Element reference to Video tag
+   */
   @ViewChild('target', { static: true }) target!: ElementRef;
 
+  /**
+   * Access the videojs player object.
+   *
+   * @returns {Player} videojs player object
+   * @throws {Error} If the player is not yet initialized.
+   */
   private get player(): Player {
     const player = videojs(this.target.nativeElement);
     if (!player) {
@@ -24,6 +39,11 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     return player
   }
 
+  /**
+   * Sets the source URL for the video, and commences playing
+   *
+   * If set to undefined or null, will stop the video player and clear the source.
+   */
   @Input()
   set source(s: string | undefined | null) {
     if (s) {
@@ -48,12 +68,15 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    /** Injected ChangeDetectorRef service */
     private changeDetectorRef: ChangeDetectorRef
   ) {
     // Empty constructor
   }
 
-  // Instantiate a Video.js player OnInit
+  /**
+   *  ngOnInit event. Logs when the video player is ready.
+   */
   ngOnInit() {
     videojs(this.target.nativeElement, { "techOrder": ["youtube"], "youtube": { "ytControls": 2 }, fluid: true })
       .ready(() => {
@@ -61,7 +84,9 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
       });
   }
 
-  // Dispose the player OnDestroy
+  /**
+   * Dispose the player OnDestroy
+   */
   ngOnDestroy() {
     this.player.dispose();
   }

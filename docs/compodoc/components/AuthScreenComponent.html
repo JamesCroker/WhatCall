@@ -138,6 +138,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Uses FirebaseUI to display an Signin with Google sign-in screen.</p>
+<p>The signin flow is hanlded via Google OAuth using popups.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -260,7 +268,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/auth-screen/auth-screen.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/auth-screen/auth-screen.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -327,8 +335,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/app/auth-screen/auth-screen.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/app/auth-screen/auth-screen.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -364,14 +372,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/app/auth-screen/auth-screen.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/auth-screen/auth-screen.ts:46</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>onSignIn event handler.</p>
+<p>Close the dialog once the user signs in</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -413,10 +424,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/auth-screen/auth-screen.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/auth-screen/auth-screen.ts:28</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the modal dialog</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -432,6 +449,11 @@ import { Auth, onAuthStateChanged } from &quot;@angular/fire/auth&quot;;
 import { MatButtonModule } from &quot;@angular/material/button&quot;;
 import { MatDialogRef } from &quot;@angular/material/dialog&quot;;
 
+/**
+ * Uses FirebaseUI to display an Signin with Google sign-in screen.
+ *
+ * The signin flow is hanlded via Google OAuth using popups.
+ */
 @Component({
   selector: &#x27;app-auth-screen&#x27;,
   imports: [MatButtonModule, OAuthScreenComponent, GoogleSignInButtonComponent],
@@ -441,13 +463,17 @@ import { MatDialogRef } from &quot;@angular/material/dialog&quot;;
 export class AuthScreenComponent implements OnInit {
 
   constructor(
+    /** injected Auth service */
     private auth: Auth
-  ) { }
+  ) {
+    // Empty constructor
+  }
 
+  /** Reference to the modal dialog */
   private readonly dialogRef &#x3D; inject(MatDialogRef&lt;AuthScreenComponent&gt;);
 
   ngOnInit(): void {
-    console.debug(&#x27;AuthScreenComponent initialized&#x27;);
+    // Subscrive to changes in user state, and log to console for debug.
     onAuthStateChanged(this.auth, (user) &#x3D;&gt; {
       if (user) {
         console.debug(&#x27;User signed in:&#x27;, user.displayName);
@@ -457,6 +483,11 @@ export class AuthScreenComponent implements OnInit {
     });
   }
 
+  /**
+   * onSignIn event handler.
+   *
+   * Close the dialog once the user signs in
+   */
   onSignIn(): void {
     this.dialogRef.close();
   }

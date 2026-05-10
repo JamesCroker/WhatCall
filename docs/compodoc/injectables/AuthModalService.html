@@ -137,6 +137,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Injectable service that launches AuthScreenComponent.</p>
+<p>Implements lazy-loading of AuthScreeComponent to avoid need to embed in root module.</p>
+
+            </p>
 
 
 
@@ -180,7 +188,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/auth-screen/authModal.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/auth-screen/authModal.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -257,22 +265,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/auth-screen/authModal.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/app/auth-screen/authModal.ts:28</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Launches the upload modal.
-Handles a lazy load of the AuthScreenComponent</p>
+                        <div class="io-description"><p>Launches the upload modal.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A promise that resolves when the modal is closed.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -289,6 +300,11 @@ import {
     MatDialog
 } from &#x27;@angular/material/dialog&#x27;;
 
+/**
+ * Injectable service that launches AuthScreenComponent.
+ *
+ * Implements lazy-loading of AuthScreeComponent to avoid need to embed in root module.
+ */
 @Injectable({
     providedIn: &#x27;root&#x27;,
 })
@@ -302,7 +318,8 @@ export class AuthModalService {
 
     /**
      * Launches the upload modal.
-     * Handles a lazy load of the AuthScreenComponent
+     *
+     * @returns {Promise&lt;void&gt;} A promise that resolves when the modal is closed.
      */
     async launch(): Promise&lt;void&gt; {
         if (!this.auth.currentUser) {
@@ -321,7 +338,8 @@ export class AuthModalService {
         console.log(&#x27;User is already authenticated, no need to launch auth modal&#x27;);
     }
 
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>

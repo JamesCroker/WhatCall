@@ -1,14 +1,12 @@
-<svg version="1.1" baseProfile="full" width="7306.5" height="775.0" viewBox="0 0 7306.5 775" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<svg version="1.1" baseProfile="full" width="6916.5" height="759.0" viewBox="0 0 6916.5 759" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
 <desc >#.interface: fill=lightblue
 #.enumeration: fill=lightgreen
 #.type: fill=lightgray
 
 [&lt;interface&gt;FirebaseEmulatorConfig|+auth: string;+firestore: { host: string; port: number; };+storage: { host: string; port: number; }|]
 [&lt;interface&gt;FirebaseConfig|+projectId: string;+appId: string;+storageBucket: string;+apiKey: string;+authDomain: string;+messagingSenderId: string;+measurementId: string|]
-[ProfileService|-auth: Auth|+getUid(): string;+updateProfile(): void]
-[ScenarioService|-firestore: Firestore;-profileService: ProfileService|+getRandomScenarioId(): Promise&lt;string&gt;;+getScenarioWithResponsesById$(): Observable&lt;ScenarioWithResponses&gt;;-getScenarioById$(): Observable&lt;Scenario&gt;;+addScenario(): Promise&lt;string&gt;;+editScenario(): Promise&lt;void&gt;;+addResponse(): Promise&lt;void&gt;;-getResponsesForScenario$(): Observable&lt;ScenarioResponse\[\]&gt;;-getMyResponseForScenario$(): Observable&lt;ScenarioResponse&gt;;-responsesRef(): CollectionReference&lt;DocumentData, DocumentData&gt;;+getFirestore(): Firestore]
+[ScenarioService|-firestore: Firestore;-auth: Auth|+getRandomScenarioId(): Promise&lt;string&gt;;+getScenarioWithResponsesById$(): Observable&lt;ScenarioWithResponses&gt;;-getScenarioById$(): Observable&lt;Scenario&gt;;+addScenario(): Promise&lt;string&gt;;+editScenario(): Promise&lt;void&gt;;+addResponse(): Promise&lt;void&gt;;-getResponsesForScenario$(): Observable&lt;ScenarioResponse\[\]&gt;;-getMyResponseForScenario$(): Observable&lt;ScenarioResponse&gt;;-responsesRef(): CollectionReference&lt;DocumentData, DocumentData&gt;;+getFirestore(): Firestore]
 [StorageService|-storage: Storage|+upload(): Promise&lt;string&gt;;-storageRef(): StorageReference;+getFirebaseStorage(): Storage]
-[&lt;interface&gt;Profile|+name: string|]
 [&lt;interface&gt;Scenario|+id: string;+title: string;+url: string;+uid: string;+scenarioType: string;+options: string\[\]|]
 [&lt;interface&gt;ScenarioWithResponses|+responses: ScenarioResponse\[\];+stats: ScenarioStats;+myResponse?: ScenarioResponse|]
 [&lt;interface&gt;ScenarioResponse|+id: string;+uid: string;+scenarioId: string;+latestResponse: string;+firstResponse: string|]
@@ -19,12 +17,12 @@
 [OnInit]&lt;:--[AuthScreenComponent]
 [AuthModalService|-dialog: MatDialog;-auth: Auth|+launch(): Promise&lt;void&gt;]
 [HomeComponent||]
-[MenuComponent|+isLoggedIn: boolean;-snackbar: MatSnackBar;-router: Router;-scenarioPageController: ScenarioPageController;-uploadModalService: UploadModalService;-auth: Auth;-authModalService: AuthModalService|+gotoRandonScenario(): void;+launchUpload(): Promise&lt;void&gt;;+signOut(): void]
-[ResponsesChartComponent|+barChartOptions: _DeepPartialObject&lt;CoreChartOptions&lt;&quot;bar&quot;&gt; &amp; ElementChartOptions&lt;&quot;bar&quot;&gt; &amp; PluginChartOptions&lt;&quot;bar&quot;&gt; &amp; DatasetChartOptions&lt;&quot;bar&quot;&gt; &amp; ScaleChartOptions&lt;...&gt; &amp; BarControllerChartOptions&gt;;+barChartType: &quot;bar&quot;;+barChartData: ChartData&lt;&quot;bar&quot;, (number \| \[number, number\])\[\], unknown&gt;|]
-[ScenarioComponent|+stepper: MatStepper;+scenario$: Observable&lt;ScenarioWithResponses&gt;;-scenario: ScenarioWithResponses;+stepperDuration: string;+firstFormGroup: FormGroup&lt;{}&gt;;+secondFormGroup: FormGroup&lt;{}&gt;;-activatedRoute: ActivatedRoute;-pageController: ScenarioPageController;-scenarioService: ScenarioService;-changeDetector: ChangeDetectorRef;-location: Location|+ngOnInit(): void;+loadScenario(): void;+selectionMade(): Promise&lt;void&gt;;+gotoNext(): void]
+[MenuComponent|+isLoggedIn: boolean;-snackbar: MatSnackBar;-router: Router;-scenarioPageController: ScenarioPageController;-uploadModalService: UploadModalService;-auth: Auth;-authModalService: AuthModalService|+gotoRandomScenario(): void;+launchUpload(): Promise&lt;void&gt;;+signOut(): void]
+[ResponsesChartComponent|+scenarioStats: ScenarioStats;+barChartOptions: _DeepPartialObject&lt;CoreChartOptions&lt;&quot;bar&quot;&gt; &amp; ElementChartOptions&lt;&quot;bar&quot;&gt; &amp; PluginChartOptions&lt;&quot;bar&quot;&gt; &amp; DatasetChartOptions&lt;&quot;bar&quot;&gt; &amp; ScaleChartOptions&lt;...&gt; &amp; BarControllerChartOptions&gt;|]
+[ScenarioComponent|+stepper: MatStepper;+scenario$: Observable&lt;ScenarioWithResponses&gt;;-scenario: ScenarioWithResponses;+stepperDuration: string;+firstFormGroup: FormGroup&lt;{}&gt;;+secondFormGroup: FormGroup&lt;{}&gt;;-activatedRoute: ActivatedRoute;-pageController: ScenarioPageController;-scenarioService: ScenarioService;-changeDetector: ChangeDetectorRef;-location: Location|+ngOnInit(): void;+selectionMade(): Promise&lt;void&gt;;+gotoNext(): void]
 [OnInit]&lt;:--[ScenarioComponent]
-[ScenarioPageController|+activeScenarioId$: BehaviorSubject&lt;string&gt;|+loadScenario(): Promise&lt;void&gt;]
-[UploadComponent|+fileInputElem: ElementRef&lt;HTMLInputElement&gt;;-dialogRef: MatDialogRef&lt;any, any&gt;;+separatorKeysCodes: number\[\];+reactiveKeywords: WritableSignal&lt;string\[\]&gt;;+firstFormGroup: FormGroup&lt;{ upload: FormControl&lt;string&gt;; url: FormControl&lt;string&gt;; }&gt;;+secondFormGroup: FormGroup&lt;{ title: FormControl&lt;string&gt;; scenarioType: FormControl&lt;string&gt;; description: FormControl&lt;string&gt;; }&gt;;+thirdFormGroup: FormGroup&lt;{ options: FormControl&lt;string\[\]&gt;; }&gt;;-profileService: ProfileService;-scenarioService: ScenarioService;-storageService: StorageService|+removeReactiveKeyword(): void;+addReactiveKeyword(): void;+save(): Promise&lt;void&gt;]
+[ScenarioPageController|+activeScenarioId$: BehaviorSubject&lt;string&gt;|+loadScenario(): void]
+[UploadComponent|+fileInputElem: ElementRef&lt;HTMLInputElement&gt;;-dialogRef: MatDialogRef&lt;any, any&gt;;+separatorKeysCodes: number\[\];+reactiveKeywords: WritableSignal&lt;string\[\]&gt;;+firstFormGroup: FormGroup&lt;{ upload: FormControl&lt;string&gt;; url: FormControl&lt;string&gt;; }&gt;;+secondFormGroup: FormGroup&lt;{ title: FormControl&lt;string&gt;; scenarioType: FormControl&lt;string&gt;; description: FormControl&lt;string&gt;; }&gt;;+thirdFormGroup: FormGroup&lt;{ options: FormControl&lt;string\[\]&gt;; }&gt;;-scenarioService: ScenarioService;-storageService: StorageService;-auth: Auth|+removeReactiveKeyword(): void;+addReactiveKeyword(): void;+save(): Promise&lt;void&gt;]
 [UploadModalService|-dialog: MatDialog|+launch(): Promise&lt;MatDialogRef&lt;UploadComponent, any&gt;&gt;]
 [VideoPlayerComponent|+target: ElementRef&lt;any&gt;;-changeDetectorRef: ChangeDetectorRef|+ngOnInit(): void;+ngOnDestroy(): void]
 [OnInit]&lt;:--[VideoPlayerComponent]
@@ -32,30 +30,30 @@
 <g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
 <g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
 <g stroke="transparent" fill="transparent">
-<rect x="0.0" y="0.0" height="775.0" width="7306.5" stroke="none"></rect>
+<rect x="0.0" y="0.0" height="759.0" width="6916.5" stroke="none"></rect>
 </g>
 <g transform="translate(8, 8)" fill="#33322E">
 <g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
 <g stroke-dasharray="6 6">
-<path d="M1979.5 275.8 L1979.5 392 L1979.5 513 L1979.5 513.0 " fill="none"></path>
+<path d="M1589.5 275.8 L1589.5 392 L1589.5 505 L1589.5 505.0 " fill="none"></path>
 </g>
-<path d="M1984.8 275.8 L1979.5 275.8 L1974.2 275.8 L1979.5 262.5 Z"></path>
+<path d="M1594.8 275.8 L1589.5 275.8 L1584.2 275.8 L1589.5 262.5 Z"></path>
 <g stroke-dasharray="6 6">
-<path d="M2805.8 205.4 L2384.5 392 L2384.5 501.5 L2384.5 501.5 " fill="none"></path>
+<path d="M2415.8 205.4 L1994.5 392 L1994.5 493.5 L1994.5 493.5 " fill="none"></path>
 </g>
-<path d="M2808.0 210.2 L2805.8 205.4 L2803.6 200.5 L2818.0 200.0 Z"></path>
+<path d="M2418.0 210.2 L2415.8 205.4 L2413.6 200.5 L2428.0 200.0 Z"></path>
 <g stroke-dasharray="6 6">
-<path d="M2849.5 215.3 L2849.5 392 L2849.5 412 L2849.5 412.0 " fill="none"></path>
+<path d="M2459.5 215.3 L2459.5 392 L2459.5 412 L2459.5 412.0 " fill="none"></path>
 </g>
-<path d="M2854.8 215.3 L2849.5 215.3 L2844.2 215.3 L2849.5 202.0 Z"></path>
+<path d="M2464.8 215.3 L2459.5 215.3 L2454.2 215.3 L2459.5 202.0 Z"></path>
 <g stroke-dasharray="6 6">
-<path d="M2894.3 190.3 L4974.75 392 L6909.5 551.4485809286308 L6909.5 551.4 " fill="none"></path>
+<path d="M2504.3 190.3 L4584.75 392 L6519.5 544.0964849780311 L6519.5 544.1 " fill="none"></path>
 </g>
-<path d="M2894.8 185.0 L2894.3 190.3 L2893.8 195.6 L2881.0 189.1 Z"></path>
+<path d="M2504.8 185.0 L2504.3 190.3 L2503.8 195.6 L2491.0 189.1 Z"></path>
 <g stroke-dasharray="6 6">
-<path d="M7100.0 215.3 L7100 392 L7087.377521613833 501.5 L7087.4 501.5 " fill="none"></path>
+<path d="M6710.0 215.3 L6710 392 L6697.73413897281 493.5 L6697.7 493.5 " fill="none"></path>
 </g>
-<path d="M7105.3 215.3 L7100.0 215.3 L7094.7 215.3 L7100.0 202.0 Z"></path>
+<path d="M6715.3 215.3 L6710.0 215.3 L6704.7 215.3 L6710.0 202.0 Z"></path>
 <g data-name="FirebaseEmulatorConfig">
 <g fill="lightblue" stroke="#33322E" data-name="FirebaseEmulatorConfig">
 <rect x="0.0" y="101.5" height="169.0" width="206.0" data-name="FirebaseEmulatorConfig"></rect>
@@ -116,52 +114,26 @@
 </g>
 </g>
 </g>
-<g data-name="ProfileService">
-<g fill="#eee8d5" stroke="#33322E" data-name="ProfileService">
-<rect x="524.0" y="130.0" height="112.0" width="186.0" data-name="ProfileService"></rect>
-<path d="M524.0 162.0 L710.0 162.0" fill="none" data-name="ProfileService"></path>
-<path d="M524.0 194.0 L710.0 194.0" fill="none" data-name="ProfileService"></path>
-</g>
-<g transform="translate(524, 130)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ProfileService" data-compartment="0">
-<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ProfileService" data-compartment="0">
-<a id="../../src/services/profileService.ts.ProfileService" xlink:href="../../src/services/profileService.ts"><text x="85.0" y="14.1" stroke="none" text-anchor="middle" data-name="ProfileService" data-compartment="0">ProfileService</text></a>
-
-</g>
-</g>
-<g transform="translate(524, 162)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ProfileService" data-compartment="1">
-<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ProfileService" data-compartment="1">
-<text x="0.0" y="14.1" stroke="none" data-name="ProfileService" data-compartment="1">-auth: Auth</text>
-
-</g>
-</g>
-<g transform="translate(524, 194)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ProfileService" data-compartment="2">
-<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ProfileService" data-compartment="2">
-<text x="0.0" y="14.1" stroke="none" data-name="ProfileService" data-compartment="2">+getUid(): string</text>
-<text x="0.0" y="30.3" stroke="none" data-name="ProfileService" data-compartment="2">+updateProfile(): void</text>
-
-</g>
-</g>
-</g>
 <g data-name="ScenarioService">
 <g fill="#eee8d5" stroke="#33322E" data-name="ScenarioService">
-<rect x="750.0" y="57.0" height="258.0" width="617.0" data-name="ScenarioService"></rect>
-<path d="M750.0 89.0 L1367.0 89.0" fill="none" data-name="ScenarioService"></path>
-<path d="M750.0 137.0 L1367.0 137.0" fill="none" data-name="ScenarioService"></path>
+<rect x="524.0" y="57.0" height="258.0" width="617.0" data-name="ScenarioService"></rect>
+<path d="M524.0 89.0 L1141.0 89.0" fill="none" data-name="ScenarioService"></path>
+<path d="M524.0 137.0 L1141.0 137.0" fill="none" data-name="ScenarioService"></path>
 </g>
-<g transform="translate(750, 57)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ScenarioService" data-compartment="0">
+<g transform="translate(524, 57)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ScenarioService" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ScenarioService" data-compartment="0">
 <a id="../../src/services/scenarioService.ts.ScenarioService" xlink:href="../../src/services/scenarioService.ts"><text x="300.5" y="14.1" stroke="none" text-anchor="middle" data-name="ScenarioService" data-compartment="0">ScenarioService</text></a>
 
 </g>
 </g>
-<g transform="translate(750, 89)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioService" data-compartment="1">
+<g transform="translate(524, 89)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioService" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioService" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioService" data-compartment="1">-firestore: Firestore</text>
-<text x="0.0" y="30.3" stroke="none" data-name="ScenarioService" data-compartment="1">-profileService: ProfileService</text>
+<text x="0.0" y="30.3" stroke="none" data-name="ScenarioService" data-compartment="1">-auth: Auth</text>
 
 </g>
 </g>
-<g transform="translate(750, 137)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioService" data-compartment="2">
+<g transform="translate(524, 137)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioService" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioService" data-compartment="2">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioService" data-compartment="2">+getRandomScenarioId(): Promise&lt;string&gt;</text>
 <text x="0.0" y="30.3" stroke="none" data-name="ScenarioService" data-compartment="2">+getScenarioWithResponsesById$(): Observable&lt;ScenarioWithResponses&gt;</text>
@@ -179,23 +151,23 @@
 </g>
 <g data-name="StorageService">
 <g fill="#eee8d5" stroke="#33322E" data-name="StorageService">
-<rect x="1407.0" y="121.5" height="129.0" width="275.0" data-name="StorageService"></rect>
-<path d="M1407.0 153.5 L1682.0 153.5" fill="none" data-name="StorageService"></path>
-<path d="M1407.0 185.5 L1682.0 185.5" fill="none" data-name="StorageService"></path>
+<rect x="1181.0" y="121.5" height="129.0" width="275.0" data-name="StorageService"></rect>
+<path d="M1181.0 153.5 L1456.0 153.5" fill="none" data-name="StorageService"></path>
+<path d="M1181.0 185.5 L1456.0 185.5" fill="none" data-name="StorageService"></path>
 </g>
-<g transform="translate(1407, 121.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="StorageService" data-compartment="0">
+<g transform="translate(1181, 121.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="StorageService" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="StorageService" data-compartment="0">
 <a id="../../src/services/storageService.ts.StorageService" xlink:href="../../src/services/storageService.ts"><text x="129.5" y="14.1" stroke="none" text-anchor="middle" data-name="StorageService" data-compartment="0">StorageService</text></a>
 
 </g>
 </g>
-<g transform="translate(1407, 153.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="StorageService" data-compartment="1">
+<g transform="translate(1181, 153.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="StorageService" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="StorageService" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="StorageService" data-compartment="1">-storage: Storage</text>
 
 </g>
 </g>
-<g transform="translate(1407, 185.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="StorageService" data-compartment="2">
+<g transform="translate(1181, 185.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="StorageService" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="StorageService" data-compartment="2">
 <text x="0.0" y="14.1" stroke="none" data-name="StorageService" data-compartment="2">+upload(): Promise&lt;string&gt;</text>
 <text x="0.0" y="30.3" stroke="none" data-name="StorageService" data-compartment="2">-storageRef(): StorageReference</text>
@@ -204,43 +176,19 @@
 </g>
 </g>
 </g>
-<g data-name="Profile">
-<g fill="lightblue" stroke="#33322E" data-name="Profile">
-<rect x="1722.0" y="150.0" height="72.0" width="124.0" data-name="Profile"></rect>
-<path d="M1722.0 182.0 L1846.0 182.0" fill="none" data-name="Profile"></path>
-<path d="M1722.0 214.0 L1846.0 214.0" fill="none" data-name="Profile"></path>
-</g>
-<g transform="translate(1722, 150)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Profile" data-compartment="0">
-<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Profile" data-compartment="0">
-<a id="../../src/types/profile.ts.Profile" xlink:href="../../src/types/profile.ts"><text x="54.0" y="14.1" stroke="none" text-anchor="middle" data-name="Profile" data-compartment="0">Profile</text></a>
-
-</g>
-</g>
-<g transform="translate(1722, 182)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Profile" data-compartment="1">
-<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Profile" data-compartment="1">
-<text x="0.0" y="14.1" stroke="none" data-name="Profile" data-compartment="1">+name: string</text>
-
-</g>
-</g>
-<g transform="translate(1722, 214)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Profile" data-compartment="2">
-<g transform="translate(8, 8)" fill="#33322E" data-name="Profile" data-compartment="2">
-
-</g>
-</g>
-</g>
 <g data-name="Scenario">
 <g fill="lightblue" stroke="#33322E" data-name="Scenario">
-<rect x="1886.0" y="109.5" height="153.0" width="187.0" data-name="Scenario"></rect>
-<path d="M1886.0 141.5 L2073.0 141.5" fill="none" data-name="Scenario"></path>
-<path d="M1886.0 254.5 L2073.0 254.5" fill="none" data-name="Scenario"></path>
+<rect x="1496.0" y="109.5" height="153.0" width="187.0" data-name="Scenario"></rect>
+<path d="M1496.0 141.5 L1683.0 141.5" fill="none" data-name="Scenario"></path>
+<path d="M1496.0 254.5 L1683.0 254.5" fill="none" data-name="Scenario"></path>
 </g>
-<g transform="translate(1886, 109.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="0">
+<g transform="translate(1496, 109.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Scenario" data-compartment="0">
 <a id="../../src/types/types.ts.Scenario" xlink:href="../../src/types/types.ts"><text x="85.5" y="14.1" stroke="none" text-anchor="middle" data-name="Scenario" data-compartment="0">Scenario</text></a>
 
 </g>
 </g>
-<g transform="translate(1886, 141.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="1">
+<g transform="translate(1496, 141.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Scenario" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="Scenario" data-compartment="1">+id: string</text>
 <text x="0.0" y="30.3" stroke="none" data-name="Scenario" data-compartment="1">+title: string</text>
@@ -251,7 +199,7 @@
 
 </g>
 </g>
-<g transform="translate(1886, 254.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="2">
+<g transform="translate(1496, 254.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Scenario" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="Scenario" data-compartment="2">
 
 </g>
@@ -259,17 +207,17 @@
 </g>
 <g data-name="ScenarioWithResponses">
 <g fill="lightblue" stroke="#33322E" data-name="ScenarioWithResponses">
-<rect x="1830.0" y="513.0" height="105.0" width="299.0" data-name="ScenarioWithResponses"></rect>
-<path d="M1830.0 545.0 L2129.0 545.0" fill="none" data-name="ScenarioWithResponses"></path>
-<path d="M1830.0 610.0 L2129.0 610.0" fill="none" data-name="ScenarioWithResponses"></path>
+<rect x="1440.0" y="505.0" height="105.0" width="299.0" data-name="ScenarioWithResponses"></rect>
+<path d="M1440.0 537.0 L1739.0 537.0" fill="none" data-name="ScenarioWithResponses"></path>
+<path d="M1440.0 602.0 L1739.0 602.0" fill="none" data-name="ScenarioWithResponses"></path>
 </g>
-<g transform="translate(1830, 513)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="0">
+<g transform="translate(1440, 505)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ScenarioWithResponses" data-compartment="0">
 <a id="../../src/types/types.ts.ScenarioWithResponses" xlink:href="../../src/types/types.ts"><text x="141.5" y="14.1" stroke="none" text-anchor="middle" data-name="ScenarioWithResponses" data-compartment="0">ScenarioWithResponses</text></a>
 
 </g>
 </g>
-<g transform="translate(1830, 545)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="1">
+<g transform="translate(1440, 537)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioWithResponses" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioWithResponses" data-compartment="1">+responses: ScenarioResponse[]</text>
 <text x="0.0" y="30.3" stroke="none" data-name="ScenarioWithResponses" data-compartment="1">+stats: ScenarioStats</text>
@@ -277,7 +225,7 @@
 
 </g>
 </g>
-<g transform="translate(1830, 610)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="2">
+<g transform="translate(1440, 602)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioWithResponses" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="ScenarioWithResponses" data-compartment="2">
 
 </g>
@@ -285,17 +233,17 @@
 </g>
 <g data-name="ScenarioResponse">
 <g fill="lightblue" stroke="#33322E" data-name="ScenarioResponse">
-<rect x="2113.0" y="117.5" height="137.0" width="203.0" data-name="ScenarioResponse"></rect>
-<path d="M2113.0 149.5 L2316.0 149.5" fill="none" data-name="ScenarioResponse"></path>
-<path d="M2113.0 246.5 L2316.0 246.5" fill="none" data-name="ScenarioResponse"></path>
+<rect x="1723.0" y="117.5" height="137.0" width="203.0" data-name="ScenarioResponse"></rect>
+<path d="M1723.0 149.5 L1926.0 149.5" fill="none" data-name="ScenarioResponse"></path>
+<path d="M1723.0 246.5 L1926.0 246.5" fill="none" data-name="ScenarioResponse"></path>
 </g>
-<g transform="translate(2113, 117.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="0">
+<g transform="translate(1723, 117.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ScenarioResponse" data-compartment="0">
 <a id="../../src/types/types.ts.ScenarioResponse" xlink:href="../../src/types/types.ts"><text x="93.5" y="14.1" stroke="none" text-anchor="middle" data-name="ScenarioResponse" data-compartment="0">ScenarioResponse</text></a>
 
 </g>
 </g>
-<g transform="translate(2113, 149.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="1">
+<g transform="translate(1723, 149.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioResponse" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioResponse" data-compartment="1">+id: string</text>
 <text x="0.0" y="30.3" stroke="none" data-name="ScenarioResponse" data-compartment="1">+uid: string</text>
@@ -305,7 +253,7 @@
 
 </g>
 </g>
-<g transform="translate(2113, 246.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="2">
+<g transform="translate(1723, 246.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioResponse" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="ScenarioResponse" data-compartment="2">
 
 </g>
@@ -313,17 +261,17 @@
 </g>
 <g data-name="ScenarioStats">
 <g fill="lightblue" stroke="#33322E" data-name="ScenarioStats">
-<rect x="2356.0" y="133.5" height="105.0" width="335.0" data-name="ScenarioStats"></rect>
-<path d="M2356.0 165.5 L2691.0 165.5" fill="none" data-name="ScenarioStats"></path>
-<path d="M2356.0 230.5 L2691.0 230.5" fill="none" data-name="ScenarioStats"></path>
+<rect x="1966.0" y="133.5" height="105.0" width="335.0" data-name="ScenarioStats"></rect>
+<path d="M1966.0 165.5 L2301.0 165.5" fill="none" data-name="ScenarioStats"></path>
+<path d="M1966.0 230.5 L2301.0 230.5" fill="none" data-name="ScenarioStats"></path>
 </g>
-<g transform="translate(2356, 133.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="0">
+<g transform="translate(1966, 133.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ScenarioStats" data-compartment="0">
 <a id="../../src/types/types.ts.ScenarioStats" xlink:href="../../src/types/types.ts"><text x="159.5" y="14.1" stroke="none" text-anchor="middle" data-name="ScenarioStats" data-compartment="0">ScenarioStats</text></a>
 
 </g>
 </g>
-<g transform="translate(2356, 165.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="1">
+<g transform="translate(1966, 165.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioStats" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioStats" data-compartment="1">+totalResponses: number</text>
 <text x="0.0" y="30.3" stroke="none" data-name="ScenarioStats" data-compartment="1">+optionCounts: { [option: string]: number</text>
@@ -331,7 +279,7 @@
 
 </g>
 </g>
-<g transform="translate(2356, 230.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="2">
+<g transform="translate(1966, 230.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioStats" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="ScenarioStats" data-compartment="2">
 
 </g>
@@ -339,22 +287,22 @@
 </g>
 <g data-name="App">
 <g fill="#eee8d5" stroke="#33322E" data-name="App">
-<rect x="2731.0" y="162.0" height="48.0" width="47.0" data-name="App"></rect>
-<path d="M2731.0 194.0 L2778.0 194.0" fill="none" data-name="App"></path>
-<path d="M2731.0 202.0 L2778.0 202.0" fill="none" data-name="App"></path>
+<rect x="2341.0" y="162.0" height="48.0" width="47.0" data-name="App"></rect>
+<path d="M2341.0 194.0 L2388.0 194.0" fill="none" data-name="App"></path>
+<path d="M2341.0 202.0 L2388.0 202.0" fill="none" data-name="App"></path>
 </g>
-<g transform="translate(2731, 162)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="App" data-compartment="0">
+<g transform="translate(2341, 162)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="App" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="App" data-compartment="0">
 <a id="../../src/app/app/app.ts.App" xlink:href="../../src/app/app/app.ts"><text x="15.5" y="14.1" stroke="none" text-anchor="middle" data-name="App" data-compartment="0">App</text></a>
 
 </g>
 </g>
-<g transform="translate(2731, 194)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="App" data-compartment="1">
+<g transform="translate(2341, 194)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="App" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" data-name="App" data-compartment="1">
 
 </g>
 </g>
-<g transform="translate(2731, 202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="App" data-compartment="2">
+<g transform="translate(2341, 202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="App" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="App" data-compartment="2">
 
 </g>
@@ -362,24 +310,24 @@
 </g>
 <g data-name="AuthScreenComponent">
 <g fill="#eee8d5" stroke="#33322E" data-name="AuthScreenComponent">
-<rect x="2234.0" y="501.5" height="128.0" width="301.0" data-name="AuthScreenComponent"></rect>
-<path d="M2234.0 533.5 L2535.0 533.5" fill="none" data-name="AuthScreenComponent"></path>
-<path d="M2234.0 581.5 L2535.0 581.5" fill="none" data-name="AuthScreenComponent"></path>
+<rect x="1844.0" y="493.5" height="128.0" width="301.0" data-name="AuthScreenComponent"></rect>
+<path d="M1844.0 525.5 L2145.0 525.5" fill="none" data-name="AuthScreenComponent"></path>
+<path d="M1844.0 573.5 L2145.0 573.5" fill="none" data-name="AuthScreenComponent"></path>
 </g>
-<g transform="translate(2234, 501.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthScreenComponent" data-compartment="0">
+<g transform="translate(1844, 493.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthScreenComponent" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthScreenComponent" data-compartment="0">
 <a id="../../src/app/auth-screen/auth-screen.ts.AuthScreenComponent" xlink:href="../../src/app/auth-screen/auth-screen.ts"><text x="142.5" y="14.1" stroke="none" text-anchor="middle" data-name="AuthScreenComponent" data-compartment="0">AuthScreenComponent</text></a>
 
 </g>
 </g>
-<g transform="translate(2234, 533.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthScreenComponent" data-compartment="1">
+<g transform="translate(1844, 525.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthScreenComponent" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthScreenComponent" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="AuthScreenComponent" data-compartment="1">-dialogRef: MatDialogRef&lt;any, any&gt;</text>
 <text x="0.0" y="30.3" stroke="none" data-name="AuthScreenComponent" data-compartment="1">-auth: Auth</text>
 
 </g>
 </g>
-<g transform="translate(2234, 581.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthScreenComponent" data-compartment="2">
+<g transform="translate(1844, 573.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthScreenComponent" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthScreenComponent" data-compartment="2">
 <text x="0.0" y="14.1" stroke="none" data-name="AuthScreenComponent" data-compartment="2">+ngOnInit(): void</text>
 <text x="0.0" y="30.3" stroke="none" data-name="AuthScreenComponent" data-compartment="2">+onSignIn(): void</text>
@@ -389,9 +337,9 @@
 </g>
 <g data-name="OnInit">
 <g fill="#eee8d5" stroke="#33322E" data-name="OnInit">
-<rect x="2818.0" y="170.0" height="32.0" width="63.0" data-name="OnInit"></rect>
+<rect x="2428.0" y="170.0" height="32.0" width="63.0" data-name="OnInit"></rect>
 </g>
-<g transform="translate(2818, 170)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnInit" data-compartment="0">
+<g transform="translate(2428, 170)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnInit" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OnInit" data-compartment="0">
 <text x="23.5" y="14.1" stroke="none" text-anchor="middle" data-name="OnInit" data-compartment="0">OnInit</text>
 
@@ -400,24 +348,24 @@
 </g>
 <g data-name="AuthModalService">
 <g fill="#eee8d5" stroke="#33322E" data-name="AuthModalService">
-<rect x="2921.0" y="130.0" height="112.0" width="218.0" data-name="AuthModalService"></rect>
-<path d="M2921.0 162.0 L3139.0 162.0" fill="none" data-name="AuthModalService"></path>
-<path d="M2921.0 210.0 L3139.0 210.0" fill="none" data-name="AuthModalService"></path>
+<rect x="2531.0" y="130.0" height="112.0" width="218.0" data-name="AuthModalService"></rect>
+<path d="M2531.0 162.0 L2749.0 162.0" fill="none" data-name="AuthModalService"></path>
+<path d="M2531.0 210.0 L2749.0 210.0" fill="none" data-name="AuthModalService"></path>
 </g>
-<g transform="translate(2921, 130)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthModalService" data-compartment="0">
+<g transform="translate(2531, 130)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthModalService" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthModalService" data-compartment="0">
 <a id="../../src/app/auth-screen/authModal.ts.AuthModalService" xlink:href="../../src/app/auth-screen/authModal.ts"><text x="101.0" y="14.1" stroke="none" text-anchor="middle" data-name="AuthModalService" data-compartment="0">AuthModalService</text></a>
 
 </g>
 </g>
-<g transform="translate(2921, 162)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthModalService" data-compartment="1">
+<g transform="translate(2531, 162)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthModalService" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthModalService" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="AuthModalService" data-compartment="1">-dialog: MatDialog</text>
 <text x="0.0" y="30.3" stroke="none" data-name="AuthModalService" data-compartment="1">-auth: Auth</text>
 
 </g>
 </g>
-<g transform="translate(2921, 210)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthModalService" data-compartment="2">
+<g transform="translate(2531, 210)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthModalService" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthModalService" data-compartment="2">
 <text x="0.0" y="14.1" stroke="none" data-name="AuthModalService" data-compartment="2">+launch(): Promise&lt;void&gt;</text>
 
@@ -426,22 +374,22 @@
 </g>
 <g data-name="HomeComponent">
 <g fill="#eee8d5" stroke="#33322E" data-name="HomeComponent">
-<rect x="3179.0" y="162.0" height="48.0" width="153.0" data-name="HomeComponent"></rect>
-<path d="M3179.0 194.0 L3332.0 194.0" fill="none" data-name="HomeComponent"></path>
-<path d="M3179.0 202.0 L3332.0 202.0" fill="none" data-name="HomeComponent"></path>
+<rect x="2789.0" y="162.0" height="48.0" width="153.0" data-name="HomeComponent"></rect>
+<path d="M2789.0 194.0 L2942.0 194.0" fill="none" data-name="HomeComponent"></path>
+<path d="M2789.0 202.0 L2942.0 202.0" fill="none" data-name="HomeComponent"></path>
 </g>
-<g transform="translate(3179, 162)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="HomeComponent" data-compartment="0">
+<g transform="translate(2789, 162)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="HomeComponent" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="HomeComponent" data-compartment="0">
 <a id="../../src/app/home/home.ts.HomeComponent" xlink:href="../../src/app/home/home.ts"><text x="68.5" y="14.1" stroke="none" text-anchor="middle" data-name="HomeComponent" data-compartment="0">HomeComponent</text></a>
 
 </g>
 </g>
-<g transform="translate(3179, 194)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HomeComponent" data-compartment="1">
+<g transform="translate(2789, 194)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HomeComponent" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" data-name="HomeComponent" data-compartment="1">
 
 </g>
 </g>
-<g transform="translate(3179, 202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HomeComponent" data-compartment="2">
+<g transform="translate(2789, 202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HomeComponent" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="HomeComponent" data-compartment="2">
 
 </g>
@@ -449,17 +397,17 @@
 </g>
 <g data-name="MenuComponent">
 <g fill="#eee8d5" stroke="#33322E" data-name="MenuComponent">
-<rect x="3372.0" y="73.0" height="226.0" width="406.0" data-name="MenuComponent"></rect>
-<path d="M3372.0 105.0 L3778.0 105.0" fill="none" data-name="MenuComponent"></path>
-<path d="M3372.0 234.0 L3778.0 234.0" fill="none" data-name="MenuComponent"></path>
+<rect x="2982.0" y="73.0" height="226.0" width="406.0" data-name="MenuComponent"></rect>
+<path d="M2982.0 105.0 L3388.0 105.0" fill="none" data-name="MenuComponent"></path>
+<path d="M2982.0 234.0 L3388.0 234.0" fill="none" data-name="MenuComponent"></path>
 </g>
-<g transform="translate(3372, 73)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="MenuComponent" data-compartment="0">
+<g transform="translate(2982, 73)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="MenuComponent" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="MenuComponent" data-compartment="0">
 <a id="../../src/app/menu/menu.ts.MenuComponent" xlink:href="../../src/app/menu/menu.ts"><text x="195.0" y="14.1" stroke="none" text-anchor="middle" data-name="MenuComponent" data-compartment="0">MenuComponent</text></a>
 
 </g>
 </g>
-<g transform="translate(3372, 105)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MenuComponent" data-compartment="1">
+<g transform="translate(2982, 105)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MenuComponent" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="MenuComponent" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="MenuComponent" data-compartment="1">+isLoggedIn: boolean</text>
 <text x="0.0" y="30.3" stroke="none" data-name="MenuComponent" data-compartment="1">-snackbar: MatSnackBar</text>
@@ -471,9 +419,9 @@
 
 </g>
 </g>
-<g transform="translate(3372, 234)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MenuComponent" data-compartment="2">
+<g transform="translate(2982, 234)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="MenuComponent" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="MenuComponent" data-compartment="2">
-<text x="0.0" y="14.1" stroke="none" data-name="MenuComponent" data-compartment="2">+gotoRandonScenario(): void</text>
+<text x="0.0" y="14.1" stroke="none" data-name="MenuComponent" data-compartment="2">+gotoRandomScenario(): void</text>
 <text x="0.0" y="30.3" stroke="none" data-name="MenuComponent" data-compartment="2">+launchUpload(): Promise&lt;void&gt;</text>
 <text x="0.0" y="46.5" stroke="none" data-name="MenuComponent" data-compartment="2">+signOut(): void</text>
 
@@ -482,25 +430,24 @@
 </g>
 <g data-name="ResponsesChartComponent">
 <g fill="#eee8d5" stroke="#33322E" data-name="ResponsesChartComponent">
-<rect x="3818.0" y="133.5" height="105.0" width="1695.0" data-name="ResponsesChartComponent"></rect>
-<path d="M3818.0 165.5 L5513.0 165.5" fill="none" data-name="ResponsesChartComponent"></path>
-<path d="M3818.0 230.5 L5513.0 230.5" fill="none" data-name="ResponsesChartComponent"></path>
+<rect x="3428.0" y="142.0" height="88.0" width="1695.0" data-name="ResponsesChartComponent"></rect>
+<path d="M3428.0 174.0 L5123.0 174.0" fill="none" data-name="ResponsesChartComponent"></path>
+<path d="M3428.0 222.0 L5123.0 222.0" fill="none" data-name="ResponsesChartComponent"></path>
 </g>
-<g transform="translate(3818, 133.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ResponsesChartComponent" data-compartment="0">
+<g transform="translate(3428, 142)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ResponsesChartComponent" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ResponsesChartComponent" data-compartment="0">
 <a id="../../src/app/responses-chart/responses-chart.ts.ResponsesChartComponent" xlink:href="../../src/app/responses-chart/responses-chart.ts"><text x="839.5" y="14.1" stroke="none" text-anchor="middle" data-name="ResponsesChartComponent" data-compartment="0">ResponsesChartComponent</text></a>
 
 </g>
 </g>
-<g transform="translate(3818, 165.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponsesChartComponent" data-compartment="1">
+<g transform="translate(3428, 174)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponsesChartComponent" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ResponsesChartComponent" data-compartment="1">
-<text x="0.0" y="14.1" stroke="none" data-name="ResponsesChartComponent" data-compartment="1">+barChartOptions: _DeepPartialObject&lt;CoreChartOptions&lt;&quot;bar&quot;&gt; &amp; ElementChartOptions&lt;&quot;bar&quot;&gt; &amp; PluginChartOptions&lt;&quot;bar&quot;&gt; &amp; DatasetChartOptions&lt;&quot;bar&quot;&gt; &amp; ScaleChartOptions&lt;...&gt; &amp; BarControllerChartOptions&gt;</text>
-<text x="0.0" y="30.3" stroke="none" data-name="ResponsesChartComponent" data-compartment="1">+barChartType: &quot;bar&quot;</text>
-<text x="0.0" y="46.5" stroke="none" data-name="ResponsesChartComponent" data-compartment="1">+barChartData: ChartData&lt;&quot;bar&quot;, (number | [number, number])[], unknown&gt;</text>
+<text x="0.0" y="14.1" stroke="none" data-name="ResponsesChartComponent" data-compartment="1">+scenarioStats: ScenarioStats</text>
+<text x="0.0" y="30.3" stroke="none" data-name="ResponsesChartComponent" data-compartment="1">+barChartOptions: _DeepPartialObject&lt;CoreChartOptions&lt;&quot;bar&quot;&gt; &amp; ElementChartOptions&lt;&quot;bar&quot;&gt; &amp; PluginChartOptions&lt;&quot;bar&quot;&gt; &amp; DatasetChartOptions&lt;&quot;bar&quot;&gt; &amp; ScaleChartOptions&lt;...&gt; &amp; BarControllerChartOptions&gt;</text>
 
 </g>
 </g>
-<g transform="translate(3818, 230.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponsesChartComponent" data-compartment="2">
+<g transform="translate(3428, 222)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ResponsesChartComponent" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" data-name="ResponsesChartComponent" data-compartment="2">
 
 </g>
@@ -508,17 +455,17 @@
 </g>
 <g data-name="ScenarioComponent">
 <g fill="#eee8d5" stroke="#33322E" data-name="ScenarioComponent">
-<rect x="2640.0" y="412.0" height="307.0" width="419.0" data-name="ScenarioComponent"></rect>
-<path d="M2640.0 444.0 L3059.0 444.0" fill="none" data-name="ScenarioComponent"></path>
-<path d="M2640.0 638.0 L3059.0 638.0" fill="none" data-name="ScenarioComponent"></path>
+<rect x="2250.0" y="412.0" height="291.0" width="419.0" data-name="ScenarioComponent"></rect>
+<path d="M2250.0 444.0 L2669.0 444.0" fill="none" data-name="ScenarioComponent"></path>
+<path d="M2250.0 638.0 L2669.0 638.0" fill="none" data-name="ScenarioComponent"></path>
 </g>
-<g transform="translate(2640, 412)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ScenarioComponent" data-compartment="0">
+<g transform="translate(2250, 412)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ScenarioComponent" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ScenarioComponent" data-compartment="0">
 <a id="../../src/app/scenario/scenario.ts.ScenarioComponent" xlink:href="../../src/app/scenario/scenario.ts"><text x="201.5" y="14.1" stroke="none" text-anchor="middle" data-name="ScenarioComponent" data-compartment="0">ScenarioComponent</text></a>
 
 </g>
 </g>
-<g transform="translate(2640, 444)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioComponent" data-compartment="1">
+<g transform="translate(2250, 444)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioComponent" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioComponent" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioComponent" data-compartment="1">+stepper: MatStepper</text>
 <text x="0.0" y="30.3" stroke="none" data-name="ScenarioComponent" data-compartment="1">+scenario$: Observable&lt;ScenarioWithResponses&gt;</text>
@@ -534,54 +481,53 @@
 
 </g>
 </g>
-<g transform="translate(2640, 638)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioComponent" data-compartment="2">
+<g transform="translate(2250, 638)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioComponent" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioComponent" data-compartment="2">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioComponent" data-compartment="2">+ngOnInit(): void</text>
-<text x="0.0" y="30.3" stroke="none" data-name="ScenarioComponent" data-compartment="2">+loadScenario(): void</text>
-<text x="0.0" y="46.5" stroke="none" data-name="ScenarioComponent" data-compartment="2">+selectionMade(): Promise&lt;void&gt;</text>
-<text x="0.0" y="62.7" stroke="none" data-name="ScenarioComponent" data-compartment="2">+gotoNext(): void</text>
+<text x="0.0" y="30.3" stroke="none" data-name="ScenarioComponent" data-compartment="2">+selectionMade(): Promise&lt;void&gt;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="ScenarioComponent" data-compartment="2">+gotoNext(): void</text>
 
 </g>
 </g>
 </g>
 <g data-name="ScenarioPageController">
 <g fill="#eee8d5" stroke="#33322E" data-name="ScenarioPageController">
-<rect x="5553.0" y="138.0" height="96.0" width="371.0" data-name="ScenarioPageController"></rect>
-<path d="M5553.0 170.0 L5924.0 170.0" fill="none" data-name="ScenarioPageController"></path>
-<path d="M5553.0 202.0 L5924.0 202.0" fill="none" data-name="ScenarioPageController"></path>
+<rect x="5163.0" y="138.0" height="96.0" width="371.0" data-name="ScenarioPageController"></rect>
+<path d="M5163.0 170.0 L5534.0 170.0" fill="none" data-name="ScenarioPageController"></path>
+<path d="M5163.0 202.0 L5534.0 202.0" fill="none" data-name="ScenarioPageController"></path>
 </g>
-<g transform="translate(5553, 138)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ScenarioPageController" data-compartment="0">
+<g transform="translate(5163, 138)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ScenarioPageController" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ScenarioPageController" data-compartment="0">
 <a id="../../src/app/scenario/scenarioPageController.ts.ScenarioPageController" xlink:href="../../src/app/scenario/scenarioPageController.ts"><text x="177.5" y="14.1" stroke="none" text-anchor="middle" data-name="ScenarioPageController" data-compartment="0">ScenarioPageController</text></a>
 
 </g>
 </g>
-<g transform="translate(5553, 170)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioPageController" data-compartment="1">
+<g transform="translate(5163, 170)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioPageController" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioPageController" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="ScenarioPageController" data-compartment="1">+activeScenarioId$: BehaviorSubject&lt;string&gt;</text>
 
 </g>
 </g>
-<g transform="translate(5553, 202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioPageController" data-compartment="2">
+<g transform="translate(5163, 202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ScenarioPageController" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ScenarioPageController" data-compartment="2">
-<text x="0.0" y="14.1" stroke="none" data-name="ScenarioPageController" data-compartment="2">+loadScenario(): Promise&lt;void&gt;</text>
+<text x="0.0" y="14.1" stroke="none" data-name="ScenarioPageController" data-compartment="2">+loadScenario(): void</text>
 
 </g>
 </g>
 </g>
 <g data-name="UploadComponent">
 <g fill="#eee8d5" stroke="#33322E" data-name="UploadComponent">
-<rect x="5964.0" y="0.0" height="372.0" width="509.0" data-name="UploadComponent"></rect>
-<path d="M5964.0 32.0 L6473.0 32.0" fill="none" data-name="UploadComponent"></path>
-<path d="M5964.0 307.0 L6473.0 307.0" fill="none" data-name="UploadComponent"></path>
+<rect x="5574.0" y="0.0" height="372.0" width="509.0" data-name="UploadComponent"></rect>
+<path d="M5574.0 32.0 L6083.0 32.0" fill="none" data-name="UploadComponent"></path>
+<path d="M5574.0 307.0 L6083.0 307.0" fill="none" data-name="UploadComponent"></path>
 </g>
-<g transform="translate(5964, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UploadComponent" data-compartment="0">
+<g transform="translate(5574, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UploadComponent" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UploadComponent" data-compartment="0">
 <a id="../../src/app/upload/upload.ts.UploadComponent" xlink:href="../../src/app/upload/upload.ts"><text x="246.5" y="14.1" stroke="none" text-anchor="middle" data-name="UploadComponent" data-compartment="0">UploadComponent</text></a>
 
 </g>
 </g>
-<g transform="translate(5964, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UploadComponent" data-compartment="1">
+<g transform="translate(5574, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UploadComponent" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UploadComponent" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="UploadComponent" data-compartment="1">+fileInputElem: ElementRef&lt;HTMLInputElement&gt;</text>
 <text x="0.0" y="30.3" stroke="none" data-name="UploadComponent" data-compartment="1">-dialogRef: MatDialogRef&lt;any, any&gt;</text>
@@ -596,13 +542,13 @@
 <text x="0.0" y="176.1" stroke="none" data-name="UploadComponent" data-compartment="1">}&gt;</text>
 <text x="0.0" y="192.3" stroke="none" data-name="UploadComponent" data-compartment="1">+thirdFormGroup: FormGroup&lt;{ options: FormControl&lt;string[]&gt;</text>
 <text x="0.0" y="208.5" stroke="none" data-name="UploadComponent" data-compartment="1">}&gt;</text>
-<text x="0.0" y="224.7" stroke="none" data-name="UploadComponent" data-compartment="1">-profileService: ProfileService</text>
-<text x="0.0" y="240.9" stroke="none" data-name="UploadComponent" data-compartment="1">-scenarioService: ScenarioService</text>
-<text x="0.0" y="257.1" stroke="none" data-name="UploadComponent" data-compartment="1">-storageService: StorageService</text>
+<text x="0.0" y="224.7" stroke="none" data-name="UploadComponent" data-compartment="1">-scenarioService: ScenarioService</text>
+<text x="0.0" y="240.9" stroke="none" data-name="UploadComponent" data-compartment="1">-storageService: StorageService</text>
+<text x="0.0" y="257.1" stroke="none" data-name="UploadComponent" data-compartment="1">-auth: Auth</text>
 
 </g>
 </g>
-<g transform="translate(5964, 307)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UploadComponent" data-compartment="2">
+<g transform="translate(5574, 307)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UploadComponent" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UploadComponent" data-compartment="2">
 <text x="0.0" y="14.1" stroke="none" data-name="UploadComponent" data-compartment="2">+removeReactiveKeyword(): void</text>
 <text x="0.0" y="30.3" stroke="none" data-name="UploadComponent" data-compartment="2">+addReactiveKeyword(): void</text>
@@ -613,23 +559,23 @@
 </g>
 <g data-name="UploadModalService">
 <g fill="#eee8d5" stroke="#33322E" data-name="UploadModalService">
-<rect x="6513.0" y="138.0" height="96.0" width="497.0" data-name="UploadModalService"></rect>
-<path d="M6513.0 170.0 L7010.0 170.0" fill="none" data-name="UploadModalService"></path>
-<path d="M6513.0 202.0 L7010.0 202.0" fill="none" data-name="UploadModalService"></path>
+<rect x="6123.0" y="138.0" height="96.0" width="497.0" data-name="UploadModalService"></rect>
+<path d="M6123.0 170.0 L6620.0 170.0" fill="none" data-name="UploadModalService"></path>
+<path d="M6123.0 202.0 L6620.0 202.0" fill="none" data-name="UploadModalService"></path>
 </g>
-<g transform="translate(6513, 138)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UploadModalService" data-compartment="0">
+<g transform="translate(6123, 138)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UploadModalService" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UploadModalService" data-compartment="0">
 <a id="../../src/app/upload/uploadModal.ts.UploadModalService" xlink:href="../../src/app/upload/uploadModal.ts"><text x="240.5" y="14.1" stroke="none" text-anchor="middle" data-name="UploadModalService" data-compartment="0">UploadModalService</text></a>
 
 </g>
 </g>
-<g transform="translate(6513, 170)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UploadModalService" data-compartment="1">
+<g transform="translate(6123, 170)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UploadModalService" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UploadModalService" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="UploadModalService" data-compartment="1">-dialog: MatDialog</text>
 
 </g>
 </g>
-<g transform="translate(6513, 202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UploadModalService" data-compartment="2">
+<g transform="translate(6123, 202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UploadModalService" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UploadModalService" data-compartment="2">
 <text x="0.0" y="14.1" stroke="none" data-name="UploadModalService" data-compartment="2">+launch(): Promise&lt;MatDialogRef&lt;UploadComponent, any&gt;&gt;</text>
 
@@ -638,24 +584,24 @@
 </g>
 <g data-name="VideoPlayerComponent">
 <g fill="#eee8d5" stroke="#33322E" data-name="VideoPlayerComponent">
-<rect x="6909.5" y="501.5" height="128.0" width="341.0" data-name="VideoPlayerComponent"></rect>
-<path d="M6909.5 533.5 L7250.5 533.5" fill="none" data-name="VideoPlayerComponent"></path>
-<path d="M6909.5 581.5 L7250.5 581.5" fill="none" data-name="VideoPlayerComponent"></path>
+<rect x="6519.5" y="493.5" height="128.0" width="341.0" data-name="VideoPlayerComponent"></rect>
+<path d="M6519.5 525.5 L6860.5 525.5" fill="none" data-name="VideoPlayerComponent"></path>
+<path d="M6519.5 573.5 L6860.5 573.5" fill="none" data-name="VideoPlayerComponent"></path>
 </g>
-<g transform="translate(6909.5, 501.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="VideoPlayerComponent" data-compartment="0">
+<g transform="translate(6519.5, 493.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="VideoPlayerComponent" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="VideoPlayerComponent" data-compartment="0">
 <a id="../../src/app/video-player/video-player.ts.VideoPlayerComponent" xlink:href="../../src/app/video-player/video-player.ts"><text x="162.5" y="14.1" stroke="none" text-anchor="middle" data-name="VideoPlayerComponent" data-compartment="0">VideoPlayerComponent</text></a>
 
 </g>
 </g>
-<g transform="translate(6909.5, 533.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="VideoPlayerComponent" data-compartment="1">
+<g transform="translate(6519.5, 525.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="VideoPlayerComponent" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="VideoPlayerComponent" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="VideoPlayerComponent" data-compartment="1">+target: ElementRef&lt;any&gt;</text>
 <text x="0.0" y="30.3" stroke="none" data-name="VideoPlayerComponent" data-compartment="1">-changeDetectorRef: ChangeDetectorRef</text>
 
 </g>
 </g>
-<g transform="translate(6909.5, 581.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="VideoPlayerComponent" data-compartment="2">
+<g transform="translate(6519.5, 573.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="VideoPlayerComponent" data-compartment="2">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="VideoPlayerComponent" data-compartment="2">
 <text x="0.0" y="14.1" stroke="none" data-name="VideoPlayerComponent" data-compartment="2">+ngOnInit(): void</text>
 <text x="0.0" y="30.3" stroke="none" data-name="VideoPlayerComponent" data-compartment="2">+ngOnDestroy(): void</text>
@@ -665,9 +611,9 @@
 </g>
 <g data-name="OnDestroy">
 <g fill="#eee8d5" stroke="#33322E" data-name="OnDestroy">
-<rect x="7050.0" y="170.0" height="32.0" width="100.0" data-name="OnDestroy"></rect>
+<rect x="6660.0" y="170.0" height="32.0" width="100.0" data-name="OnDestroy"></rect>
 </g>
-<g transform="translate(7050, 170)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnDestroy" data-compartment="0">
+<g transform="translate(6660, 170)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnDestroy" data-compartment="0">
 <g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OnDestroy" data-compartment="0">
 <text x="42.0" y="14.1" stroke="none" text-anchor="middle" data-name="OnDestroy" data-compartment="0">OnDestroy</text>
 

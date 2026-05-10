@@ -14,8 +14,9 @@ export class UploadModalService {
   }
 
   /**
-   * Launches the upload modal.
-   * Handles a lazy load of the UploadCompoent
+   * Launches the upload modal, using a lazy load of the UploadCompoent
+   *
+   * @returns {Promise<void>} A promise which resolves once the dialog has been launched.
    */
   async launch() {
     const UploadComponent = await import('./upload').then(m => m.UploadComponent)

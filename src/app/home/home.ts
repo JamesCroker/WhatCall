@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 
+/**
+ * Application HomeScreen
+ */
 @Component({
   selector: 'app-home',
   imports: [RouterLink, MatButtonModule],

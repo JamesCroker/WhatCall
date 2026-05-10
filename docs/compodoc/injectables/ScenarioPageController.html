@@ -141,8 +141,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>/**
-Service to interact with video data from Firestore.</p>
+                <p>Service to interact with video data from Firestore.</p>
 
             </p>
 
@@ -178,7 +177,6 @@ Service to interact with video data from Firestore.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Async</span>
                                 <a href="#loadScenario" >loadScenario</a>
                             </li>
                         </ul>
@@ -205,7 +203,6 @@ Service to interact with video data from Firestore.</p>
                 <td class="col-md-4">
                     <a name="loadScenario"></a>
                     <span class="name">
-                            <span class="modifier">Async</span>
                         <span ><b>loadScenario</b></span>
                         <a href="#loadScenario"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -213,22 +210,23 @@ Service to interact with video data from Firestore.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loadScenario(scenarioId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>loadScenario(scenarioId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/app/scenario/scenarioPageController.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/app/scenario/scenarioPageController.ts:23</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Set the activeScenarioId</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -239,6 +237,7 @@ Service to interact with video data from Firestore.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -253,12 +252,16 @@ Service to interact with video data from Firestore.</p>
                                             </td>
 
 
+                                            <td>
+                                                    <p>New activeScenario Id, or undefined to unset.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                             <div class="io-description">
@@ -300,10 +303,16 @@ Service to interact with video data from Firestore.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/scenario/scenarioPageController.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/scenario/scenarioPageController.ts:15</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Observable for activeScenarioId (or undefined)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -317,7 +326,6 @@ Service to interact with video data from Firestore.</p>
 import { BehaviorSubject } from &#x27;rxjs&#x27;;
 
 /**
-/**
  * Service to interact with video data from Firestore.
  */
 @Injectable({
@@ -325,10 +333,18 @@ import { BehaviorSubject } from &#x27;rxjs&#x27;;
 })
 export class ScenarioPageController {
 
+  /**
+   * Observable for activeScenarioId (or undefined)
+   */
   public readonly activeScenarioId$: BehaviorSubject&lt;string | undefined&gt;
     &#x3D; new BehaviorSubject&lt;string | undefined&gt;(undefined);
 
-  async loadScenario(scenarioId?: string) {
+  /**
+   * Set the activeScenarioId
+   *
+   * @param {string | undefined} scenarioId New activeScenario Id, or undefined to unset.
+   */
+  loadScenario(scenarioId?: string) {
     this.activeScenarioId$.next(scenarioId);
   }
 

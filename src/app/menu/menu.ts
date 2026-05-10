@@ -9,6 +9,10 @@ import { UploadModalService } from '../upload/uploadModal';
 import { Auth } from '@angular/fire/auth';
 import { onAuthStateChanged } from 'firebase/auth';
 import { AuthModalService } from '../auth-screen/authModal';
+
+/**
+ * Page header and drop-down menu
+ */
 @Component({
   selector: 'app-menu',
   imports: [RouterOutlet, MatMenuModule, MatIconModule, MatToolbarModule, RouterLink],
@@ -17,16 +21,28 @@ import { AuthModalService } from '../auth-screen/authModal';
 })
 export class MenuComponent {
 
+  /** Is the user signed-in non-anonymously */
   public isLoggedIn = false;
 
+  /** Injected MatSnackBar service */
   private snackbar = inject(MatSnackBar);
 
   constructor(
+    /** Injected Router serice */
     private router: Router,
+
+    /** Injected ScenarioPageController service */
     private scenarioPageController: ScenarioPageController,
+
+    /** Injected UploadModalService service */
     private uploadModalService: UploadModalService,
+
+    /** Injected Auth service */
     private auth: Auth,
+
+    /** Injected AuthModalService service */
     private authModalService: AuthModalService
+
   ) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -37,11 +53,24 @@ export class MenuComponent {
     })
   }
 
-  gotoRandonScenario() {
+  /**
+   * Navigates the user to a random scenario.
+   */
+  gotoRandomScenario() {
     this.router.navigate(['/scenario']);
     this.scenarioPageController.loadScenario();
   }
 
+  /**
+   * Launches the UploadModal to allow a user to upload a new video.
+   *
+   * If the user is not signed-in first launch the AuthModal to enable the user to sign-in.
+   *
+   * Only launch the UploadModal if the user successfully signs in, otherwise display a snackbar
+   * with a 'sign-in required' error message.
+   *
+   * @returns {Promise<void>} A promise which resolves when the upload modal closes.
+   */
   async launchUpload() {
     if (!this.auth.currentUser) {
       await this.authModalService.launch();
@@ -53,6 +82,9 @@ export class MenuComponent {
     this.uploadModalService.launch();
   }
 
+  /**
+   * Sign the current user out
+   */
   signOut() {
     this.auth.signOut();
   }

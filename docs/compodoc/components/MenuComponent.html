@@ -138,6 +138,13 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Page header and drop-down menu</p>
+
+    </p>
 
 
 
@@ -231,7 +238,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#gotoRandonScenario" >gotoRandonScenario</a>
+                                <a href="#gotoRandomScenario" >gotoRandomScenario</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -263,7 +270,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/menu/menu.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/menu/menu.ts:28</a></div>
                             </td>
                         </tr>
 
@@ -362,30 +369,32 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="gotoRandonScenario"></a>
+                    <a name="gotoRandomScenario"></a>
                     <span class="name">
-                        <span ><b>gotoRandonScenario</b></span>
-                        <a href="#gotoRandonScenario"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>gotoRandomScenario</b></span>
+                        <a href="#gotoRandomScenario"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>gotoRandonScenario()</code>
+<code>gotoRandomScenario()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/app/menu/menu.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/menu/menu.ts:59</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Navigates the user to a random scenario.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -417,19 +426,28 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/app/menu/menu.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/menu/menu.ts:74</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Launches the UploadModal to allow a user to upload a new video.</p>
+<p>If the user is not signed-in first launch the AuthModal to enable the user to sign-in.</p>
+<p>Only launch the UploadModal if the user successfully signs in, otherwise display a snackbar
+with a &#39;sign-in required&#39; error message.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A promise which resolves when the upload modal closes.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -454,14 +472,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">src/app/menu/menu.ts:56</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/menu/menu.ts:88</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sign the current user out</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -502,10 +522,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/menu/menu.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/menu/menu.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Is the user signed-in non-anonymously</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -534,10 +560,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/menu/menu.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/menu/menu.ts:28</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Injected MatSnackBar service</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -558,6 +590,10 @@ import { UploadModalService } from &#x27;../upload/uploadModal&#x27;;
 import { Auth } from &#x27;@angular/fire/auth&#x27;;
 import { onAuthStateChanged } from &#x27;firebase/auth&#x27;;
 import { AuthModalService } from &#x27;../auth-screen/authModal&#x27;;
+
+/**
+ * Page header and drop-down menu
+ */
 @Component({
   selector: &#x27;app-menu&#x27;,
   imports: [RouterOutlet, MatMenuModule, MatIconModule, MatToolbarModule, RouterLink],
@@ -566,16 +602,28 @@ import { AuthModalService } from &#x27;../auth-screen/authModal&#x27;;
 })
 export class MenuComponent {
 
+  /** Is the user signed-in non-anonymously */
   public isLoggedIn &#x3D; false;
 
+  /** Injected MatSnackBar service */
   private snackbar &#x3D; inject(MatSnackBar);
 
   constructor(
+    /** Injected Router serice */
     private router: Router,
+
+    /** Injected ScenarioPageController service */
     private scenarioPageController: ScenarioPageController,
+
+    /** Injected UploadModalService service */
     private uploadModalService: UploadModalService,
+
+    /** Injected Auth service */
     private auth: Auth,
+
+    /** Injected AuthModalService service */
     private authModalService: AuthModalService
+
   ) {
     onAuthStateChanged(auth, (user) &#x3D;&gt; {
       if (user) {
@@ -586,11 +634,24 @@ export class MenuComponent {
     })
   }
 
-  gotoRandonScenario() {
+  /**
+   * Navigates the user to a random scenario.
+   */
+  gotoRandomScenario() {
     this.router.navigate([&#x27;/scenario&#x27;]);
     this.scenarioPageController.loadScenario();
   }
 
+  /**
+   * Launches the UploadModal to allow a user to upload a new video.
+   *
+   * If the user is not signed-in first launch the AuthModal to enable the user to sign-in.
+   *
+   * Only launch the UploadModal if the user successfully signs in, otherwise display a snackbar
+   * with a &#x27;sign-in required&#x27; error message.
+   *
+   * @returns {Promise&lt;void&gt;} A promise which resolves when the upload modal closes.
+   */
   async launchUpload() {
     if (!this.auth.currentUser) {
       await this.authModalService.launch();
@@ -602,6 +663,9 @@ export class MenuComponent {
     this.uploadModalService.launch();
   }
 
+  /**
+   * Sign the current user out
+   */
   signOut() {
     this.auth.signOut();
   }
@@ -627,7 +691,7 @@ export class MenuComponent {
     &lt;mat-icon&gt;home&lt;/mat-icon&gt;
     &lt;span&gt;Home&lt;/span&gt;
   &lt;/button&gt;
-  &lt;button data-testid&#x3D;&quot;menu-randomscenario&quot; mat-menu-item (click)&#x3D;&quot;gotoRandonScenario()&quot;&gt;
+  &lt;button data-testid&#x3D;&quot;menu-randomscenario&quot; mat-menu-item (click)&#x3D;&quot;gotoRandomScenario()&quot;&gt;
     &lt;mat-icon&gt;refresh&lt;/mat-icon&gt;
     &lt;span&gt;Random Scenario&lt;/span&gt;
   &lt;/button&gt;
@@ -639,7 +703,8 @@ export class MenuComponent {
     &lt;mat-icon&gt;logout&lt;/mat-icon&gt;
     &lt;span&gt;signOut&lt;/span&gt;
   &lt;/button&gt;&lt;/mat-menu&gt;
-&lt;router-outlet /&gt;</code></pre>
+&lt;router-outlet /&gt;
+</code></pre>
     </div>
 
 
@@ -668,7 +733,7 @@ export class MenuComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-toolbar>  <button #menuButton matIconButton [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">    <mat-icon>menu</mat-icon>  </button>  <span>WhatCall</span>  <span class="toolbar-spacer"></span>  <button matIconButton class="example-icon" aria-label="Example icon-button with share icon">    <mat-icon>person</mat-icon>  </button></mat-toolbar><mat-menu #menu="matMenu">  <button mat-menu-item routerLink="/">    <mat-icon>home</mat-icon>    <span>Home</span>  </button>  <button data-testid="menu-randomscenario" mat-menu-item (click)="gotoRandonScenario()">    <mat-icon>refresh</mat-icon>    <span>Random Scenario</span>  </button>  <button mat-menu-item (click)="launchUpload()">    <mat-icon>file_upload</mat-icon>    <span>Upload Scenario</span>  </button>  <button mat-menu-item (click)="signOut()" [style]="(!isLoggedIn) ? \'display: none;\' : \'\'">    <mat-icon>logout</mat-icon>    <span>signOut</span>  </button></mat-menu><router-outlet /></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-toolbar>  <button #menuButton matIconButton [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">    <mat-icon>menu</mat-icon>  </button>  <span>WhatCall</span>  <span class="toolbar-spacer"></span>  <button matIconButton class="example-icon" aria-label="Example icon-button with share icon">    <mat-icon>person</mat-icon>  </button></mat-toolbar><mat-menu #menu="matMenu">  <button mat-menu-item routerLink="/">    <mat-icon>home</mat-icon>    <span>Home</span>  </button>  <button data-testid="menu-randomscenario" mat-menu-item (click)="gotoRandomScenario()">    <mat-icon>refresh</mat-icon>    <span>Random Scenario</span>  </button>  <button mat-menu-item (click)="launchUpload()">    <mat-icon>file_upload</mat-icon>    <span>Upload Scenario</span>  </button>  <button mat-menu-item (click)="signOut()" [style]="(!isLoggedIn) ? \'display: none;\' : \'\'">    <mat-icon>logout</mat-icon>    <span>signOut</span>  </button></mat-menu><router-outlet /></div>'
     var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'AuthScreenComponent', 'selector': 'app-auth-screen'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'ResponsesChartComponent', 'selector': 'app-responses-chart'},{'name': 'ScenarioComponent', 'selector': 'app-scenario'},{'name': 'UploadComponent', 'selector': 'app-upload'},{'name': 'VideoPlayerComponent', 'selector': 'app-video-player'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MenuComponent'};

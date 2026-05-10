@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ScenarioService } from './scenarioService';
 import { Firestore } from '@angular/fire/firestore';
-import { ProfileService } from './profileService';
+import { Auth } from '@angular/fire/auth';
 
 describe('ScenarioService', () => {
   let service: ScenarioService;
@@ -10,12 +10,7 @@ describe('ScenarioService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        {
-          provide: ProfileService,
-          useValue: {
-            getUid: () => '123'
-          }
-        },
+        { provide: Auth, useValue: {} }
       ]
     });
 

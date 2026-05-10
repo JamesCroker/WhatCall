@@ -259,9 +259,6 @@
                                 <a href="#gotoNext" >gotoNext</a>
                             </li>
                             <li>
-                                <a href="#loadScenario" >loadScenario</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
@@ -291,7 +288,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/scenario/scenario.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/scenario/scenario.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -406,86 +403,21 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/app/scenario/scenario.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/scenario/scenario.ts:128</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>goto next randomly selected scenario.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loadScenario"></a>
-                    <span class="name">
-                        <span ><b>loadScenario</b></span>
-                        <a href="#loadScenario"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>loadScenario(scenarioId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">src/app/scenario/scenario.ts:73</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>scenarioId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    Yes
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -510,14 +442,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/scenario/scenario.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/scenario/scenario.ts:93</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Angular OnInit event</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -549,14 +483,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/app/scenario/scenario.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">src/app/scenario/scenario.ts:118</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handler for when a user selects a response option button.</p>
+<p>Adds the user&#39;s response to the Firestore responses collection using the scenarioService</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -567,6 +504,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -581,6 +519,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The text of the response selected by the user</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -590,7 +532,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A promise that resolves once Firestore is updated</p>
+
                             </div>
                 </td>
             </tr>
@@ -621,16 +564,21 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new FormGroup({
-  })</code>
+                        <i>Default value : </i><code>new FormGroup({})</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/scenario/scenario.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/scenario/scenario.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Empty FromGroup object, used for first mat-stepper page.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -659,10 +607,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/scenario/scenario.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/scenario/scenario.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>active scenario tracks most recent response recived from scenario$ observable.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -686,16 +640,14 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/scenario/scenario.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/scenario/scenario.ts:33</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Observable that emits the active ScenarioWithResponses object based on the
-activeScenarioId$, including the responses and stats.
-The component can subscribe to this Observable to get updates whenever the
-active scenario changes.</p>
+                    <div class="io-description"><p>Observable that emits the active ScenarioWithResponses object based on the activeScenarioId$
+including the responses and stats.</p>
 </div>
                 </td>
             </tr>
@@ -721,16 +673,21 @@ active scenario changes.</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new FormGroup({
-  })</code>
+                        <i>Default value : </i><code>new FormGroup({})</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/scenario/scenario.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/scenario/scenario.ts:45</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Empty FromGroup object, used for second mat-stepper page.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -763,10 +720,16 @@ active scenario changes.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/scenario/scenario.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/scenario/scenario.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The MatStepper page element - referenced from the HTML.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -795,10 +758,16 @@ active scenario changes.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/scenario/scenario.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/scenario/scenario.ts:39</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The duration of animation for the mat-stepper</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -831,48 +800,85 @@ import { FormGroup, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 })
 export class ScenarioComponent implements OnInit {
 
+  /**
+   * The MatStepper page element - referenced from the HTML.
+   */
   @ViewChild(&#x27;stepper&#x27;) stepper!: MatStepper;
 
   /**
- * Observable that emits the active ScenarioWithResponses object based on the
-  activeScenarioId$, including the responses and stats.
- * The component can subscribe to this Observable to get updates whenever the
-  active scenario changes.
- */
+   * Observable that emits the active ScenarioWithResponses object based on the activeScenarioId$
+   * including the responses and stats.
+  **/
   public scenario$: Observable&lt;ScenarioWithResponses | undefined&gt;;
+
+  /** active scenario tracks most recent response recived from scenario$ observable. */
   private scenario: ScenarioWithResponses | undefined &#x3D; undefined;
 
+  /** The duration of animation for the mat-stepper */
   public stepperDuration &#x3D; &#x27;&#x27;;
 
-  firstFormGroup &#x3D; new FormGroup({
-  });
-  secondFormGroup &#x3D; new FormGroup({
-  });
+  /** Empty FromGroup object, used for first mat-stepper page. */
+  firstFormGroup &#x3D; new FormGroup({});
+
+  /** Empty FromGroup object, used for second mat-stepper page. */
+  secondFormGroup &#x3D; new FormGroup({});
 
   constructor(
+    /** injected ActivatedRoute service */
     private activatedRoute: ActivatedRoute,
+
+    /** injected ScenarioPageController service */
     private pageController: ScenarioPageController,
+
+    /** injected ScenarioService service */
     private scenarioService: ScenarioService,
+
+    /** injected ChangeDetectorRef service */
     private changeDetector: ChangeDetectorRef,
+
+    /** injected Location service */
     private location: Location
   ) {
-    this.scenario$ &#x3D; this.pageController.activeScenarioId$.pipe(mergeMap(scenarioId &#x3D;&gt; {
-      console.log(&#x27;ScenarioComponent: activeScenarioId&#x27;, scenarioId);
-      if (!scenarioId) {
-        return this.scenarioService.getRandomScenarioId()
-      } else {
-        return Promise.resolve(scenarioId);
-      }
-    }),
+
+    // Subscrive to activeScenarioId$ (from pageController)
+    this.scenario$ &#x3D; this.pageController.activeScenarioId$.pipe(
+      // If there is no activeScenarioId (undefined) get a random scenario id
+      // Input  scenarioId : string | undefined (if no id specified)
+      // Output scenarioId : string
+      mergeMap(scenarioId &#x3D;&gt; {
+        console.log(&#x27;ScenarioComponent: activeScenarioId&#x27;, scenarioId);
+        if (!scenarioId) {
+          return this.scenarioService.getRandomScenarioId()
+        } else {
+          return Promise.resolve(scenarioId);
+        }
+      }),
+
+      // Fetch a observable for the ScenarioWithResponses object for the specified scenarioId
+      // Input  scenarioId: string
+      // Output Observable&lt;ScenarioWithResponses | undefined&gt;
       map(scenarioId &#x3D;&gt; this.scenarioService.getScenarioWithResponsesById$(scenarioId)),
+
+      // Switch the observable returned to the ScenarioWithResponses observable
+      // Input  Observable&lt;ScenarioWithResponses | undefined&gt;
+      // Output ScenarioWithResponses | undefined
       switchAll()
     );
   }
 
+  /**
+   * Angular OnInit event
+   */
   ngOnInit(): void {
+    // Subscribe to the ActiveRoute path parameters, and set the :id as the activeScenarioId, using
+    // the pageController service.
     this.activatedRoute.params.subscribe(async params &#x3D;&gt; {
       await this.pageController.loadScenario(params[&#x27;id&#x27;]);
     })
+
+     // Subsctive to scenario$ and:
+     //  - store the result in this.scenario.
+     //  - update the URL to /scenario/:id
     this.scenario$.subscribe(activeScenario &#x3D;&gt; {
       this.scenario &#x3D; activeScenario;
       this.location.replaceState(&#x60;/scenario/${activeScenario?.id}&#x60;);
@@ -880,10 +886,14 @@ export class ScenarioComponent implements OnInit {
     });
   }
 
-  loadScenario(scenarioId?: string) {
-    this.pageController.loadScenario(scenarioId);
-  }
-
+  /**
+   * Handler for when a user selects a response option button.
+   *
+   * Adds the user&#x27;s response to the Firestore responses collection using the scenarioService
+   *
+   * @param {string} userResponse The text of the response selected by the user
+   * @returns {Promise&lt;void&gt;} A promise that resolves once Firestore is updated
+   */
   async selectionMade(userResponse: string) {
     if (!this.scenario) {
       throw new Error(&#x27;No scenario loaded&#x27;);
@@ -891,10 +901,18 @@ export class ScenarioComponent implements OnInit {
     this.scenarioService.addResponse(this.scenario.id, userResponse)
   }
 
+  /**
+   * goto next randomly selected scenario.
+   */
   gotoNext() {
+    // select another random scenaro by calling page controller without scenarioId specified.
     this.pageController.loadScenario();
+
+    // move the stepper back to page-1 without annimation
     this.stepperDuration &#x3D; &#x27;0ms&#x27;;
     this.stepper.reset();
+
+    // Subscribe to the animationDone event and once (0ms) animation is complete turn animation back on
     this.stepper.animationDone.asObservable().subscribe(() &#x3D;&gt; {
       this.stepperDuration &#x3D; &#x27;&#x27;;
     })

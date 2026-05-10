@@ -4,6 +4,11 @@ import {
     MatDialog
 } from '@angular/material/dialog';
 
+/**
+ * Injectable service that launches AuthScreenComponent.
+ *
+ * Implements lazy-loading of AuthScreeComponent to avoid need to embed in root module.
+ */
 @Injectable({
     providedIn: 'root',
 })
@@ -17,7 +22,8 @@ export class AuthModalService {
 
     /**
      * Launches the upload modal.
-     * Handles a lazy load of the AuthScreenComponent
+     *
+     * @returns {Promise<void>} A promise that resolves when the modal is closed.
      */
     async launch(): Promise<void> {
         if (!this.auth.currentUser) {

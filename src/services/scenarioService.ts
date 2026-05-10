@@ -5,12 +5,10 @@ import {
   Firestore
 } from '@angular/fire/firestore';
 
-// Import the functions you need from the SDKs you need
-import { ProfileService } from './profileService';
-
-import {  Scenario, ScenarioResponse, ScenarioStats, ScenarioWithResponses } from '../types';
+import { Scenario, ScenarioResponse, ScenarioStats, ScenarioWithResponses } from '../types';
 import { responseConverter, scenarioConverter } from './converters';
 import { combineLatest, fromEventPattern, map, Observable, of } from 'rxjs';
+import { Auth } from '@angular/fire/auth';
 
 /**
  * Service to interact with video data from Firestore.
@@ -23,7 +21,7 @@ export class ScenarioService {
   private firestore: Firestore
 
   constructor(
-    private profileService: ProfileService
+    private auth: Auth
   ) {
     this.firestore = this.getFirestore();
   }
@@ -138,7 +136,7 @@ export class ScenarioService {
   */
   public async addResponse(scenarioId: string, response: string): Promise<void> {
     // Check if user is logged in
-    const uid = this.profileService.getUid() || 'made up user'
+    const uid = this.auth.currentUser?.uid || 'made up user'
     if (!uid) {
       throw new Error('User not logged in');
     }
@@ -202,7 +200,7 @@ export class ScenarioService {
    * @returns
    */
   private getMyResponseForScenario$(scenarioId: string): Observable<ScenarioResponse | undefined> {
-    const uid = this.profileService.getUid() || '';
+    const uid = this.auth.currentUser?.uid || '';
     const docRef = doc(this.responsesRef(scenarioId), uid);
     return fromEventPattern<DocumentSnapshot<ScenarioResponse | undefined>>(
       (handler) => onSnapshot(docRef, handler),

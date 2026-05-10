@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UploadComponent } from './upload';
-import { ProfileService, ScenarioService, StorageService } from '../../services';
+import { ScenarioService, StorageService } from '../../services';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Auth } from '@angular/fire/auth';
 
 describe('UploadComponent', () => {
   let component: UploadComponent;
@@ -13,7 +14,7 @@ describe('UploadComponent', () => {
         { provide: MatDialogRef, useValue: { close: () => { } } },
         { provide: StorageService, useValue: {} },
         { provide: ScenarioService, useValue: {} },
-        { provide: ProfileService, useValue: {} }
+        { provide: Auth, useValue: {} }
       ],
       imports: [UploadComponent]
     })

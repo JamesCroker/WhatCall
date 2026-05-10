@@ -94,9 +94,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/AuthModalService.html" data-type="entity-link" >AuthModalService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/ProfileService.html" data-type="entity-link" >ProfileService</a>
-                                </li>
-                                <li class="link">
                                     <a href="injectables/ScenarioPageController.html" data-type="entity-link" >ScenarioPageController</a>
                                 </li>
                                 <li class="link">
@@ -123,9 +120,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/FirebaseEmulatorConfig.html" data-type="entity-link" >FirebaseEmulatorConfig</a>
-                            </li>
-                            <li class="link">
-                                <a href="interfaces/Profile.html" data-type="entity-link" >Profile</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Scenario.html" data-type="entity-link" >Scenario</a>

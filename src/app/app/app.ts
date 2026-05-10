@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { MenuComponent } from "../menu/menu";
 
+/**
+ * Main Application Class
+ */
 @Component({
   selector: 'app-root',
   imports: [MenuComponent],
@@ -10,8 +13,8 @@ import { MenuComponent } from "../menu/menu";
 export class App {
 
   constructor(
-  ) { 
+  ) {
     // Empty constructor for dependency injection
   }
-  
+
 }

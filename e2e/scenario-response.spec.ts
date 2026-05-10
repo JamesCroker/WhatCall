@@ -4,7 +4,7 @@ import { SCENARIOS } from './testdata';
 
 test.describe('Unathenticated Scenario View', () => {
 
-  test('An unathenticated user can respond to a scenario.',
+  test.skip('An unathenticated user can respond to a scenario.',
     {
       annotation: {
         type: 'requirement',

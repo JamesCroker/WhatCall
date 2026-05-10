@@ -144,6 +144,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Firebase configuration, provided by the Firebase console.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -449,6 +456,12 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export type FirebaseEmulators &#x3D; FirebaseEmulatorConfig | null;
 
+/**
+ * Optional configuration to set the application to use Firebase emulator
+ * @member {string} auth URL of the auth emulator e.g. &#x27;https://localhost:8001&#x27;
+ * @member firestore Endpoint for the firestore emulator
+ * @member storage Endpoint for the storage mulator
+ */
 export interface FirebaseEmulatorConfig {
   auth: string,
   firestore: {
@@ -461,6 +474,9 @@ export interface FirebaseEmulatorConfig {
   }
 }
 
+/**
+ * Firebase configuration, provided by the Firebase console.
+ */
 export interface FirebaseConfig {
   projectId: string,
   appId: string,
@@ -469,7 +485,8 @@ export interface FirebaseConfig {
   authDomain: string,
   messagingSenderId: string,
   measurementId: string
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
 

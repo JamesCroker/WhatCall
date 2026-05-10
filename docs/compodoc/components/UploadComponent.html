@@ -138,6 +138,15 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to upload a new scenario.</p>
+<p>Presented as a wizard, with a number of steps to capture video URL, title, and options.
+Intended to be displayed as a modal (launched by uploadModal)</p>
+
+    </p>
 
 
 
@@ -298,12 +307,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(profileService: <a href="../injectables/ProfileService.html" target="_self">ProfileService</a>, scenarioService: <a href="../injectables/ScenarioService.html" target="_self">ScenarioService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>)</code>
+<code>constructor(scenarioService: <a href="../injectables/ScenarioService.html" target="_self">ScenarioService</a>, storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, auth: Auth)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/upload/upload.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/upload/upload.ts:74</a></div>
                             </td>
                         </tr>
 
@@ -321,18 +330,6 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>profileService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/ProfileService.html" target="_self" >ProfileService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
                                                         <td>scenarioService</td>
                                                   
                                                         <td>
@@ -349,6 +346,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/StorageService.html" target="_self" >StorageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>auth</td>
+                                                  
+                                                        <td>
+                                                                    <code>Auth</code>
                                                         </td>
                                                   
                                                     <td>
@@ -394,14 +403,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/upload/upload.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/upload/upload.ts:111</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Add an option to the list</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -412,6 +423,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -426,6 +438,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>input event recieved from MatChip</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -461,14 +477,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/upload/upload.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/upload/upload.ts:92</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Remove an option from the list</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -479,6 +497,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -493,6 +512,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>option to remove</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -530,14 +553,18 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="128"
-                                    class="link-to-prism">src/app/upload/upload.ts:128</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/upload/upload.ts:136</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Create a new scenario, saving the form contents.</p>
+<p>If a file has been provided, upload this to the storage service and use the public URL of the
+storage item as the URL.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -579,10 +606,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/upload/upload.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/upload/upload.ts:46</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to MatDialog</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -615,10 +648,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/upload/upload.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/upload/upload.ts:43</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to fileInput HTML element</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -649,10 +688,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/upload/upload.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/upload/upload.ts:55</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>FormGroup for first page - contains form controls</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -681,10 +726,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/upload/upload.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/upload/upload.ts:52</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>array of entered options (Signal wrapped)  - presented onscreen as MatChips</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -716,10 +767,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/upload/upload.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/upload/upload.ts:61</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>FormGroup for second page - contains form controls</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -748,10 +805,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/upload/upload.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/upload/upload.ts:49</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>List of key codes to treat as separate options</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -785,10 +848,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/upload/upload.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/upload/upload.ts:68</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>FormGroup for third page - contains form contols</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -814,7 +883,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/upload/upload.ts:94</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/upload/upload.ts:126</a></div>
                                 </td>
                             </tr>
 
@@ -832,14 +901,21 @@ import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
 import { MatStepperModule } from &#x27;@angular/material/stepper&#x27;;
 import { MatChipInputEvent, MatChipsModule } from &#x27;@angular/material/chips&#x27;;
-import { ProfileService, ScenarioService, StorageService } from &#x27;../../services&#x27;;
+import { ScenarioService, StorageService } from &#x27;../../services&#x27;;
 import { Scenario } from &#x27;../../types&#x27;;
 import { ENTER, COMMA, SEMICOLON } from &#x27;@angular/cdk/keycodes&#x27;;
 import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
 import { MatDialogRef } from &#x27;@angular/material/dialog&#x27;;
 import { MatRadioModule } from &#x27;@angular/material/radio&#x27;;
 import * as ArrayValidators from &#x27;./arrayValidators&#x27;;
+import { Auth } from &#x27;@angular/fire/auth&#x27;;
 
+/**
+ * Component to upload a new scenario.
+ *
+ * Presented as a wizard, with a number of steps to capture video URL, title, and options.
+ * Intended to be displayed as a modal (launched by uploadModal)
+ */
 @Component({
   standalone: true,
   selector: &#x27;app-upload&#x27;,
@@ -859,22 +935,32 @@ import * as ArrayValidators from &#x27;./arrayValidators&#x27;;
 })
 export class UploadComponent {
 
+  /** Reference to fileInput HTML element */
   @ViewChild(&#x27;fileInput&#x27;) fileInputElem!: ElementRef&lt;HTMLInputElement&gt;;
 
+  /** Reference to MatDialog */
   private readonly dialogRef &#x3D; inject(MatDialogRef&lt;UploadComponent&gt;);
 
+  /** List of key codes to treat as separate options */
   readonly separatorKeysCodes: number[] &#x3D; [ENTER, COMMA, SEMICOLON]; // Enter, comma
+
+  /** array of entered options (Signal wrapped)  - presented onscreen as MatChips */
   readonly reactiveKeywords &#x3D; signal&lt;string[]&gt;([]);
 
+  /** FormGroup for first page - contains form controls */
   firstFormGroup &#x3D; new FormGroup({
     upload: new FormControl&lt;string&gt;(&#x27;1&#x27;),
     url: new FormControl&lt;string&gt;(&#x27;&#x27;),
   });
+
+  /** FormGroup for second page - contains form controls */
   secondFormGroup &#x3D; new FormGroup({
     title: new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required),
     scenarioType: new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required),
     description: new FormControl&lt;string&gt;(&#x27;&#x27;, Validators.required),
   });
+
+  /** FormGroup for third page - contains form contols */
   thirdFormGroup &#x3D; new FormGroup({
     options: new FormControl&lt;string[]&gt;([] as string[], [
       Validators.required,
@@ -884,11 +970,21 @@ export class UploadComponent {
   });
 
   constructor(
-    private profileService: ProfileService,
+    /** injected ScenarioService service */
     private scenarioService: ScenarioService,
-    private storageService: StorageService
-  ) { }
+    /** injected StorageService service */
+    private storageService: StorageService,
+    /** injected Angular/Fire Auth service */
+    private auth: Auth
+  ) {
+    // Empty constructor
+  }
 
+  /**
+   * Remove an option from the list
+   *
+   * @param keyword option to remove
+   */
   removeReactiveKeyword(keyword: string) {
     this.reactiveKeywords.update(keywords &#x3D;&gt; {
       const index &#x3D; keywords.indexOf(keyword);
@@ -903,6 +999,11 @@ export class UploadComponent {
     this.thirdFormGroup.controls[&#x27;options&#x27;].setValue(this.reactiveKeywords());
   }
 
+  /**
+   * Add an option to the list
+   *
+   * @param event input event recieved from MatChip
+   */
   addReactiveKeyword(event: MatChipInputEvent): void {
     const value &#x3D; (event.value || &#x27;&#x27;).trim();
 
@@ -922,47 +1023,26 @@ export class UploadComponent {
     return this.thirdFormGroup.get(&#x27;options&#x27;) as FormArray;
   }
 
-  /*
-  PSEUDO CODE:
-  if (the user is not logged in) {
-    throw an error and exit.
-  }
-
-  if (the user has entered a URL) {
-    URL &#x3D; the URL entered by the user
-  } else {
-    upload the first file selected to Firebase Storage using a unique identifier (e.g., timestamp or UUID)
-    make the file publicly accessible and get the URL
-  }
-
-  create a database document based on the input from the user and the URL obtained above, including:
-  - title
-  - description
-  - scenario type
-  - options (array of strings)
-  - URL (from above)
-  - UID of the user
-
-  save the document to Firestore under a &quot;scenarios&quot; collection with an auto-generated ID
-
-  if (save is successful) {
-    close the upload dialog
-  }  else {
-    display an error message to the user
-  }
-
-  */
+  /**
+   * Create a new scenario, saving the form contents.
+   *
+   * If a file has been provided, upload this to the storage service and use the public URL of the
+   * storage item as the URL.
+   */
   async save(): Promise&lt;void&gt; {
 
+    // If a file has been added via the file input, select the first file added.
     const file &#x3D; (this.fileInputElem.nativeElement.files !&#x3D;&#x3D; null)
       ? this.fileInputElem.nativeElement.files[0]
       : undefined;
 
-    const uid &#x3D; this.profileService.getUid();
+    const uid &#x3D; this.auth.currentUser?.uid;
     if (!uid) {
       throw new Error(&#x27;User not logged in&#x27;);
     }
 
+    // If a file has been added to the file control upload the file using a time-based ID and
+    // use the public URL returned as the URL of the scenario.
     let fileUrl &#x3D; this.firstFormGroup.value.url;
     if (file !&#x3D;&#x3D; undefined) {
       const fileId &#x3D; (new Date()).toISOString()
@@ -970,14 +1050,17 @@ export class UploadComponent {
     }
 
     try {
+
+      // Create a scenario object, ready to save
       const formData: Omit&lt;Scenario, &#x27;id&#x27;&gt; &#x3D; {
         url: fileUrl || &#x27;&#x27;,
         options: this.thirdFormGroup.value.options || [],
         scenarioType: this.secondFormGroup.value.scenarioType || &#x27;&#x27;,
         title: this.secondFormGroup.value.title || &#x27;&#x27;,
-        uid: this.profileService.getUid() || &#x27;&#x27;
+        uid: this.auth.currentUser?.uid || &#x27;&#x27;
       };
 
+      // Save the scenario in Firestore using the scenarioService.
       const scenarioId &#x3D; await this.scenarioService.addScenario(formData);
       console.log(&#x27;Scenario saved successfully with ID:&#x27;, scenarioId);
 

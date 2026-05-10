@@ -5,14 +5,21 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { ProfileService, ScenarioService, StorageService } from '../../services';
+import { ScenarioService, StorageService } from '../../services';
 import { Scenario } from '../../types';
 import { ENTER, COMMA, SEMICOLON } from '@angular/cdk/keycodes';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import * as ArrayValidators from './arrayValidators';
+import { Auth } from '@angular/fire/auth';
 
+/**
+ * Component to upload a new scenario.
+ *
+ * Presented as a wizard, with a number of steps to capture video URL, title, and options.
+ * Intended to be displayed as a modal (launched by uploadModal)
+ */
 @Component({
   standalone: true,
   selector: 'app-upload',
@@ -32,22 +39,32 @@ import * as ArrayValidators from './arrayValidators';
 })
 export class UploadComponent {
 
+  /** Reference to fileInput HTML element */
   @ViewChild('fileInput') fileInputElem!: ElementRef<HTMLInputElement>;
 
+  /** Reference to MatDialog */
   private readonly dialogRef = inject(MatDialogRef<UploadComponent>);
 
+  /** List of key codes to treat as separate options */
   readonly separatorKeysCodes: number[] = [ENTER, COMMA, SEMICOLON]; // Enter, comma
+
+  /** array of entered options (Signal wrapped)  - presented onscreen as MatChips */
   readonly reactiveKeywords = signal<string[]>([]);
 
+  /** FormGroup for first page - contains form controls */
   firstFormGroup = new FormGroup({
     upload: new FormControl<string>('1'),
     url: new FormControl<string>(''),
   });
+
+  /** FormGroup for second page - contains form controls */
   secondFormGroup = new FormGroup({
     title: new FormControl<string>('', Validators.required),
     scenarioType: new FormControl<string>('', Validators.required),
     description: new FormControl<string>('', Validators.required),
   });
+
+  /** FormGroup for third page - contains form contols */
   thirdFormGroup = new FormGroup({
     options: new FormControl<string[]>([] as string[], [
       Validators.required,
@@ -57,11 +74,21 @@ export class UploadComponent {
   });
 
   constructor(
-    private profileService: ProfileService,
+    /** injected ScenarioService service */
     private scenarioService: ScenarioService,
-    private storageService: StorageService
-  ) { }
+    /** injected StorageService service */
+    private storageService: StorageService,
+    /** injected Angular/Fire Auth service */
+    private auth: Auth
+  ) {
+    // Empty constructor
+  }
 
+  /**
+   * Remove an option from the list
+   *
+   * @param keyword option to remove
+   */
   removeReactiveKeyword(keyword: string) {
     this.reactiveKeywords.update(keywords => {
       const index = keywords.indexOf(keyword);
@@ -76,6 +103,11 @@ export class UploadComponent {
     this.thirdFormGroup.controls['options'].setValue(this.reactiveKeywords());
   }
 
+  /**
+   * Add an option to the list
+   *
+   * @param event input event recieved from MatChip
+   */
   addReactiveKeyword(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
@@ -95,47 +127,26 @@ export class UploadComponent {
     return this.thirdFormGroup.get('options') as FormArray;
   }
 
-  /*
-  PSEUDO CODE:
-  if (the user is not logged in) {
-    throw an error and exit.
-  }
-
-  if (the user has entered a URL) {
-    URL = the URL entered by the user
-  } else {
-    upload the first file selected to Firebase Storage using a unique identifier (e.g., timestamp or UUID)
-    make the file publicly accessible and get the URL
-  }
-
-  create a database document based on the input from the user and the URL obtained above, including:
-  - title
-  - description
-  - scenario type
-  - options (array of strings)
-  - URL (from above)
-  - UID of the user
-
-  save the document to Firestore under a "scenarios" collection with an auto-generated ID
-
-  if (save is successful) {
-    close the upload dialog
-  }  else {
-    display an error message to the user
-  }
-
-  */
+  /**
+   * Create a new scenario, saving the form contents.
+   *
+   * If a file has been provided, upload this to the storage service and use the public URL of the
+   * storage item as the URL.
+   */
   async save(): Promise<void> {
 
+    // If a file has been added via the file input, select the first file added.
     const file = (this.fileInputElem.nativeElement.files !== null)
       ? this.fileInputElem.nativeElement.files[0]
       : undefined;
 
-    const uid = this.profileService.getUid();
+    const uid = this.auth.currentUser?.uid;
     if (!uid) {
       throw new Error('User not logged in');
     }
 
+    // If a file has been added to the file control upload the file using a time-based ID and
+    // use the public URL returned as the URL of the scenario.
     let fileUrl = this.firstFormGroup.value.url;
     if (file !== undefined) {
       const fileId = (new Date()).toISOString()
@@ -143,14 +154,17 @@ export class UploadComponent {
     }
 
     try {
+
+      // Create a scenario object, ready to save
       const formData: Omit<Scenario, 'id'> = {
         url: fileUrl || '',
         options: this.thirdFormGroup.value.options || [],
         scenarioType: this.secondFormGroup.value.scenarioType || '',
         title: this.secondFormGroup.value.title || '',
-        uid: this.profileService.getUid() || ''
+        uid: this.auth.currentUser?.uid || ''
       };
 
+      // Save the scenario in Firestore using the scenarioService.
       const scenarioId = await this.scenarioService.addScenario(formData);
       console.log('Scenario saved successfully with ID:', scenarioId);
 

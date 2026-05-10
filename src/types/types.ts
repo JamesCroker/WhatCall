@@ -1,3 +1,6 @@
+/**
+ * Scenario object relecting a scenario, title and options.
+ */
 export interface Scenario {
   /** ID for the scenario (populated from document ID by converter) */
   id: string;
@@ -18,6 +21,9 @@ export interface Scenario {
   options: string[];
 }
 
+/**
+ * Scenario object with user responses, as well as the response of the current user
+ */
 export interface ScenarioWithResponses extends Scenario {
   /** Array of all user responses to a scenario. */
   responses: ScenarioResponse[];
@@ -29,6 +35,9 @@ export interface ScenarioWithResponses extends Scenario {
   myResponse?: ScenarioResponse;
 }
 
+/**
+ * A user response to a specific scenario
+ */
 export interface ScenarioResponse {
   /** ID for the response (populated from document ID by converter) */
   id: string;
@@ -55,6 +64,9 @@ export interface ScenarioResponse {
   firstResponse: string;
 }
 
+/**
+ * Response statistics for a scenario, including a count of responses to each option.
+ */
 export interface ScenarioStats {
   /** A count of all responses for this scenario */
   totalResponses: number;

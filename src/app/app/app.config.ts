@@ -15,6 +15,25 @@ import {
 import { provideFirebaseUI, provideFirebaseUIPolicies } from '@firebase-oss/ui-angular';
 import { firebaseConfig, firebaseEmulators } from '../../env/environment';
 
+/**
+ * Application configuration used to bootstrap angular
+ *
+ * Configures providers
+ *   Angular
+ *     - browserGobalErrorListener
+ *     - Router
+ *   Firebase
+ *     - App
+ *     - Firestore
+ *     - Storage
+ *     - Auth
+ *     - FirebaseUI
+ *   Other libraries
+ *     - Charts
+ *
+ * If emulators are configured within env.ts the configuration connects to the emulator, otherwise
+ * project configuration is used.
+ */
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),

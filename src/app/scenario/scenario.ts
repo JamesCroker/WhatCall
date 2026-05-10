@@ -21,6 +21,9 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class ScenarioComponent implements OnInit {
 
+  /**
+   * The MatStepper page element - referenced from the HTML.
+   */
   @ViewChild('stepper') stepper!: MatStepper;
 
   /**
@@ -36,10 +39,10 @@ export class ScenarioComponent implements OnInit {
   public stepperDuration = '';
 
   /** Empty FromGroup object, used for first mat-stepper page. */
-  firstFormGroup = new FormGroup({ });
+  firstFormGroup = new FormGroup({});
 
   /** Empty FromGroup object, used for second mat-stepper page. */
-  secondFormGroup = new FormGroup({ });
+  secondFormGroup = new FormGroup({});
 
   constructor(
     /** injected ActivatedRoute service */
@@ -57,23 +60,46 @@ export class ScenarioComponent implements OnInit {
     /** injected Location service */
     private location: Location
   ) {
-    this.scenario$ = this.pageController.activeScenarioId$.pipe(mergeMap(scenarioId => {
-      console.log('ScenarioComponent: activeScenarioId', scenarioId);
-      if (!scenarioId) {
-        return this.scenarioService.getRandomScenarioId()
-      } else {
-        return Promise.resolve(scenarioId);
-      }
-    }),
+
+    // Subscrive to activeScenarioId$ (from pageController)
+    this.scenario$ = this.pageController.activeScenarioId$.pipe(
+      // If there is no activeScenarioId (undefined) get a random scenario id
+      // Input  scenarioId : string | undefined (if no id specified)
+      // Output scenarioId : string
+      mergeMap(scenarioId => {
+        console.log('ScenarioComponent: activeScenarioId', scenarioId);
+        if (!scenarioId) {
+          return this.scenarioService.getRandomScenarioId()
+        } else {
+          return Promise.resolve(scenarioId);
+        }
+      }),
+
+      // Fetch a observable for the ScenarioWithResponses object for the specified scenarioId
+      // Input  scenarioId: string
+      // Output Observable<ScenarioWithResponses | undefined>
       map(scenarioId => this.scenarioService.getScenarioWithResponsesById$(scenarioId)),
+
+      // Switch the observable returned to the ScenarioWithResponses observable
+      // Input  Observable<ScenarioWithResponses | undefined>
+      // Output ScenarioWithResponses | undefined
       switchAll()
     );
   }
 
+  /**
+   * Angular OnInit event
+   */
   ngOnInit(): void {
+    // Subscribe to the ActiveRoute path parameters, and set the :id as the activeScenarioId, using
+    // the pageController service.
     this.activatedRoute.params.subscribe(async params => {
       await this.pageController.loadScenario(params['id']);
     })
+
+     // Subsctive to scenario$ and:
+     //  - store the result in this.scenario.
+     //  - update the URL to /scenario/:id
     this.scenario$.subscribe(activeScenario => {
       this.scenario = activeScenario;
       this.location.replaceState(`/scenario/${activeScenario?.id}`);
@@ -81,10 +107,14 @@ export class ScenarioComponent implements OnInit {
     });
   }
 
-  loadScenario(scenarioId?: string) {
-    this.pageController.loadScenario(scenarioId);
-  }
-
+  /**
+   * Handler for when a user selects a response option button.
+   *
+   * Adds the user's response to the Firestore responses collection using the scenarioService
+   *
+   * @param {string} userResponse The text of the response selected by the user
+   * @returns {Promise<void>} A promise that resolves once Firestore is updated
+   */
   async selectionMade(userResponse: string) {
     if (!this.scenario) {
       throw new Error('No scenario loaded');

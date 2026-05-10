@@ -23,7 +23,7 @@ describe('ResponsesChartComponent', () => {
 
   it('chart data should default to empty chart if undefined', () => {
     component.scenarioStats = undefined;
-    expect(component.barChartData).toEqual({
+    expect(component._barChartData).toEqual({
       labels: [],
       datasets: []
     })
@@ -38,7 +38,7 @@ describe('ResponsesChartComponent', () => {
         c: 1
       }
     }
-    expect(component.barChartData).toEqual({
+    expect(component._barChartData).toEqual({
       labels: ['a', 'b', 'c'],
       datasets: [
         { data: [1, 2, 1], label: 'Responses' }
