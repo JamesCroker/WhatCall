@@ -4,6 +4,12 @@ Web Application to enable users to submit videos for feedback from the community
 
 Created by James Croker as A-level project.
 
+## Documentation
+
+* [typedoc](https://jamescroker.github.io/WhatCall/typedoc/)
+* [compodoc](https://jamescroker.github.io/WhatCall/compodoc/)
+* [tsuml2](https://jamescroker.github.io/WhatCall/tsuml2/uml.svg)
+
 ## Development server
 
 To start a local development server, run:
